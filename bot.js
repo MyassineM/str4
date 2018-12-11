@@ -39,3 +39,5 @@ if (message.content.startsWith(adminprefix + 'setavatar')) {
 
 
 
+
+client.login(process.env.BOT_TOKEN);// لا تغير فيها شيء
