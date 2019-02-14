@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 var prefix = ".";
 var adminprefix = '.'
-const developers = ["522130443097604107"]
+const developers = ['545655818645798915','545655818645798915']
 client.on('message', message => {
     var argresult = message.content.split(` `).slice(1).join(' ');
       if (!developers.includes(message.author.id)) return;
@@ -32,7 +32,7 @@ client.on('message', message => {
 } else
 if (message.content.startsWith(adminprefix + 'setavatar')) {
   client.user.setAvatar(argresult);
-    message.channel.send(`**Bot Change Avatar By !                     | Yas.sine**#3327 : :**${argresult}** `);
+    message.channel.send(`**Bot Change Avatar By !                     | Yas.sine**#3327: :**${argresult}** `);
 }
 });
 
