@@ -404,9 +404,9 @@ client.on('message', function(message) {
     if(message.content === 'cc') {
     if(message.member.hasPermission('MANAGE_ROLES')) {
     setInterval(function(){})
-    message.channel.send('يتم انشاء 50 لون انتضر | ▶️')
+    message.channel.send('Wait we are making 50 colors| ▶️')
     }else{
-    message.channel.send('ما معاك البرمشن المطلوب |❌🚫')
+    message.channel.send('You dont have permission|❌🚫')
     }
     }
     });
