@@ -282,14 +282,6 @@ client.on('message', async message => {
     }
 });
 
-client.on("message", msg => {
-let men = msg.mentions.members.first()
-if(!men || !men.voiceChannel) return;
-if(msg.content === prefix+"vkick") {
-men.setVoiceChannel(null)
-}
-});
-
 client.on('message', message => {
     const swearWords = ["heck", "damn","darn", "noob","fuck", "L","ez", "lesbain","fuck you", "your mom","shit"]; // الكلمات الممنوعه هنا
     if( swearWords.some(word => message.content.includes(word)) ) {
