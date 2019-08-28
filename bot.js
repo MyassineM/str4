@@ -298,20 +298,6 @@ client.on('message', message => {
       }
 }) //Toxic Codes
 
-client.on('message', message => {
-    if (message.guild) return undefined;
-    var roomid = "616333456225599499";
-    var room = client.channels.get(roomid);
-    if (!room) return undefined;
-    var emb = new Discord.RichEmbed()
-    .setColor("#36393e")
-    .setAuthor(message.author.username,message.author.displayAvatarURL)
-    .setDescription(`**Message from ${message.author} in the bot dm**\n\`\`\`apache\nMessage; ${message.content}\`\`\``)
-    .setThumbnail(message.author.displayAvatarURL)
-    .setTimestamp();
-    room.send(emb);
-});
-
 client.on("message", message => {
    
  
