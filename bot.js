@@ -1,8 +1,8 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 var prefix = "!";
-var adminprefix = '؟'
-const developers = ["563669586990596126"]
+var adminprefix = '!'
+const developers = ["436918120184021012"]
 
 
 client.on("message", (message) => {
@@ -169,7 +169,7 @@ client.on('message', message=> {
     if (message.author.bot) return;
     if (message.isMentioned(client.user))
     {
-    message.reply(`**شتبي ليش منشنتني خلني بسيرفر ورع خخخخخخخ الله يعديك**`)
+    message.reply(`**What do want ?**`)
     }
 });
 client.on('message', message => {
@@ -186,7 +186,7 @@ client.on('message', message => {
   if (!message.content.startsWith(prefix)) return;
   var args = message.content.split(' ').slice(1);
   var argresult = args.join(' ');
-  if (message.author.id !== '436918120184021012') return;
+  if (message.author.id !== '616260595041304590') return;
 
 if (message.content.startsWith(prefix + 'p')) {
   client.user.setGame(argresult);
