@@ -88,4 +88,55 @@ if (message.content.startsWith(prefix + 's')) {
 
 });
 
+client.on('message', message => {
+    if (message.content.startsWith("!bot")) {
+    message.channel.send({
+        embed: new Discord.RichEmbed()
+            .setAuthor(client.user.username,client.user.avatarURL)
+            .setThumbnail(client.user.avatarURL)
+            .setColor('RANDOM')
+            .setTitle('``INFO Broadcast Arab Bot`` ')
+            .addField('``My Ping``' , [`${Date.now() - message.createdTimestamp}` + 'MS'], true)
+            .addField('``RAM Usage``', `[${(process.memoryUsage().rss / 1048576).toFixed()}MB]`, true)
+            .addField('``servers``', [client.guilds.size], true)
+            .addField('``channels``' , `[ ${client.channels.size} ]` , true)
+            .addField('``Users``' ,`[ ${client.users.size} ]` , true)
+            .addField('``My Name``' , `[ ${client.user.tag} ]` , true)
+            .addField('``My ID``' , `[ ${client.user.id} ]` , true)
+                  .addField('``My Prefix``' , `[-]` , true)
+                  .addField('``My Language``' , `[ Java Script ]` , true)
+                    })
+}
+});
+
+client.on('message', msg => {
+  if(msg.content === 'هلا')
+  msg.reply('هلا بيك')
+});
+
+client.on('message', msg => {
+  if(msg.content === 'سلام عليكم')
+  msg.reply('وعليكم السلام')
+});
+
+client.on('message', msg => {
+  if(msg.content === 'مين صاحب البوت')
+  msg.reply('دماء ')
+});
+
+client.on('message', msg => {
+  if(msg.content === 'اما')
+  msg.reply('والله ')
+});
+
+client.on('message', msg => {
+  if(msg.content === 'MrBloods')
+  msg.reply('')
+});
+
+client.on('message', msg => {
+  if(msg.content === ' Bye')
+  msg.reply('Bye ❤')
+});
+
 client.login(process.env.BOT_TOKEN);// لا تغير فيها شيء
