@@ -26,7 +26,7 @@ client.on("message", (message) => {
                 SEND_MESSAGES: true,
                 READ_MESSAGES: true
             });
-            message.channel.send(`:white_check_mark: Dont check your ticket, #${c.name}.`);
+            message.channel.send(`:white_check_mark: Done check your ticket, #${c.name}.`);
             const embed = new Discord.RichEmbed()
                 .setColor(0xCF40FA)
                 .addField(`Hey ${message.author.username}!`, `:white_check_mark:  Done check your ticket, #ticket`)
