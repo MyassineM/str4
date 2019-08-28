@@ -306,7 +306,7 @@ client.on("message", message => {
         color: 0x36393e,
         description: "The Room chat has been Deleted !",
         footer: {
-          text: "MrBloods bot."
+          text: "Bot by MrBloods"
         }
       }}).then(msg => {msg.delete(3000)});
                           }
