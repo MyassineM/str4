@@ -282,8 +282,6 @@ client.on('message', async message => {
     }
 });
 
-const Discord = require("discord.js")
-const client = new Discord.Client()
 client.on("guildMemberAdd", (member) => {
   let channel = member.guild.channels.get("616329647587590180");
   if (!channel) {
