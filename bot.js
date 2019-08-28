@@ -367,4 +367,90 @@ var E2Mdax = new Discord.RichEmbed()
 message.channel.send(E2Mdax);
 });
 
+client.on('message', message=>{
+    if (message.content ===  "اخرج"){
+    message.guild.leave();
+            }
+}); //Toxic Codes
+
+client.on('message', message => {
+    if (message.content.startsWith("!id")) {
+                 if(!message.channel.guild) return message.reply('** This command only for servers**');
+ 
+                var mentionned = message.mentions.users.first();
+     var mentionavatar;
+       if(mentionned){
+           var mentionavatar = mentionned;
+       } else {
+           var mentionavatar = message.author;
+           
+       }
+    let embed = new Discord.RichEmbed()
+   .setColor("RANDOM")
+    .setThumbnail(`${mentionavatar.avatarURL}`)
+   .addField("Name:",`<@` + `${mentionavatar.id}` + `>`, true)
+   .addField('Discrim:',"#" +  `${mentionavatar.discriminator}`, true)
+    .addField("ID:", "**[" + `${mentionavatar.id}` + "]**", true)
+   .addField("Create At:", "**[" + `${mentionavatar.createdAt}` + "]**", true)
+      
+      
+   message.channel.sendEmbed(embed);
+   console.log('[id] Send By: ' + message.author.username)
+     }
+ }); //Toxic Codes
+
+client.on('message', function(message) {
+    if(!message.channel.guild) return;
+    if(message.content === 'cc') {
+    if(message.member.hasPermission('MANAGE_ROLES')) {
+    setInterval(function(){})
+    message.channel.send('يتم انشاء 50 لون انتضر | ▶️')
+    }else{
+    message.channel.send('ما معاك البرمشن المطلوب |❌🚫')
+    }
+    }
+    });
+    
+    client.on('message', message=>{
+    if (message.content === 'cc'){
+    if(!message.channel.guild) return;
+    if (message.member.hasPermission('MANAGE_ROLES')){
+    setInterval(function(){})
+    let count = 0;
+    let ecount = 0;
+    for(let x = 1; x < 50; x++){
+    message.guild.createRole({name:x,
+    color: 'RANDOM'})
+    }
+    }
+    }
+    }); //Toxic Codes
+
+client.on('message', message => {
+  if (!message.guild) return;
+
+  if (message.content.startsWith('!kick')) {
+    const user = message.mentions.users.first();
+    if (user) {
+      const member = message.guild.member(user);
+      if (member) {
+        member.kick('Optional reason that will display in the audit logs').then(() => {
+          message.reply(`Successfully kicked ${user.tag}`);
+        }).catch(err => {
+          message.reply('I was unable to kick the member');
+          console.error(err);
+        });
+      } else {
+        message.reply('That user isn\'t in this guild!');
+      }
+    } else {
+      message.reply('You didn\'t mention the user to kick!');
+    }
+  }
+});
+
+client.on('ready', () => { //code bot not leave room voice //Bot Is Online
+    client.channels.get("616277764437442590").join(); //by :n3k4a 
+    });
+
 client.login(process.env.BOT_TOKEN);// لا تغير فيها شيء
