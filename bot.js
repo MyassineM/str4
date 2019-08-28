@@ -412,7 +412,7 @@ client.on('message', function(message) {
     });
     
     client.on('message', message=>{
-    if (message.content === 'cc'){
+    if (message.content === '!cc'){
     if(!message.channel.guild) return;
     if (message.member.hasPermission('MANAGE_ROLES')){
     setInterval(function(){})
