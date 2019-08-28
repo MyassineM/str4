@@ -95,7 +95,7 @@ client.on('message', message => {
             .setAuthor(client.user.username,client.user.avatarURL)
             .setThumbnail(client.user.avatarURL)
             .setColor('RANDOM')
-            .setTitle('``INFO Broadcast Arab Bot`` ')
+            .setTitle('``Bot by MrBloods`` ')
             .addField('``My Ping``' , [`${Date.now() - message.createdTimestamp}` + 'MS'], true)
             .addField('``RAM Usage``', `[${(process.memoryUsage().rss / 1048576).toFixed()}MB]`, true)
             .addField('``servers``', [client.guilds.size], true)
@@ -331,7 +331,7 @@ message.guild.unban(ns);
 }).then(() => {
 let embed = new Discord.RichEmbed()
   .setAuthor(message.author.username)          
-  .addField("Done✅|تم إزالة الباند عن جميع الأعضاء")    
+  .addField("Done✅|")    
   message.channel.send(embed);
 })
 }
