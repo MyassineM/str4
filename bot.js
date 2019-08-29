@@ -1465,30 +1465,6 @@ client.on('message', message => {
     }
 });
 
-client.on('message', message => {
-    if (message.content.startsWith("!unmute")) {
-    
-
-        let guildUnmute = message.guild;
-        let argsUnmute = message.content.split(' ').slice(1);
-      
-        if (!message.guild.member(message.author).hasPermission('MANAGE_ROLES')) {
-            return message.reply(':lock: **I** need `MANAGE_ROLES` Permissions to execute `mute`')
-        }
-        if (!message.guild.member(client.user).hasPermission('MANAGE_ROLES')) {
-            return message.reply(':lock: **I** need `MANAGE_ROLES` Permissions to execute `mute`')
-        }
-        let userUnmute = message.mentions.users.first();
-        let muteRoleUnmute = client.guilds.get(message.guild.id).roles.find('name', 'muted');
-        if (message.mentions.users.size < 1) {
-            return message.reply('You need to mention someone to unmute him!.');
-        }
-        message.guild.member(userUnmute).removeRole(muteRoleUnmute).then(() => {
-            message.reply(`You've succesfully unmuted ${userUnmute}`);
-        });
-    }
-});
-
  client.on('message', function(message) {
     if(message.content.startsWith(prefix + 'roll')) {
         let args = message.content.split(" ").slice(1);
@@ -1504,108 +1480,6 @@ client.on('message', message => {
     }
 });
 
-client.on('message', message => {
-    var prefix = "!";
-  if (message.author.x5bz) return;
-  if (!message.content.startsWith(prefix)) return;
- 
-  let command = message.content.split(" ")[0];
-  command = command.slice(prefix.length);
- 
-  let args = message.content.split(" ").slice(1);
- 
-  if (command == "ban") {
-               if(!message.channel.guild) return message.reply('** This command only for servers**');
-         
-  if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.reply("**You Don't Have ` BAN_MEMBERS ` Permission**");
-  if(!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) return message.reply("**I Don't Have ` BAN_MEMBERS ` Permission**");
-  let user = message.mentions.users.first();
-  let reason = message.content.split(" ").slice(2).join(" ");
-  /*let b5bzlog = client.channels.find("name", "5bz-log");
- 
-  if(!b5bzlog) return message.reply("I've detected that this server doesn't have a 5bz-log text channel.");*/
-  if (message.mentions.users.size < 1) return message.channel.send(`https://cdn.pg.sa/fjxlms81nk.png`);
-  if(!reason) return message.channel.send(`https://cdn.pg.sa/fjxlms81nk.png`);
-  if (!message.guild.member(user)
-  .bannable) return message.reply(`This User Is Have High Role !`);
- 
-  message.guild.member(user).ban(7, user);
- 
-  const banembed = new Discord.RichEmbed()
-  .setAuthor(`BANNED!`, user.displayAvatarURL)
-  .setColor("RANDOM")
-  .setTimestamp()
-  .addField("**User:**",  '**[ ' + `${user.tag}` + ' ]**')
-  .addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
-  .addField("**Reason:**", '**[ ' + `${reason}` + ' ]**')
-  message.channel.send({
-    embed : banembed
-  })
-}
-});
-	    
-client.on('message', message => {
-         if(message.content === prefix + "closeroom") {
-                             if(!message.channel.guild) return message.reply('** This command only for servers**');
-  
-     if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply(' **__ليس لديك صلاحيات__**');
-                message.channel.overwritePermissions(message.guild.id, {
-              SEND_MESSAGES: false
-  
-                }).then(() => {
-                    message.reply("**__تم تقفيل الشات__ :white_check_mark: **")
-                });
-                  }
-      if(message.content === prefix + "openroom") {
-                          if(!message.channel.guild) return message.reply('** This command only for servers**');
-  
-     if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('**__ليس لديك صلاحيات__**');
-                message.channel.overwritePermissions(message.guild.id, {
-              SEND_MESSAGES: true
-  
-                }).then(() => {
-                    message.reply("**__تم فتح الشات__:white_check_mark:**")
-                });
-      }
-         
-});
-	    
-client.on('message', message => {
-  if (message.author.x5bz) return;
-  if (!message.content.startsWith(prefix)) return;
-
-  let command = message.content.split(" ")[0];
-  command = command.slice(prefix.length);
-
-  let args = message.content.split(" ").slice(1);
-
-  if (command == "kick") {
-               if(!message.channel.guild) return message.reply('** This command only for servers**');
-         
-  if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.reply("**You Don't Have ` KICK_MEMBERS ` Permission**");
-  if(!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.reply("**I Don't Have ` KICK_MEMBERS ` Permission**");
-  let user = message.mentions.users.first();
-  let reason = message.content.split(" ").slice(2).join(" ");
-  if (message.mentions.users.size < 1) return message.reply("**https://cdn.discordapp.com/attachments/498625534549295114/498825358682882059/kick_metion.png**");
-  if(!reason) return message.reply ("**https://cdn.discordapp.com/attachments/498625534549295114/498825956983701514/kick_reson.png**");
-  if (!message.guild.member(user)
-  .kickable) return message.reply("**This User Is Have High Role**");
-
-  message.guild.member(user).kick();
-
-  const kickembed = new Discord.RichEmbed()
-  .setAuthor(`KICKED!`, user.displayAvatarURL)
-  .setColor("RANDOM")
-  .setTimestamp()
-  .addField("**User:**",  '**[ ' + `${user.tag}` + ' ]**')
-  .addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
-  .addField("**Reason:**", '**[ ' + `${reason}` + ' ]**')
-  message.channel.send({
-    embed : kickembed
-  })
-}
-});
-	    
 client.on('message', message => {
 if(!message.channel.guild) return;
 if(message.content.startsWith(prefix + 'move')) {
