@@ -1502,6 +1502,84 @@ message.react("❌")
  }
 });//toxic codes
 
+client.on("message", message => {
+    if (message.content === "!help") {
+     const embed = new Discord.RichEmbed() 
+         .setColor("#00FF00")
+         .setThumbnail(message.author.avatarURL)
+         .setDescription(`**Help | XLegendaryGalaxy**
+
+        **__General orders__**
+**
+『!allbots/ Show you all the bots in the server.』
+『!server/ Show you the server info』
+『!bot/ Show you the bot info』
+『!members/ Show you the online and offline members』
+『!id/ Show you your id』
+『!ping/ Show you the bot ping』
+『!info/ Show you some bot info』
+『!help/ Show you this list』
+『!link/ Give you link of the server』
+『!new/ Open a ticket』
+『!close/ Close a ticket』
+『!sug/ Suggestion for an idea』
+『!image/ Show server image』
+『!avatar/ Show you your avatar』
+『!rename/ Like nickname』
+『!user/ Show you your infos』
+**
+
+        **__Games orders__**
+ **       
+『!rps/ Rock-Paper-Scissors』
+『!roll/ Rolling』
+『!flip/ All know it xD』
+『!cat/ Give you some cute pictures』
+『!slots/ everyone know it』
+『!hack/ like hacking accs but its a game』
+『!emoji <emoji>/ its funny and helpful 』
+『!skin <ign>/ Show your minecraft skin 』
+**
+
+        **__Music orders__**
+**
+『${prefix}play / Soon』
+『${prefix}skip / Soon』
+『${prefix}pause / Soon』
+『${prefix}resume / Soon』
+『${prefix}vol / Soon』
+『${prefix}stop / Soon』
+『${prefix}np / Soon』
+『${prefix}queue / Soon』
+**
+
+        **__Administrative Orders__**
+**
+『!bc / broadcast』
+『!role / show you all the roles』
+『!clear / clear all the chat』
+『!kick @user / Kick member』
+『!ban @user / Ban member』
+『!unbanall / Unban  all the members』
+『!cc / make 50 colored roles』
+『!topic / Change or create a topic』
+『!say <word> / The bot will say your word』
+『!move/ You will move the member from foice channel』
+『!voice  / Show you the members who are in the voice rooms』
+
+『 The bot can mute anyone share any link in the chat - The bot will remove any bad words 』
+『 The bot welcome who join the server if you create a room called welcome 』
+『 The bot have a log !! 』
+『 Thanks for using the bot 』
+
+       Bot By MrBloods** `)
+     
+            
+   message.author.sendEmbed(embed)
+   
+   }
+   });
+
 client.on('message', message => {
   if (message.content.startsWith(prefix +"avatar")) {
 if(!message.channel.guild) return;
