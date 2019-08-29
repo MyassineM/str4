@@ -467,8 +467,8 @@ client.on("message", (message) => {
 }); //Toxic Codes
 
 client.on('message', message => {    
-    var p = "#";
-            if (message.content.startsWith(! + "topic")) {
+    var p = "!";
+            if (message.content.startsWith(p + "topic")) {
                 if(!message.channel.guild) return;
                 if (!message.member.hasPermission("MANAGE_CHANNEL"))  return;
       var a= message.content.split(' ').slice(1).join("  ");
@@ -609,7 +609,6 @@ client.on("message", message => {
 
         **__Administrative Orders__**
 **
-『!move @user /  Move the user to anther channel』
 『!bc / broadcast』
 『!clear / clear all the chat』
 『!kick @user / Kick member』
