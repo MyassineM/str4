@@ -1399,253 +1399,340 @@ client.on('message' , async message => {
   });
 
 client.on('message', message => {
-  if (!message.guild) return;
+     if (message.content === "!user") {
+         if(!message.channel.guild) return message.reply('** This command only for servers**');
+     let embed = new Discord.RichEmbed()
+  .setThumbnail(message.author.avatarURL)  
+               .setFooter(`Anti Invite Links`, '')
+    .setColor("ffffff")
+    .addField(" :bust_in_silhouette: Full Username", `${message.author.username}#${message.author.discriminator}`)
+    .addField(" :id: User ID", message.author.id)
+    .addField(" :information_source: Stats", `${message.author.presence.status}`, true)
+    .addField(' :game_die: Game', `${message.author.presence.game === null ? "No Game" : message.author.presence.game.name}`, true)
+    .addField(':robot: Bot ?', message.author.client)
+    .addField(" :shield: Roles:", message.member.roles.filter(r => r.id !== message.guild.id).map(roles => roles.name))
+    .addField(" :globe_with_meridians: Registered \ Joined Discord", message.author.createdAt)
+    .addField(" :inbox_tray: Joined Server", message.member.joinedAt)
 
-  if (message.content.startsWith('!kick')) {
-    const user = message.mentions.users.first();
-    if (user) {
-      const member = message.guild.member(user);
-      if (member) {
-        member.kick('Optional reason that will display in the audit logs').then(() => {
-          message.reply(`Successfully kicked ${user.tag}`);
-        }).catch(err => {
-          message.reply('I was unable to kick the member');
-          console.error(err);
-        });
-      } else {
-        message.reply('That user isn\'t in this guild!');
-      }
-    } else {
-      message.reply('You didn\'t mention the user to kick!');
+     
+  message.channel.sendEmbed(embed);
     }
+});
+
+var flip = ["**__HEADS__**",
+"**__TAILS__**"
+]
+    client.on('message', message => {
+        
+    if(message.content.startsWith(prefix + 'flip')) {
+        if(!message.channel.guild) return message.reply('** This command only for servers **');
+         var cat = new Discord.RichEmbed()
+.setDescription(flip[Math.floor(Math.random() * flip.length)])
+.setThumbnail("https://cdn.onlinewebfonts.com/svg/img_441809.png")
+.setColor(0xd3d0c4)
+   .setFooter(`©  Dream™ `)
+message.channel.sendEmbed(cat);
+
+    }
+});
+
+client.on('message', message => {
+        
+   if(message.content.startsWith(prefix + 'rename')) {
+if(message.member.hasPermission("ADMINISTRATOR")) {
+         let args = message.content.split(' ').slice(2);
+var mentionned = message.mentions.users.first();
+   
+  if(!args){
+    return message.channel.send(":x: " + `**| Please enter a new Nick for ${mentionned}**`);
+  }
+  if (!mentionned)return message.channel.send("**You Have to Mention A member :x:**")
+  message.guild.member(mentionned).setNickname(args.join(" ")).then(user => message.channel.send(`:full_moon_with_face: ${mentionned}'s' **New NickName is **` + `__${args.join(" ")}__` + "!")).catch(console.error);
+} else {
+  return message.reply(":x: " + "| You need to have the \"ADMINISTRATOR\" Permission");
+  }
+
+
+    }
+});
+
+client.on('message', message => {
+    if (message.content === "!role") {
+        if(!message.channel.guild) return message.reply('** This command only for servers **');
+
+        var roles = message.guild.roles.map(roles => `${roles.name}, `).join(' ')
+        message.channel.send(`**[${roles}]**`);
+    }
+});
+
+client.on('message', message => {
+    if (message.content.startsWith("!unmute")) {
+    
+
+        let guildUnmute = message.guild;
+        let argsUnmute = message.content.split(' ').slice(1);
+      
+        if (!message.guild.member(message.author).hasPermission('MANAGE_ROLES')) {
+            return message.reply(':lock: **I** need `MANAGE_ROLES` Permissions to execute `mute`')
+        }
+        if (!message.guild.member(client.user).hasPermission('MANAGE_ROLES')) {
+            return message.reply(':lock: **I** need `MANAGE_ROLES` Permissions to execute `mute`')
+        }
+        let userUnmute = message.mentions.users.first();
+        let muteRoleUnmute = client.guilds.get(message.guild.id).roles.find('name', 'muted');
+        if (message.mentions.users.size < 1) {
+            return message.reply('You need to mention someone to unmute him!.');
+        }
+        message.guild.member(userUnmute).removeRole(muteRoleUnmute).then(() => {
+            message.reply(`You've succesfully unmuted ${userUnmute}`);
+        });
+    }
+});
+
+client.on('message', message => {
+    if (message.content.startsWith("!mute")) {
+     
+
+        if (!message.member.hasPermission('MUTE_MEMBERS')) {
+            message.channel.send(':lock: **I** need `MANAGE_ROLES` Permissions to execute `mute`');
+            return;
+        }
+
+        if (!message.guild.member(client.user).hasPermission('MANAGE_ROLES')) {
+            return message.reply(':lock: **I** need `MANAGE_ROLES` Permissions to execute `mute`')
+        }
+        const msmute = require('ms');
+        let reasonMute = message.content.split(' ').slice(3).join(' ');
+        let timeMute = message.content.split(' ')[2];
+        let guildMute = message.guild;
+      // Let adminRoleMute = guild.roles.find("name", "TOA");
+        let memberMute = message.guild.member;
+        let userMute = message.mentions.users.first();
+        let muteRoleMute = client.guilds.get(message.guild.id).roles.find('name', 'muted');
+   
+
+        if (!muteRoleMute) {
+            return message.reply('`Please create a role called "muted"`');
+        }
+
+        if (message.mentions.users.size < 1) {
+            return message.reply('You need to mention someone to Mute him!.');
+        }
+        if (message.author.id === userMute.id) {
+            return message.reply('You cant punish yourself :wink:');
+        }
+        if (!timeMute) {
+            return message.reply('specify the time for the mute!**Usage:**`~mute [@mention] [1m] [reason]`');
+        }
+        if (!timeMute.match(/[1-60][s,m,h,d,w]/g)) {
+            return message.reply('I need a valid time ! look at the Usage! right here: **Usage:**`~mute [@mention] [1m] [reason]`');
+        }
+        if (!reasonMute) {
+            return message.reply('You must give me a reason for Mute **Usage:**`~mute [@mention] [15m] [reason]`');
+        }
+        if (reasonMute.time < 1) {
+            return message.reply('TIME?').then(message => message.delete(2000));
+        }
+        if (reasonMute.length < 1) {
+            return message.reply('You must give me a reason for Mute');
+        }
+        message.guild.member(userMute).addRole(muteRoleMute)
+
+        setTimeout(() => {
+            message.guild.member(userMute).removeRole(muteRoleMute)
+        }, msmute(timeMute));
+        message.guild.channels.filter(textchannel => textchannel.type === 'text').forEach(cnl => {
+            cnl.overwritePermissions(muteRoleMute, {
+                SEND_MESSAGES: false
+            });
+        });
+
+        message.reply("This user has been muted.");
+
+       message.channel.send({embed: {
+            color: 16745560,
+            author: {
+              name: client.user.username,
+              icon_url: client.user.avatarURL
+            },
+            fields: [{
+                name: 'Mute',
+                value: `**Muted:**${userMute.username}#${userMute.discriminator}\n**Moderator:** ${message.author.username}\n**Duration:** ${msmute(msmute(timeMute), {long: true})}\n**Reason:** ${reasonMute}`
+              }
+            ],
+            timestamp: new Date(),
+            footer: {
+              icon_url: client.user.avatarURL,
+              text: "© SOKA "
+            }
+          }
+});
+
+ client.on('message', function(message) {
+    if(message.content.startsWith(prefix + 'roll')) {
+        let args = message.content.split(" ").slice(1);
+        if (!args[0]) {
+            message.channel.send('**Put a number** :game_die:');
+            return;
+            }
+    message.channel.send(Math.floor(Math.random() * args.join(' ')));
+            if (!args[0]) {
+          message.edit('1')
+          return;
+        }
+    }
+});
+
+client.on('message', message => {
+    var prefix = "!";
+  if (message.author.x5bz) return;
+  if (!message.content.startsWith(prefix)) return;
+ 
+  let command = message.content.split(" ")[0];
+  command = command.slice(prefix.length);
+ 
+  let args = message.content.split(" ").slice(1);
+ 
+  if (command == "ban") {
+               if(!message.channel.guild) return message.reply('** This command only for servers**');
+         
+  if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.reply("**You Don't Have ` BAN_MEMBERS ` Permission**");
+  if(!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) return message.reply("**I Don't Have ` BAN_MEMBERS ` Permission**");
+  let user = message.mentions.users.first();
+  let reason = message.content.split(" ").slice(2).join(" ");
+  /*let b5bzlog = client.channels.find("name", "5bz-log");
+ 
+  if(!b5bzlog) return message.reply("I've detected that this server doesn't have a 5bz-log text channel.");*/
+  if (message.mentions.users.size < 1) return message.channel.send(`https://cdn.pg.sa/fjxlms81nk.png`);
+  if(!reason) return message.channel.send(`https://cdn.pg.sa/fjxlms81nk.png`);
+  if (!message.guild.member(user)
+  .bannable) return message.reply(`This User Is Have High Role !`);
+ 
+  message.guild.member(user).ban(7, user);
+ 
+  const banembed = new Discord.RichEmbed()
+  .setAuthor(`BANNED!`, user.displayAvatarURL)
+  .setColor("RANDOM")
+  .setTimestamp()
+  .addField("**User:**",  '**[ ' + `${user.tag}` + ' ]**')
+  .addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
+  .addField("**Reason:**", '**[ ' + `${reason}` + ' ]**')
+  message.channel.send({
+    embed : banembed
+  })
+}
+});
+	    
+client.on('message', message => {
+         if(message.content === prefix + "closeroom") {
+                             if(!message.channel.guild) return message.reply('** This command only for servers**');
+  
+     if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply(' **__ليس لديك صلاحيات__**');
+                message.channel.overwritePermissions(message.guild.id, {
+              SEND_MESSAGES: false
+  
+                }).then(() => {
+                    message.reply("**__تم تقفيل الشات__ :white_check_mark: **")
+                });
+                  }
+      if(message.content === prefix + "openroom") {
+                          if(!message.channel.guild) return message.reply('** This command only for servers**');
+  
+     if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('**__ليس لديك صلاحيات__**');
+                message.channel.overwritePermissions(message.guild.id, {
+              SEND_MESSAGES: true
+  
+                }).then(() => {
+                    message.reply("**__تم فتح الشات__:white_check_mark:**")
+                });
+      }
+         
+});
+	    
+client.on('message', message => {
+  if (message.content.startsWith(prefix +"avatar")) {
+if(!message.channel.guild) return;
+      var mentionned = message.mentions.users.first();
+  var client;
+    if(mentionned){
+        var client = mentionned; } else {
+        var client = message.author;
+    }
+      const embed = new Discord.RichEmbed()
+                         .addField('Requested by:', "<@" + message.author.id + ">")
+      .setColor(000000)
+      .setImage(`${client.avatarURL}`)
+    message.channel.sendEmbed(embed);
   }
 });
+	    
+client.on('message', message => {
+  if (message.author.x5bz) return;
+  if (!message.content.startsWith(prefix)) return;
 
-client.on('message', async msg => { 
-	if (msg.author.bot) return undefined;
-    if (!msg.content.startsWith(prefix)) return undefined;
-    
-    const args = msg.content.split(' ');
-	const searchString = args.slice(1).join(' ');
-    
-	const url = args[1] ? args[1].replace(/<(.+)>/g, '$1') : '';
-	const serverQueue = queue.get(msg.guild.id);
+  let command = message.content.split(" ")[0];
+  command = command.slice(prefix.length);
 
-	let command = msg.content.toLowerCase().split(" ")[0];
-	command = command.slice(prefix.length)
+  let args = message.content.split(" ").slice(1);
 
-	if (command === `play`) {
-		const voiceChannel = msg.member.voiceChannel;
-        
-        if (!voiceChannel) return msg.channel.send("انت لم تدخل روم صوتي");
-        
-        const permissions = voiceChannel.permissionsFor(msg.client.user);
-        
-        if (!permissions.has('CONNECT')) {
+  if (command == "kick") {
+               if(!message.channel.guild) return message.reply('** This command only for servers**');
+         
+  if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.reply("**You Don't Have ` KICK_MEMBERS ` Permission**");
+  if(!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.reply("**I Don't Have ` KICK_MEMBERS ` Permission**");
+  let user = message.mentions.users.first();
+  let reason = message.content.split(" ").slice(2).join(" ");
+  if (message.mentions.users.size < 1) return message.reply("**https://cdn.discordapp.com/attachments/498625534549295114/498825358682882059/kick_metion.png**");
+  if(!reason) return message.reply ("**https://cdn.discordapp.com/attachments/498625534549295114/498825956983701514/kick_reson.png**");
+  if (!message.guild.member(user)
+  .kickable) return message.reply("**This User Is Have High Role**");
 
-			return msg.channel.send("ليست لدي صلاحيات للدخول الى الروم");
-        }
-        
-		if (!permissions.has('SPEAK')) {
+  message.guild.member(user).kick();
 
-			return msg.channel.send("انا لا يمكنني التكلم في هاذه الروم");
-		}
-
-		if (!permissions.has('EMBED_LINKS')) {
-
-			return msg.channel.sendMessage("انا لا املك صلاحيات ارسال روابط")
-		}
-
-		if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
-
-			const playlist = await youtube.getPlaylist(url);
-            const videos = await playlist.getVideos();
-            
-
-			for (const video of Object.values(videos)) {
-                
-                const video2 = await youtube.getVideoByID(video.id); 
-                await handleVideo(video2, msg, voiceChannel, true); 
-            }
-			return msg.channel.send(`**${playlist.title}**, Just added to the queue!`);
-		} else {
-
-			try {
-
-                var video = await youtube.getVideo(url);
-                
-			} catch (error) {
-				try {
-
-					var videos = await youtube.searchVideos(searchString, 5);
-					let index = 0;
-                    const embed1 = new Discord.RichEmbed()
-                    .setTitle(":mag_right:  YouTube Search Results :")
-                    .setDescription(`
-                    ${videos.map(video2 => `${++index}. **${video2.title}**`).join('\n')}`)
-                    
-					.setColor("#f7abab")
-					msg.channel.sendEmbed(embed1).then(message =>{message.delete(20000)})
-					
-/////////////////					
-					try {
-
-						var response = await msg.channel.awaitMessages(msg2 => msg2.content > 0 && msg2.content < 11, {
-							maxMatches: 1,
-							time: 15000,
-							errors: ['time']
-						});
-					} catch (err) {
-						console.error(err);
-						return msg.channel.send('لم يتم اختيار الاغنية');
-                    }
-                    
-					const videoIndex = parseInt(response.first().content);
-                    var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
-                    
-				} catch (err) {
-
-					console.error(err);
-					return msg.channel.send("I didn't find any results!");
-				}
-			}
-
-            return handleVideo(video, msg, voiceChannel);
-            
-        }
-        
-	} else if (command === `skip`) {
-
-		if (!msg.member.voiceChannel) return msg.channel.send("يجب ان تكون في روم صوتي");
-        if (!serverQueue) return msg.channel.send("ليست هناك اغاني ليتم التخطي");
-
-		serverQueue.connection.dispatcher.end('تم تخطي الاغنية');
-        return undefined;
-        
-	} else if (command === `stop`) {
-
-		if (!msg.member.voiceChannel) return msg.channel.send("يجب ان تكون في روم صوتي");
-        if (!serverQueue) return msg.channel.send("There is no Queue to stop!!");
-        
-		serverQueue.songs = [];
-		serverQueue.connection.dispatcher.end('تم ايقاف الاغنية لقد خرجت من الروم الصوتي');
-        return undefined;
-        
-	} else if (command === `vol`) {
-
-		if (!msg.member.voiceChannel) return msg.channel.send("يجب ان تكون في روم صوتي");
-		if (!serverQueue) return msg.channel.send('يعمل الامر فقط عند تشغيل مقطع صوتي');
-        if (!args[1]) return msg.channel.send(`لقد تم تغير درجة الصوت الى**${serverQueue.volume}**`);
-        
-		serverQueue.volume = args[1];
-        serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 50);
-        
-        return msg.channel.send(`درجة الصوت الان**${args[1]}**`);
-
-	} else if (command === `np`) {
-
-		if (!serverQueue) return msg.channel.send('There is no Queue!');
-		const embedNP = new Discord.RichEmbed()
-	    .setDescription(`Now playing **${serverQueue.songs[0].title}**`)
-        return msg.channel.sendEmbed(embedNP);
-        
-	} else if (command === `queue`) {
-		
-		if (!serverQueue) return msg.channel.send('There is no Queue!!');
-		let index = 0;
-//	//	//
-		const embedqu = new Discord.RichEmbed()
-        .setTitle("The Queue Songs :")
-        .setDescription(`
-        ${serverQueue.songs.map(song => `${++index}. **${song.title}**`).join('\n')}
-**Now playing :** **${serverQueue.songs[0].title}**`)
-        .setColor("#f7abab")
-		return msg.channel.sendEmbed(embedqu);
-	} else if (command === `pause`) {
-		if (serverQueue && serverQueue.playing) {
-			serverQueue.playing = false;
-			serverQueue.connection.dispatcher.pause();
-			return msg.channel.send('تم الايقاف');
-		}
-		return msg.channel.send('في انتظار تشغيل المقطع');
-	} else if (command === "resume") {
-
-		if (serverQueue && !serverQueue.playing) {
-			serverQueue.playing = true;
-			serverQueue.connection.dispatcher.resume();
-            return msg.channel.send('تم التشغيل');
-            
-		}
-		return msg.channel.send('Queue is empty!');
-	}
-
-	return undefined;
+  const kickembed = new Discord.RichEmbed()
+  .setAuthor(`KICKED!`, user.displayAvatarURL)
+  .setColor("RANDOM")
+  .setTimestamp()
+  .addField("**User:**",  '**[ ' + `${user.tag}` + ' ]**')
+  .addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
+  .addField("**Reason:**", '**[ ' + `${reason}` + ' ]**')
+  message.channel.send({
+    embed : kickembed
+  })
+}
 });
-
-async function handleVideo(video, msg, voiceChannel, playlist = false) {
-	const serverQueue = queue.get(msg.guild.id);
-	console.log(video);
-	
-
-	const song = {
-		id: video.id,
-		title: Util.escapeMarkdown(video.title),
-		url: `https://www.youtube.com/watch?v=${video.id}`
-	};
-	if (!serverQueue) {
-		const queueConstruct = {
-			textChannel: msg.channel,
-			voiceChannel: voiceChannel,
-			connection: null,
-			songs: [],
-			volume: 5,
-			playing: true
-		};
-		queue.set(msg.guild.id, queueConstruct);
-
-		queueConstruct.songs.push(song);
-
-		try {
-			var connection = await voiceChannel.join();
-			queueConstruct.connection = connection;
-			play(msg.guild, queueConstruct.songs[0]);
-		} catch (error) {
-			console.error(`I could not join the voice channel: ${error}!`);
-			queue.delete(msg.guild.id);
-			return msg.channel.send(`Can't join this channel: ${error}!`);
-		}
-	} else {
-		serverQueue.songs.push(song);
-		console.log(serverQueue.songs);
-		if (playlist) return undefined;
-		else return msg.channel.send(`**${song.title}**, تمت اضافة المقطع الى قائمة الانتظار `);
-	} 
-	return undefined;
+	    
+client.on('message', message => {
+if(!message.channel.guild) return;
+if(message.content.startsWith(prefix + 'move')) {
+ if (message.member.hasPermission("MOVE_MEMBERS")) {
+ if (message.mentions.users.size === 0) {
+ return message.channel.send("``لاستخدام الأمر اكتب هذه الأمر : " +prefix+ "move [USER]``")
 }
-
-function play(guild, song) {
-	const serverQueue = queue.get(guild.id);
-
-	if (!song) {
-		serverQueue.voiceChannel.leave();
-		queue.delete(guild.id);
-		return;
-	}
-	console.log(serverQueue.songs);
-
-	const dispatcher = serverQueue.connection.playStream(ytdl(song.url))
-		.on('end', reason => {
-			if (reason === 'Stream is not generating quickly enough.') console.log('Song ended.');
-			else console.log(reason);
-			serverQueue.songs.shift();
-			play(guild, serverQueue.songs[0]);
-		})
-		.on('error', error => console.error(error));
-	dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
-
-	serverQueue.textChannel.send(`**${song.title}**, is now playing!`);
+if (message.member.voiceChannel != null) {
+ if (message.mentions.members.first().voiceChannel != null) {
+ var authorchannel = message.member.voiceChannelID;
+ var usermentioned = message.mentions.members.first().id;
+var embed = new Discord.RichEmbed()
+ .setTitle("Succes!")
+ .setColor("#000000")
+ .setDescription(`لقد قمت بسحب <@${usermentioned}> الى الروم الصوتي الخاص بك✅ `)
+var embed = new Discord.RichEmbed()
+.setTitle(`You are Moved in ${message.guild.name}`)
+ .setColor("RANDOM")
+.setDescription(`**<@${message.author.id}> Moved You To His Channel!\nServer --> ${message.guild.name}**`)
+ message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(embed))
+message.guild.members.get(usermentioned).send(embed)
+} else {
+message.channel.send("``لا تستطيع سحب "+ message.mentions.members.first() +" `يجب ان يكون هذه العضو في روم صوتي`")
 }
-
-
+} else {
+ message.channel.send("**``يجب ان تكون في روم صوتي لكي تقوم بسحب العضو أليك``**")
+}
+} else {
+message.react("❌")
+}
+ }
+});//toxic codes
 
 client.login(process.env.BOT_TOKEN);// لا تغير فيها شيء
