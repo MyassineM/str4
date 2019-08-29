@@ -1366,7 +1366,7 @@ client.on('message', message => {
 
 client.on('message' , message => {
 if(message.content === '!voice') {
-    message.channel.send(`**عدد الاشخاص الموجودين بـ  الرومات الصوتيه : ${message.guild.members.filter(g => g.voiceChannel).size}**`);
+    message.channel.send(`**Number of people in the voice channels are : ${message.guild.members.filter(g => g.voiceChannel).size}**`);
 }
 });
 
