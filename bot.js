@@ -539,7 +539,7 @@ client.on('message', message => {
               const Embed11 = new Discord.RichEmbed()
         .setColor("RANDOM")
         
-    .setDescription("Link of server xLegendaryGalaxy - Bot by MrBloods")
+    .setDescription("Link of the server- Bot by MrBloods")
       message.author.sendEmbed(Embed11)
     }
 });
@@ -618,12 +618,10 @@ client.on("message", message => {
 『!cc / make 50 colored roles』
 『!topic / Change or create a topic』
 『!say <word> / Ban member』
-『! / Ban member』
 
 『 The bot can mute anyone share any link in the chat - The bot will remove any bad words 』
 『 The bot welcome who join the server if you create a room called welcome 』
 『 Thanks for using the bot 』
-
 
        Bot By MrBloods** `)
      
