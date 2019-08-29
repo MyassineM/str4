@@ -288,7 +288,7 @@ client.on('message', async message => {
 });
 
 client.on('message', message => {
-    const swearWords = ["Fuck you", "damn","darn", "noob","fuck", "L","ez", "lesbain","fuck you", "your mom","shit","Fuck","Shit"]; // الكلمات الممنوعه هنا
+    const swearWords = ["Fuck you", "damn","darn", "noob","fuck","ez", "lesbain","fuck you", "your mom","shit","Fuck","Shit"]; // الكلمات الممنوعه هنا
     if( swearWords.some(word => message.content.includes(word)) ) {
         message.delete();
         message.author.send('Hey! That word has been banned, please don\'t use it!');
