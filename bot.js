@@ -474,7 +474,7 @@ client.on('message', message => {
       var a= message.content.split(' ').slice(1).join("  ");
       if (!a) return message.reply("You didnt write anything to put it.")
       message.channel.setTopic(`${a}`)
-      .then(newChannel => message.channel.send(`Dont i changed the topic **${a}**`))
+      .then(newChannel => message.channel.send(`Done i changed the topic **${a}**`))
       .catch(console.error);
             }
 }); 
