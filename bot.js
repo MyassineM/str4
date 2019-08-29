@@ -571,9 +571,9 @@ client.on("message", message => {
      const embed = new Discord.RichEmbed() 
          .setColor("#00FF00")
          .setThumbnail(message.author.avatarURL)
-         .setDescription(`**Help | XLegendaryGalaxy
+         .setDescription(`**Help | XLegendaryGalaxy**
 
-        ***__General orders__***
+        **__General orders__**
 **
 『!allbots/ Show you all the bots in the server.』
 『!server/ Show you the server info』
@@ -589,13 +589,13 @@ client.on("message", message => {
 『!sug/ Suggestion for an idea』
 **
 
-        ***__Games orders__***
+        **__Games orders__**
  **       
 『!rps/ Rock-Paper-Scissors』
 『!cat/ Give you some cute pictures』
 **
 
-        ***__Music orders__***
+        **__Music orders__**
 **
 『${prefix}play / Soon』
 『${prefix}skip / Soon』
@@ -607,7 +607,7 @@ client.on("message", message => {
 『${prefix}queue / Soon』
 **
 
-        ***__Administrative Orders__***
+        **__Administrative Orders__**
 **
 『!move @user /  Move the user to anther channel』
 『!bc / broadcast』
