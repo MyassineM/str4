@@ -1650,32 +1650,6 @@ client.on('message',async message => {
     });
   }
 });
-
-client.on("guildMemberAdd", (member) => {
-  let channel = member.guild.channels.get("605533011827621918");
-  if (!channel) {
-      console.log("!the channel id it's not correct");
-      return;
-  }
-  if (member.id == client.user.id) {
-      return;
-  }
-  console.log('-');
-  var guild;
-  while (!guild)
-      guild = client.guilds.get("605524619268718592");
-  guild.fetchInvites().then((data) => {
-      data.forEach((Invite, key, map) => {
-          var Inv = Invite.code;
-          if (dat[Inv])
-              if (dat[Inv] < Invite.uses) {
-                  setTimeout(function() {
-channel.send(`**invited by** ${Invite.inviter} `) ;
-                  },1500);
-}
-          dat[Inv] = Invite.uses;
-     
-     });
 	  
 client.on("message", msg =>{    
 if(msg.content.startsWith(`${prefix}topservers`)){
@@ -1728,4 +1702,4 @@ client.on('message', async msg =>{
     };
 });
 
-client.login(process.env.BOT_TOKEN);// لا تغير فيها شيء
+client.login(process.env.BOT_TOKEN);// لا تغير فيها شي
