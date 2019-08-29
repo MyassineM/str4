@@ -656,9 +656,9 @@ if(message.content.startsWith("!slots")) {
   let slots3 = `${slot1[Math.floor(Math.random() * slot1.length)]}`;
   let we;
   if(slots1 === slots2 && slots2 === slots3) {
-    we = "**You Win But Saturn Bot Lose The Slot oof!!!**"
+    we = "**Winner**"
   } else {
-    we = "**You Lose And Saturn Bot Win The Slot!!** "
+    we = "**Loser** "
   }
   message.channel.send(`${slots1} | ${slots2} | ${slots3} - ${we}`)
 }
