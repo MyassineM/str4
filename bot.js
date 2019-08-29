@@ -530,7 +530,7 @@ client.on('message', message => {
     )
     const embed = new Discord.RichEmbed()
         .setColor("RANDOM")
-          .setDescription(" Dont check your dm! ")
+          .setDescription(" Done check your dm! ")
            .setAuthor(client.user.username, client.user.avatarURL)
                  .setAuthor(client.user.username, client.user.avatarURL)
                 .setFooter(`Requested by | ${message.author.tag}`)
@@ -560,46 +560,72 @@ ${botssize.join('\n')}`)
 .setFooter(client.user.username, client.user.avatarURL)
 .setTimestamp();
 message.channel.send(embed)
+			
+client.on("message", message => {
+    if (message.content === "!help") {
+     const embed = new Discord.RichEmbed() 
+         .setColor("#00FF00")
+         .setThumbnail(message.author.avatarURL)
+         .setDescription(`**Help | XLegendaryGalaxy
 
-client.on("message", function(message) {
-	var prefix = "!";
-   if(message.content.startsWith(prefix + "rps")) {
-    let messageArgs = message.content.split(" ").slice(1).join(" ");
-    let messageRPS = message.content.split(" ").slice(2).join(" ");
-    let arrayRPS = ['**# - Rock**','**# - Paper**','**# - Scissors**'];
-    let result = `${arrayRPS[Math.floor(Math.random() * arrayRPS.length)]}`;
-    var RpsEmbed = new Discord.RichEmbed()
-    .setAuthor(message.author.username)
-    .setThumbnail(message.author.avatarURL)
-    .addField("Rock","🇷",true)
-    .addField("Paper","🇵",true)
-    .addField("Scissors","🇸",true)
-    message.channel.send(RpsEmbed).then(msg => {
-        msg.react(' 🇷')
-        msg.react("🇸")
-        msg.react("🇵")
-.then(() => msg.react('🇷'))
-.then(() =>msg.react('🇸'))
-.then(() => msg.react('🇵'))
-let reaction1Filter = (reaction, user) => reaction.emoji.name === '🇷' && user.id === message.author.id;
-let reaction2Filter = (reaction, user) => reaction.emoji.name === '🇸' && user.id === message.author.id;
-let reaction3Filter = (reaction, user) => reaction.emoji.name === '🇵' && user.id === message.author.id;
-let reaction1 = msg.createReactionCollector(reaction1Filter, { time: 12000 });
-	    
-let reaction2 = msg.createReactionCollector(reaction2Filter, { time: 12000 });
-let reaction3 = msg.createReactionCollector(reaction3Filter, { time: 12000 });
-reaction1.on("collect", r => {
-        message.channel.send(result)
-})
-reaction2.on("collect", r => {
-        message.channel.send(result)
-})
-reaction3.on("collect", r => {
-        message.channel.send(result)
-})
+        ***__General orders__***
+**
+『!allbots/ Show you all the bots in the server.』
+『!server/ Show you the server info』
+『!bot/ Show you the bot info』
+『!members/ Show you the online and offline members』
+『!id/ Show you your id』
+『!ping/ Show you the bot ping』
+『!info/ Show you some bot info』
+『!help/ Show you this list』
+『!link/ Give you link of the server』
+『!new/ Open a ticket』
+『!close/ Close a ticket』
+『!sug/ Suggestion for an idea』
+**
 
-    })
-}
-});
+        ***__Games orders__***
+ **       
+『!rps/ Rock-Paper-Scissors』
+『!cat/ Give you some cute pictures』
+**
+
+        ***__Music orders__***
+**
+『${prefix}play / Soon』
+『${prefix}skip / Soon』
+『${prefix}pause / Soon』
+『${prefix}resume / Soon』
+『${prefix}vol / Soon』
+『${prefix}stop / Soon』
+『${prefix}np / Soon』
+『${prefix}queue / Soon』
+**
+
+        ***__Administrative Orders__***
+**
+『!move @user /  Move the user to anther channel』
+『!bc / broadcast』
+『!clear / clear all the chat』
+『!kick @user / Kick member』
+『!ban @user / Ban member』
+『!unbanall / Unban  all the members』
+『!cc / make 50 colored roles』
+『!topic / Change or create a topic』
+『!say <word> / Ban member』
+『! / Ban member』
+
+『 The bot can mute anyone share any link in the chat - The bot will remove any bad words 』
+『 The bot welcome who join the server if you create a room called welcome 』
+『 Thanks for using the bot - Bot by MrBloods 』
+
+
+       Bot By MrBloods** `)
+     
+            
+   message.author.sendEmbed(embed)
+   
+   }
+   });
 
 client.login(process.env.BOT_TOKEN);// لا تغير فيها شيء
