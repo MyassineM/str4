@@ -1616,7 +1616,7 @@ client.on('message',async message => {
         if(!room) return message.channel.send(':heavy_multiplication_x:| **I could not find the desired room**');
         room = collected.first().content;
         collected.first().delete();
-        msgg.edit(':eight_pointed_black_star:| **Type the duration of the Away in minutes, for example : 60**').then(msg => {
+        msgg.edit(':eight_pointed_black_star:| **Type the duration of the GiveAway in minutes, for example : 60**').then(msg => {
           message.channel.awaitMessages(filter, {
             max: 1,
             time: 20000,
@@ -1640,7 +1640,7 @@ client.on('message',async message => {
                   .setDescription(`Duration : ${duration / 60000} Minutes`)
                   .setFooter(message.author.username, message.author.avatarURL);
                   message.guild.channels.find('name', room).send(giveEmbed).then(m => {
-                     let re = m.react('💖');
+                     let re = m.react('🎉');
                      setTimeout(() => {
                        let users = m.reactions.get("💖").users;
                        let list = users.array().filter(u => u.id !== m.author.id);
