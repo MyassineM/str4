@@ -5,6 +5,11 @@ var adminprefix = '!'
 const developers = ["436918120184021012"]
 
 
+
+client.on('ready', () => { //code bot not leave room voice //Bot Is Online
+    client.channels.get("605531901725376516").join(); //by :n3k4a 
+    });
+
 client.on("message", (message) => {
 
    if (message.content.startsWith("!new")) {   
@@ -103,7 +108,7 @@ client.on('message', message => {
             .addField('``Users``' ,`[ ${client.users.size} ]` , true)
             .addField('``My Name``' , `[ ${client.user.tag} ]` , true)
             .addField('``My ID``' , `[ ${client.user.id} ]` , true)
-                  .addField('``My Prefix``' , `[-]` , true)
+                  .addField('``My Prefix``' , `[!]` , true)
                   .addField('``My Language``' , `[ Java Script ]` , true)
                     })
 }
@@ -449,8 +454,219 @@ client.on('message', message => {
   }
 });
 
-client.on('ready', () => { //code bot not leave room voice //Bot Is Online
-    client.channels.get("616277764437442590").join(); //by :n3k4a 
-    });
+client.on("message", (message) => {
+    if (message.content.startsWith("!ban")) {
+      if(!message.member.hasPermission('BAN_MEMBERS')) return message.reply('You dont have permission');
+        var member= message.mentions.members.first();
+        member.ban().then((member) => {
+            message.channel.send(member.displayName + " Good Bye ! ");
+        }).catch(() => {
+            message.channel.send("Error ");
+        });
+    }
+}); //Toxic Codes
+
+client.on('message', message => {    
+    var p = "#";
+            if (message.content.startsWith(! + "topic")) {
+                if(!message.channel.guild) return;
+                if (!message.member.hasPermission("MANAGE_CHANNEL"))  return;
+      var a= message.content.split(' ').slice(1).join("  ");
+      if (!a) return message.reply("You didnt write anything to put it.")
+      message.channel.setTopic(`${a}`)
+      .then(newChannel => message.channel.send(`Dont i changed the topic **${a}**`))
+      .catch(console.error);
+            }
+}); 
+
+client.on('message', message => {
+    if (message.content === ('!info')) {
+    message.channel.send({
+        embed: new Discord.RichEmbed()
+            .setAuthor(client.user.username,client.user.avatarURL)
+            .setThumbnail(client.user.avatarURL)
+            .setColor('RANDOM')
+            .addField('**Bot Ping**🚀 :' , [`${Date.now() - message.createdTimestamp}` + 'MS'], true)
+            .addField('**Servers**📚 :', [client.guilds.size], true)
+            .addField('**Channels**📝 :' , `[ ${client.channels.size} ]` , true)
+            .addField('**Users**🔮 :' ,`[ ${client.users.size} ]` , true)
+            .addField('**Bot Name**🔰 :' , `[ ${client.user.tag} ]` , true)
+            .addField('**Bot Owner**👑 :' , `[<@507533148897411082>]` , true)
+            .setFooter(message.author.username, message.author.avatarURL)
+    })
+}
+});//toxic codes
+
+client.on('message', message => { //zine pixel
+if(message.content.startsWith(prefix + "server")){  
+if(!message.channel.guild) return message.channel.send(` | This Command is used only in servers!`);
+const millis = new Date().getTime() - message.guild.createdAt.getTime();
+const now = new Date();
+const verificationLevels = ['None', 'Low', 'Medium', 'Insane', 'Extreme'];
+const days = millis / 1000 / 60 / 60 / 24;
+var embed  = new Discord.RichEmbed()
+.setAuthor(message.guild.name, message.guild.iconURL)
+.addField("✽** Server ID:**", `» ${message.guild.id}`,true)
+.addField("✽** Created On**", `» ${message.guild.createdAt.toLocaleString()}`,true)
+.addField("✽** Owned by**",`» ${message.guild.owner.user.username}#${message.guild.owner.user.discriminator}`)
+.addField("✽** Members**",`» ${message.guild.memberCount}`,true)
+.addField('✽** Channels **',`» **${message.guild.channels.filter(m => m.type === 'text').size}**` + ' TexT | VoicE  '+ `**${message.guild.channels.filter(m => m.type === 'voice').size}** `,true)
+.addField("✽** Region **" , `» ${message.guild.region}`,true)
+.setColor("#42A9C9") //zine pixel
+message.channel.sendEmbed(embed)
+ 
+}
+});
+
+client.on('message', message => {
+     if (message.author.bot) return;
+    if (message.content.startsWith("!link")) {
+        message.channel.createInvite({
+        thing: true,
+        maxUses: 1,
+        maxAge: 3600,
+    }).then(invite =>
+      message.author.sendMessage(invite.url)
+    )
+    const embed = new Discord.RichEmbed()
+        .setColor("RANDOM")
+          .setDescription(" Dont check your dm! ")
+           .setAuthor(client.user.username, client.user.avatarURL)
+                 .setAuthor(client.user.username, client.user.avatarURL)
+                .setFooter(`Requested by | ${message.author.tag}`)
+
+      message.channel.sendEmbed(embed).then(message => {message.delete(10000)})
+              const Embed11 = new Discord.RichEmbed()
+        .setColor("RANDOM")
+        
+    .setDescription("Link of server xLegendaryGalaxy - Bot by MrBloods")
+      message.author.sendEmbed(Embed11)
+    }
+});
+
+client.on('message', message => {
+     if(!message.channel.guild) return;
+var prefix = "!";
+                if(message.content.startsWith(prefix + 'allbots')) {
+
+    
+    if (message.author.bot) return;
+    let i = 1;
+        const botssize = message.guild.members.filter(m=>m.user.bot).map(m=>`${i++} - <@${m.id}>`);
+          const embed = new Discord.RichEmbed()
+          .setAuthor(message.author.tag, message.author.avatarURL)
+          .setDescription(`**Found ${message.guild.members.filter(m=>m.user.bot).size} bots in this Server**
+${botssize.join('\n')}`)
+.setFooter(client.user.username, client.user.avatarURL)
+.setTimestamp();
+message.channel.send(embed)
+
+client.on("message", function(message) {
+	var prefix = "!";
+   if(message.content.startsWith(prefix + "rps")) {
+    let messageArgs = message.content.split(" ").slice(1).join(" ");
+    let messageRPS = message.content.split(" ").slice(2).join(" ");
+    let arrayRPS = ['**# - Rock**','**# - Paper**','**# - Scissors**'];
+    let result = `${arrayRPS[Math.floor(Math.random() * arrayRPS.length)]}`;
+    var RpsEmbed = new Discord.RichEmbed()
+    .setAuthor(message.author.username)
+    .setThumbnail(message.author.avatarURL)
+    .addField("Rock","🇷",true)
+    .addField("Paper","🇵",true)
+    .addField("Scissors","🇸",true)
+    message.channel.send(RpsEmbed).then(msg => {
+        msg.react(' 🇷')
+        msg.react("🇸")
+        msg.react("🇵")
+.then(() => msg.react('🇷'))
+.then(() =>msg.react('🇸'))
+.then(() => msg.react('🇵'))
+let reaction1Filter = (reaction, user) => reaction.emoji.name === '🇷' && user.id === message.author.id;
+let reaction2Filter = (reaction, user) => reaction.emoji.name === '🇸' && user.id === message.author.id;
+let reaction3Filter = (reaction, user) => reaction.emoji.name === '🇵' && user.id === message.author.id;
+let reaction1 = msg.createReactionCollector(reaction1Filter, { time: 12000 });
+	    
+let reaction2 = msg.createReactionCollector(reaction2Filter, { time: 12000 });
+let reaction3 = msg.createReactionCollector(reaction3Filter, { time: 12000 });
+reaction1.on("collect", r => {
+        message.channel.send(result)
+})
+reaction2.on("collect", r => {
+        message.channel.send(result)
+})
+reaction3.on("collect", r => {
+        message.channel.send(result)
+})
+
+    })
+}
+});
+
+  client.on("message", message => {
+    if (message.content === "!help") {
+     const embed = new Discord.RichEmbed() 
+         .setColor("#00FF00")
+         .setThumbnail(message.author.avatarURL)
+         .setDescription(`**Help | XLegendaryGalaxy
+
+        ***__General orders__***
+**
+『!allbots/ Show you all the bots in the server.』
+『!server/ Show you the server info』
+『!bot/ Show you the bot info』
+『!members/ Show you the online and offline members』
+『!id/ Show you your id』
+『!ping/ Show you the bot ping』
+『!info/ Show you some bot info』
+『!help/ Show you this list』
+『!link/ Give you link of the server』
+『!new/ Open a ticket』
+『!close/ Close a ticket』
+『!sug/ Suggestion for an idea』
+**
+
+        ***__Games orders__***
+ **       
+『!rps/ Rock-Paper-Scissors』
+『!cat/ Give you some cute pictures』
+**
+
+        ***__Music orders__***
+**
+『${prefix}play / Soon』
+『${prefix}skip / Soon』
+『${prefix}pause / Soon』
+『${prefix}resume / Soon』
+『${prefix}vol / Soon』
+『${prefix}stop / Soon』
+『${prefix}np / Soon』
+『${prefix}queue / Soon』
+**
+
+        ***__Administrative Orders__***
+**
+『!move @user /  Move the user to anther channel』
+『!bc / broadcast』
+『!clear / clear all the chat』
+『!kick @user / Kick member』
+『!ban @user / Ban member』
+『!unbanall / Unban  all the members』
+『!cc / make 50 colored roles』
+『!topic / Change or create a topic』
+『!say <word> / Ban member』
+『! / Ban member』
+
+『 The bot can mute anyone share any link in the chat - The bot will remove any bad words 』
+『 The bot welcome who join the server if you create a room called welcome 』
+『 Thanks for using the bot - Bot by MrBloods 』
+
+
+       Bot By MrBloods** `)
+     
+            
+   message.author.sendEmbed(embed)
+   
+   }
+   });
 
 client.login(process.env.BOT_TOKEN);// لا تغير فيها شيء
