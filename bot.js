@@ -1597,4 +1597,75 @@ if(!message.channel.guild) return;
   }
 });//toxic codes
 
+client.on('message',async message => {
+  var room;
+  var title;
+  var duration;
+  var gMembers;
+  var filter = m => m.author.id === message.author.id;
+  if(message.content.startsWith(prefix + "giveaway")) {
+     //return message.channel.send(':heavy_multiplication_x:| **This is currently disabled .. ``Try later``**');
+    if(!message.guild.member(message.author).hasPermission('MANAGE_GUILD')) return message.channel.send(':heavy_multiplication_x:| **يجب أن يكون لديك خاصية التعديل على السيرفر**');
+    message.channel.send(`:eight_pointed_black_star:| **Please type the name of the room**`).then(msgg => {
+      message.channel.awaitMessages(filter, {
+        max: 1,
+        time: 20000,
+        errors: ['time']
+      }).then(collected => {
+        let room = message.guild.channels.find('name', collected.first().content);
+        if(!room) return message.channel.send(':heavy_multiplication_x:| **I could not find the desired room**');
+        room = collected.first().content;
+        collected.first().delete();
+        msgg.edit(':eight_pointed_black_star:| **Type the duration of the Away in minutes, for example : 60**').then(msg => {
+          message.channel.awaitMessages(filter, {
+            max: 1,
+            time: 20000,
+            errors: ['time']
+          }).then(collected => {
+            if(isNaN(collected.first().content)) return message.channel.send(':heavy_multiplication_x:| **``You should rewrite it``**');
+            duration = collected.first().content * 60000;
+            collected.first().delete();
+            msgg.edit(':eight_pointed_black_star:| **Finally, write on what you want to GiveAway**').then(msg => {
+              message.channel.awaitMessages(filter, {
+                max: 1,
+                time: 20000,
+                errors: ['time']
+              }).then(collected => {
+                title = collected.first().content;
+                collected.first().delete();
+                try {
+                  let giveEmbed = new Discord.RichEmbed()
+                  .setAuthor(message.guild.name, message.guild.iconURL)
+                  .setTitle(title)
+                  .setDescription(`Duration : ${duration / 60000} Minutes`)
+                  .setFooter(message.author.username, message.author.avatarURL);
+                  message.guild.channels.find('name', room).send(giveEmbed).then(m => {
+                     let re = m.react('💖');
+                     setTimeout(() => {
+                       let users = m.reactions.get("💖").users;
+                       let list = users.array().filter(u => u.id !== m.author.id);
+                       let gFilter = list[Math.floor(Math.random() * list.length) + 0];
+                         if(users.size === 1) gFilter = '**Not selected**';
+                       let endEmbed = new Discord.RichEmbed()
+                       .setAuthor(message.author.username, message.author.avatarURL)
+                       .setTitle(title)
+                       .addField('GiveAway finished !',`The winner is : ${gFilter}`)
+                       .setFooter(message.guild.name, message.guild.iconURL);
+                       m.edit(endEmbed);
+                     },duration);
+                   });
+                  msgg.edit(`:heavy_check_mark:| **The stand was prepared GiveAway**`);
+                } catch(e) {
+                  msgg.edit(`:heavy_multiplication_x:| **I was unable to prepare the GiveAway because of the lack of characteristics**`);
+                  console.log(e);
+                }
+              });
+            });
+          });
+        });
+      });
+    });
+  }
+});
+
 client.login(process.env.BOT_TOKEN);// لا تغير فيها شيء
