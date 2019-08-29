@@ -347,7 +347,8 @@ message.guild.unban(ns);
 }).then(() => {
 let embed = new Discord.RichEmbed()
   .setAuthor(message.author.username)          
-  .addField("Done✅|")    
+  .addField("Done✅|")  
+  .setFooter(`Requested By | ${message.author.tag}`)
   message.channel.send(embed);
 })
 }
@@ -464,18 +465,6 @@ client.on('message', message => {
     }
   }
 });
-
-client.on("message", (message) => {
-    if (message.content.startsWith("!ban")) {
-      if(!message.member.hasPermission('BAN_MEMBERS')) return message.reply('You dont have permission');
-        var member= message.mentions.members.first();
-        member.ban().then((member) => {
-            message.channel.send(member.displayName + " Good Bye ! ");
-        }).catch(() => {
-            message.channel.send("Error ");
-        });
-    }
-}); //Toxic Codes
 
 client.on('message', message => {    
     var p = "!";
@@ -1430,7 +1419,7 @@ var flip = ["**__HEADS__**",
 .setDescription(flip[Math.floor(Math.random() * flip.length)])
 .setThumbnail("https://cdn.onlinewebfonts.com/svg/img_441809.png")
 .setColor(0xd3d0c4)
-   .setFooter(`©  Dream™ `)
+   .setFooter(`Bot by MrBloods`)
 message.channel.sendEmbed(cat);
 
     }
