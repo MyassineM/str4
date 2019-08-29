@@ -1875,6 +1875,7 @@ function play(guild, song) {
 
 	serverQueue.textChannel.send(`**${song.title}**, is now playing!`);
 }
+});//toxic codes
 
 client.on('message', message => {
   if (message.content.startsWith(prefix +"avatar")) {
