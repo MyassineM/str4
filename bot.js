@@ -8,6 +8,10 @@ const fetchVideoInfo = require('youtube-info');
 
 const YouTube = require('simple-youtube-api');
 
+const SQLite = require('sqlite'); // SQLpackage
+
+const path = require('path'); // PATHpackage
+
 const youtube = new YouTube("AIzaSyAdORXg7UZUo7sePv97JyoDqtQVi3Ll0b8");
 
 const queue = new Map();
@@ -17,6 +21,7 @@ const ytdl = require('ytdl-core');
 const fs = require('fs');
 
 const gif = require("gif-search");
+
 const client = new Discord.Client();
 var prefix = "!";
 var adminprefix = '!'
@@ -1966,5 +1971,22 @@ client.on('message', async msg =>{
         }
     };
 });
+
+let inv_room = "616329647587590180" // room id
+client.on('guildMemberAdd', async member => { // membed add event
+    member.guild.fetchInvites().then(async guildInvites => { // fetch invites ?
+            const inv = invites[member.guild.id]; // get invite :)
+            invites[member.guild.id] = guildInvites; // push guild invites on invites
+            let invite = guildInvites.find(i => inv.get(i.code).uses < i.uses); // find ?
+            let res = await SQLite.get(`SELECT * FROM linkSysteme WHERE code = '${invite.code}'`) // select from sql
+            if(!res) { // if the code does'nt exists
+            console.log(invite.code) // for test
+            client.channels.get(inv_room).send("**Welcom To "+member.guild.name+"🌹 .\n       Joined By: "+invite.inviter+".**") // send message to welcome room
+            } else { // if the code link exitst
+                client.channels.get(inv_room).send("**Welcom To "+member.guild.name+"🌹 .\n       Joined By: <@!"+res.id+">.**") // send message to welcome room
+                console.log(res.code) // for test
+        } // end if
+    }); // end fetchs :)
+}); // end events :) ) )) ))  )) )) )) )) ) )) ))
 
 client.login(process.env.BOT_TOKEN);// لا تغير فيها شي
