@@ -2014,8 +2014,7 @@ let emojiChars = {
     y: '🇾', z: '🇿', 0: '0⃣', 1: '1⃣',
     2: '2⃣', 3: '3⃣', 4: '4⃣', 5: '5⃣',
     6: '6⃣', 7: '7⃣', 8: '8⃣', 9: '9⃣',
-    10: '🔟', '#': '#⃣', '*': '*⃣',
-    '!': '❗', '?': '❓',
+    10: '🔟',
 };
 
 client.on('message', msg => {
@@ -2056,7 +2055,7 @@ msgs2.delete()
 if(msg.member.roles.find(r=>r.name == role)) return msg.reply("You already own the rank");
 let roleW = msg.guild.roles.find(r=>r.name == role);
 if(!roleW) return msg.reply(`The bot is locked because there is no rank by name \`${role}\``)
-msg.channel.send(`كردت بروبوت\`${Price}\` You have 4 minutes to convert
+msg.channel.send(`Credit ProBot \`${Price}\` You have 4 minutes to convert
 to ${msg.guild.members.get(id)}
 `).then( msgs =>{
 const filter = response => response.author.id == "282859044593598464" && response.mentions._content.includes(`:moneybag: | ${msg.author.username}, has transferred \`$${Price2}\` to ${msg.guild.members.get(id)}`);
