@@ -2039,9 +2039,9 @@ let embedvip = new Discord.RichEmbed()
 .setColor("#42f4f4")
 .setAuthor(msg.author.username, msg.author.displayAvatarURL)
 .setThumbnail(msg.author.avatarURL)
-.setTitle("**اختر الطريقة المناسبة لك**")
-.addField("ل شراء الفي اي بي لنفسك","🔱",true )
-.addField("ل شراء الفي اي بي ك هدية","🎁",true)
+.setTitle("**Choose the method that's right for you**")
+.addField("To buy VIP for yourself","🔱",true )
+.addField("To buy your VIP as a gift","🎁",true)
 .setTimestamp()
 .setFooter(client.user.username,client.user.displayAvatarURL);
 msg.channel.send(embedvip).then(msgs2 =>{
@@ -2053,26 +2053,26 @@ msgs2.react("🔱").then(()=>{
     const giftc = msgs2.createReactionCollector(gift, {time: 120000});
 mec.on("collect", r=>{  
 msgs2.delete()
-if(msg.member.roles.find(r=>r.name == role)) return msg.reply("انت تمتلك الرتبة مسبقًا");
+if(msg.member.roles.find(r=>r.name == role)) return msg.reply("You already own the rank");
 let roleW = msg.guild.roles.find(r=>r.name == role);
-if(!roleW) return msg.reply(`البوت مقفل لعدم وجود رتبة ب أسم \`${role}\``)
-msg.channel.send(`كردت بروبوت\`${Price}\` لديك 4 دقائق لتحويل
-إلى ${msg.guild.members.get(id)}
+if(!roleW) return msg.reply(`The bot is locked because there is no rank by name \`${role}\``)
+msg.channel.send(`كردت بروبوت\`${Price}\` You have 4 minutes to convert
+to ${msg.guild.members.get(id)}
 `).then( msgs =>{
 const filter = response => response.author.id == "282859044593598464" && response.mentions._content.includes(`:moneybag: | ${msg.author.username}, has transferred \`$${Price2}\` to ${msg.guild.members.get(id)}`);
 msg.channel.awaitMessages(filter, { maxMatches: 1, time: 240000, errors: ['time'] })
 .then( collected =>{
 msgs.delete()
-msg.reply(`تم اعطائك رتبة \`${role}\``);
+msg.reply(`You were given rank \`${role}\``);
 msg.member.addRole(roleW);
 }).catch(e => {});
 })})
 giftc.on("collect", r=>{
   msgs2.delete()
   let roleW = msg.guild.roles.find(r=>r.name == role);
-  if(!roleW) return msg.reply(`البوت مقفل لعدم وجود رتبة ب أسم \`${role}\``)
-msg.channel.send(`كردت بروبوت\`${Price}\` لديك 4 دقائق لتحويل
-إلى ${msg.guild.members.get(id)}
+  if(!roleW) return msg.reply(`The bot is locked because there is no rank by name \`${role}\``)
+msg.channel.send(`Credit ProBot\`${Price}\` You have 4 minutes to convert
+to ${msg.guild.members.get(id)}
 `).then( msgs =>{
   const filter = response => response.author.id == "282859044593598464" && response.mentions._content.includes(`:moneybag: | ${msg.author.username}, has transferred \`$${Price2}\` to ${msg.guild.members.get(id)}`);
   msg.channel.awaitMessages(filter, { maxMatches: 1, time: 240000, errors: ['time'] })
@@ -2090,25 +2090,25 @@ if(cmd === `${prefix}used`){
   if(!args) {   
     let embed = new Discord.RichEmbed()
     .setColor("#42f4f4")
-    .setTitle(`:x: - **الرجاء ادخال كود الهدية** \`${prefix}used <Key>\``)
+    .setTitle(`:x: - **Please enter your gift code** \`${prefix}used <Key>\``)
     msg.reply(embed).then( z => z.delete(3000));
     return
 }
   let embed = new Discord.RichEmbed()
-.setTitle(`**جاري التحقق من الكود**`)
+.setTitle(`**Verifying code**`)
 .setColor("#42f4f4")
   msg.reply(embed).then( msgs =>{
   if(vipKeys[args]){
     let hav = msg.member.roles.find(`name`, vipKeys[args].name);
     if(hav){
     let embed = new Discord.RichEmbed()
-    .setTitle(`:x: - **انت تمتلك هذه الرتبة مسبقًا**  \`${vipKeys[args].name}\``)
+    .setTitle(`:x: - **You already own this rank**  \`${vipKeys[args].name}\``)
     .setColor("#42f4f4")
     msgs.edit(embed)
     return
     }
     let embed = new Discord.RichEmbed()
-    .setTitle(`:tada: - **مبروك تم اعطائك رتبة** \`${vipKeys[args].name}\``)
+    .setTitle(`:tada: - **Congratulations you were given rank** \`${vipKeys[args].name}\``)
     .setColor("#42f4f4")
     msgs.edit(embed)
     msg.member.addRole(vipKeys[args]);
@@ -2116,7 +2116,7 @@ if(cmd === `${prefix}used`){
     save()
   }else{
     let embed = new Discord.RichEmbed()
-    .setTitle(`:x: - **الكود غير صيحيح أو انه مستعمل من قبل**`)
+    .setTitle(`:x: - **The code is not valid or is already in use**`)
     .setColor("#42f4f4")
     msgs.edit(embed)
   }});
@@ -2132,7 +2132,7 @@ function genKey(msg,role){
   vipKeys[gift] = role;
   let embed = new Discord.RichEmbed()
   .setColor("#42f4f4")
-  .setTitle(`:ok_hand: - **تم ارسآل الكود على الخاص**`);
+  .setTitle(`:ok_hand: - **The code was sent to the private**`);
   msg.reply(embed);
   let embed2= new Discord.RichEmbed()
   .setAuthor(msg.author.username, msg.author.displayAvatarURL)
