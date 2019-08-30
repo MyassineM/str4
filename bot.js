@@ -17,6 +17,7 @@ const ytdl = require('ytdl-core');
 const fs = require('fs');
 
 const gif = require("gif-search");
+const client = new Discord.Client();
 var prefix = "!";
 var adminprefix = '!'
 const developers = ["436918120184021012"]
