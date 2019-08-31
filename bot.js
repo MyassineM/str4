@@ -2190,4 +2190,33 @@ if(!message.channel.guild) return message.reply(' Error : \` Guild Command \`');
     }
 });
 
+client.on('message', message => {
+      if(message.content.startsWith ("!marry")) {
+      if(!message.channel.guild) return message.reply('**This command only for servers**')
+      var proposed = message.mentions.members.first()
+     
+      if(!message.mentions.members.first()) return message.reply(' +2D3eDw **You should mention the girl that you want to marry**').catch(console.error);
+      if(message.mentions.users.size > 1) return message.reply(' +2D3eMw **You can only marry one girl**').catch(console.error);
+       if(proposed === message.author) return message.reply(`**.**`);
+        if(proposed === client.user) return message.reply(`** Do you want to marry me? **`);
+              message.channel.send(`**${proposed} 
+ Do you accept ${message.author} marry request
+ You have 30 sec
+ Write yes or no**`)
+
+const filter = m => m.content.startsWith("yes");
+message.channel.awaitMessages(filter, { max: 1, time: 30000, errors: ['time'] })
+.then(collected =>{ 
+    message.channel.send(` **${message.author} +Bkg ${proposed} Congratulations, you have got married +2D3ccA +2DzfiQ** `);
+})
+
+   const filte = m => m.content.startsWith("no");
+message.channel.awaitMessages(filte, { max: 1, time: 30000, errors: ['time'] })
+.then(collected =>{ 
+   message.channel.send(`  **${message.author} Unfortunately We wont eat wedding cake this time +2D3eFA** `);
+})
+        
+  }
+});
+
 client.login(process.env.BOT_TOKEN);// لا تغير فيها شي
