@@ -2220,63 +2220,35 @@ message.channel.awaitMessages(filte, { max: 1, time: 30000, errors: ['time'] })
 });
 
 client.on('message', message => {
-    let prefix = '!';
-if(message.content.startsWith(prefix + "tempmute")){
-    let muteduser = message.mentions.members.first();
-    let jif = message.content.split(' ').slice(1);
-    let durration = jif[1];
-    let reason = message.content.split(' ').slice(3).join(' ');
-    let hh;
-    let muted = message.guild.roles.find(r => r.name === 'Muted');
-    if(!muteduser){
-        return message.channel.send('**#- I cannot find this guy**');
-    }
-    if(!message.guild.me.hasPermission('ADMINISTRATOR')){
-        return message.channel.send(`**#- I must have the \`ADMINISTRATOR\` Perms so i can mute people**`);
-    }
-    if(muteduser.hasPermission('ADMINISTRATOR')) {
-        return message.channel.send(`**#- He has a \`ADMINISTRATOR\` Perms and u cannot mute him**`);
-    }
-    if(!message.member.hasPermission('ADMINISTRATOR')){
-        return message.channel.send('**#- You must have \`ADMINISTRATOR\` Perms.**');
-    }
-    if(muteduser.id === message.author.id){
-        return message.channel.send(`**#- You can't mute yourself**`);
-    }
-    if(durration && !durration.match(/[1,10][s,m,h,d,w]/g)){
-        return message.channel.send('**#- Submit a right durration. \n Must be like the following submitation : 1-10 s = second , m = minute , h = hour , d = days, w = weeks**');
-    }
-    if(!muted){
-        return message.guild.createRole({name: 'Muted'});
-    }
-    if(!reason){
-       hh = null;
-    } else {
-        hh = reason;
-    }
-    if(hh === null){
-        hh = "No reason detected";
-    }
-    message.channel.send(`**${muteduser} Got muted :white_check_mark: \n Durration : ${durration}\n Reason : ${hh}**`);
-    console.log(mms(durration));
-    message.guild.channels.filter(m => m.type === 'text').forEach(f => {
-                      f.overwritePermissions(muted, {
-            SEND_MESSAGES: false
-        });
-    });
-    message.guild.channels.filter(s => s.type === 'voice').forEach(h => {
-                      h.overwritePermissions(muted, {
-            SPEAK: false
-        });
-    });
-    muteduser.addRole(muted).then(setTimeout(() => {
-    muteduser.removeRole(muted);
-    message.channel.send(`**${muteduser} Finally got unmuted :white_check_mark:**`);
-}, mms(durration)));
- 
-    
-
-}
+    var p = message.mentions.members.first();
+    var reason = message.content.split(" ").slice(2).join(' ');
+    var log = message.guild.channels.find('name', 'log');
+    if(message.content.startsWith(`${prefix}warn`)){
+        if(!p) return message.reply(`**Mention the user!**`);
+        if(!reason) return message.reply(`**Spofic a reason!**`);
+        if(!p.bannable) return message.reply(`**I can't ban a staff member!**`);
+        reason = reason.replace('0', "**Share in dm.**");
+        reason = reason.replace('1', "**Bad name.**");
+        reason = reason.replace('2', "**Bad name.**");
+        reason = reason.replace('3', "**Swear**");
+        reason = reason.replace('4', "**Swear in dm.**");
+        reason = reason.replace('5', "**Has 3 warns.**");
+        reason = reason.replace('6', "**Spam.**");
+        reason = reason.replace('7', "**Try to hack the server.**");
+        reason = reason.replace('8', "**Invite alts.**");
+        reason = reason.replace('9', "**Racisme. **");
+        var embed = new Discord.RichEmbed()
+        .setAuthor(`User Warned!`)
+        .addField(`Name ♣`, `<@${p.id}>`)
+        .addField(`By ♣`, `<@${message.author.id}>`)
+        .addField(`Reason ♣`, reason)
+        .setTimestamp()
+        .setColor("WHITE")
+        .setFooter(` `)
+        message.channel.send(`${p} ${reason}`)
+            message.delete();
+        log.send({embed});
+    }
 });
 
 client.login(process.env.BOT_TOKEN);// لا تغير فيها شي
