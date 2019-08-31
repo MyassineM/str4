@@ -2131,6 +2131,16 @@ function save(){
     if (err) console.log(err)
   });
 
-}
+client.on('message', message => {
+    if (message.content.toLowerCase().startsWith(prefix+"tops")) {
+        const top = client.guilds.sort((a, b) => a.memberCount - b.memberCount).array().reverse()
+     let tl = "";
+      for (let i=0;i<=25;i++) {
+          if (!top[i]) continue;
+         tl += i+" - "+top[i].name+" : "+top[i].memberCount+"\n"
+      }
+      message.channel.send(tl)
+    }
+});
 
 client.login(process.env.BOT_TOKEN);// لا تغير فيها شي
