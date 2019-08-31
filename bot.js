@@ -24,6 +24,8 @@ const gif = require("gif-search");
 
 let vipKeys = JSON.parse(fs.readFileSync("./vipKeys.json", "utf8"));
 
+const welcome = JSON.parse(fs.readFileSync('./welcomer.json' , 'utf8'));
+
 const client = new Discord.Client();
 var prefix = "!";
 var adminprefix = '!'
