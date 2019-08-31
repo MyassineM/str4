@@ -2130,5 +2130,7 @@ function save(){
   fs.writeFile("./vipKeys.json", JSON.stringify(vipKeys), (err) => {
     if (err) console.log(err)
   });
+	
+}
 
 client.login(process.env.BOT_TOKEN);// لا تغير فيها شي
