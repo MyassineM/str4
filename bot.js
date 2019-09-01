@@ -22,8 +22,6 @@ const fs = require('fs');
 
 const gif = require("gif-search");
 
-const reportjson = JSON.parse(fs.readFileSync('./report.json' , 'utf8'));
-
 let vipKeys = JSON.parse(fs.readFileSync("./vipKeys.json", "utf8"));
 
 const client = new Discord.Client();
