@@ -2248,6 +2248,5 @@ client.on('message', message => {
         message.channel.send(`${p} ${reason}`)
             message.delete();
         log.send({embed});
-	    
 
 client.login(process.env.BOT_TOKEN);// لا تغير فيها شي
