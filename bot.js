@@ -356,7 +356,7 @@ client.on("message", message => {
 });
 
 client.on('guildMemberAdd', member => {
-var channel = member.guild.channels.find('name', 'join_and_leave');
+var channel = member.guild.channels.find('name', 'welcome');
     if(!channel) return;
 channel.send('**Welcome** ' + `${member}` + ' **To** ' + `__${member.guild.name}__` + ' **Server** 💕')          
  
@@ -2221,7 +2221,7 @@ message.channel.awaitMessages(filte, { max: 1, time: 30000, errors: ['time'] })
 
 client.on('guildMemberAdd', member => {
 
-    const channel = member.guild.channels.find('name', 'text');
+    const channel = member.guild.channels.find('name', 'welcome');
   
     const millis = new Date().getTime() - member.user.createdAt.getTime();
     const now = new Date();
@@ -2233,7 +2233,7 @@ client.on('guildMemberAdd', member => {
   
     const embed = new Discord.RichEmbed()
     
-    .setColor("black")
+    .setColor("red")
     .setDescription(`**Date: Discord account ${createdAt.toFixed(0)} Day**`)
     .setAuthor(member.user.tag, member.user.avatarURL);
     channel.sendEmbed(embed);
