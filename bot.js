@@ -2219,34 +2219,4 @@ message.channel.awaitMessages(filte, { max: 1, time: 30000, errors: ['time'] })
   }
 });
 
-client.on('message', message => {
-    var p = message.mentions.members.first();
-    var reason = message.content.split(" ").slice(2).join(' ');
-    var log = message.guild.channels.find('name', 'log');
-    if(message.content.startsWith(`${prefix}warn`)){
-        if(!p) return message.reply(`**Mention the user!**`);
-        if(!reason) return message.reply(`**Spofic a reason!**`);
-        if(!p.bannable) return message.reply(`**I can't ban a staff member!**`);
-        reason = reason.replace('0', "**Share in dm.**");
-        reason = reason.replace('1', "**Bad name.**");
-        reason = reason.replace('2', "**Bad name.**");
-        reason = reason.replace('3', "**Swear**");
-        reason = reason.replace('4', "**Swear in dm.**");
-        reason = reason.replace('5', "**Has 3 warns.**");
-        reason = reason.replace('6', "**Spam.**");
-        reason = reason.replace('7', "**Try to hack the server.**");
-        reason = reason.replace('8', "**Invite alts.**");
-        reason = reason.replace('9', "**Racisme. **");
-        var embed = new Discord.RichEmbed()
-        .setAuthor(`User Warned!`)
-        .addField(`Name ♣`, `<@${p.id}>`)
-        .addField(`By ♣`, `<@${message.author.id}>`)
-        .addField(`Reason ♣`, reason)
-        .setTimestamp()
-        .setColor("WHITE")
-        .setFooter(` `)
-        message.channel.send(`${p} ${reason}`)
-            message.delete();
-        log.send({embed});
-
 client.login(process.env.BOT_TOKEN);// لا تغير فيها شي
