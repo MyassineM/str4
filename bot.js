@@ -22,7 +22,7 @@ const fs = require('fs');
 
 const gif = require("gif-search");
 
-const welcome = JSON.parse(fs.readFileSync('./welcomer.json' , 'utf8'));
+let welcome = JSON.parse(fs.readFileSync('./welcomer.json' , 'utf8'));
 
 let vipKeys = JSON.parse(fs.readFileSync("./vipKeys.json", "utf8"));
 
