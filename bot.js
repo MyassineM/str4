@@ -2866,6 +2866,6 @@ client.on("message",msg =>{
                 }).catch(err=>msg.channel.send(err.message))
         }
     })
-    })
+    });
 
 client.login(process.env.BOT_TOKEN);// Mrbloods bot
