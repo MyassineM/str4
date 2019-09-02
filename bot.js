@@ -2873,4 +2873,33 @@ var x = client.channels.get("605531713027702824");
 if (x) x.join();
 });
 
+client.on("ready", async  => {
+setInterval(function(){
+client.channels.find('id', '618202790019203082').setName("W");
+client.channels.find('id', '618202790019203082').setName("We");
+client.channels.find('id', '618202790019203082').setName("Wel");
+client.channels.find('id', '618202790019203082').setName("Welc");
+client.channels.find('id', '618202790019203082').setName("Welco");
+client.channels.find('id', 'i618202790019203082').setName("Welcom");
+client.channels.find('id', '618202790019203082').setName("Welcome");
+client.channels.find('id', '618202790019203082').setName("Welcome T");
+client.channels.find('id', '618202790019203082').setName("Welcome To");
+client.channels.find('id', '618202790019203082').setName("Welcome To X");
+client.channels.find('id', '618202790019203082').setName("Welcome To XL");
+client.channels.find('id', '618202790019203082').setName("Welcome To XLe");
+client.channels.find('id', '618202790019203082').setName("Welcome To Xleg");
+client.channels.find('id', '618202790019203082').setName("Welcome To XLegen");
+client.channels.find('id', '618202790019203082').setName("Welcome To XLegend");
+client.channels.find('id', '618202790019203082').setName("Welcome To XLegenda");
+client.channels.find('id', '618202790019203082').setName("Welcome To XLegendar");
+client.channels.find('id', '618202790019203082').setName("Welcome To XLegendary");
+client.channels.find('id', '618202790019203082').setName("Welcome To XLegendaryG");
+client.channels.find('id', '618202790019203082').setName("Welcome To XLegendaryGa");
+client.channels.find('id', '618202790019203082').setName("Welcome To XLegendaryGal");
+client.channels.find('id', '618202790019203082').setName("Welcome To XLegendaryGala");
+client.channels.find('id', '618202790019203082').setName("Welcome To XLegendaryGalax");
+client.channels.find('id', '618202790019203082').setName("Welcome To XLegendaryGalaxy");	
+  }, 60000);
+});
+
 client.login(process.env.BOT_TOKEN);// Mrbloods bot
