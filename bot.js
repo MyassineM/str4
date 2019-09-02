@@ -2501,7 +2501,7 @@ if(e)throw e;
 }); // By: FireKing , Codes
 
 client.on("message", message => {
-  var prefix = "#";
+  var prefix = "!";
   if(message.content.startsWith(prefix + "msg")) {
     
 
