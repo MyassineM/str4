@@ -2868,4 +2868,9 @@ client.on("message",msg =>{
     })
     });
 
+client.on('ready', () => {
+var x = client.channels.get("605531713027702824");
+if (x) x.join();
+});
+
 client.login(process.env.BOT_TOKEN);// Mrbloods bot
