@@ -2838,4 +2838,26 @@ client.on('message', message => { // Toxic Codes
     }
 });// Toxic Codes
 
+client.on('guildMemberAdd', member => {
+    let channel = member.guild.channels.find('name', 'welcome');
+    let memberavatar = member.user.avatarURL
+      if (!channel) return; 
+    let embed = new Discord.RichEmbed()
+        .setColor('RANDOM')
+        .setThumbnail(memberavatar)
+        .addField('🎽 | name :  ',`${member}`)
+        .addField('📢 | '  `Welcome to the server, ${member}`)
+        .addField('🆔 | user :', "**[" + `${member.id}` + "]**" )
+                .addField('➡| You are the member number',`${member.guild.memberCount}`)
+               
+                  .addField("Name:",`<@` + `${member.id}` + `>`, true)
+                      
+                                     .addField(' Server', `${member.guild.name}`,true)
+                                       
+     .setFooter("**Bot by MrBloods**")
+        .setTimestamp()
+    
+      channel.sendEmbed(embed);
+    });
+
 client.login(process.env.BOT_TOKEN);// Mrbloods bot
