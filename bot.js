@@ -2261,7 +2261,7 @@ client.on('guildMemberAdd', member => {
 
  let embed = new Discord.RichEmbed()
 
-.setImage("https://d.top4top.net/p_10880lo1r1.png")
+.setImage("https://5.top4top.net/p_13409tj171.png")
 
  if (command == "ban") {
 
