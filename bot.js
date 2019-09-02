@@ -2574,4 +2574,89 @@ client.on('message', message => {
 )}
 })
 
+client.on("message", msg => {
+    if(!msg.guild) return;
+    if(msg.author.bot) return;
+    if(!Captcha[msg.guild.id]) Captcha[msg.guild.id] = {
+        role: "Nothing",
+        room: "Nothing",
+        cmd: "Captcha"
+    }
+    if(msg.content.startsWith(prefix + "setCaptcharole")){
+                if(!msg.guild.member(msg.author).hasPermission('MANAGE_GUILD')) return message.reply(`**Sorry But You Don\'t Have Permission \`MANAGE_GUILD\`**`).then(m => m.delete(5000));
+        let args = msg.content.split(' ').slice(1).join(' ');
+        if(!args) return msg.reply(`**You must write the name of the rank for activation.**`).then(m => m.delete(5000));
+        if(!msg.guild.roles.find("name",args)) return msg.channel.send(`There is no rank by name \`${args}\` `).then(m => m.delete(5000));
+        Captcha[msg.guild.id].role = args
+  msg.reply(`**Activation rank name changed to \`${args}\`**`).then(m => m.delete(5000));
+                    fs.writeFile("./Captcha.json", JSON.stringify(Captcha), function(a) {
+        if (a) throw a;
+    })
+    }
+    if(msg.content.startsWith(prefix + "setCaptcharoom")){
+if(!msg.guild.member(msg.author).hasPermission('MANAGE_GUILD')) return message.channel.send(`**Sorry But You Don\'t Have Permission \`MANAGE_GUILD\`**`).then(m => m.delete(5000));
+         let args2 = msg.content.split(' ').slice(1).join(' ');
+        if(!args2) return msg.reply(`**You must write the name of the room for activation.**`).then(m => m.delete(5000));
+         if(!msg.guild.channels.find("name",args2)) return msg.channel.send(`**There is no rom in the name \`${args2}\`**`).then(m => m.delete(5000));
+        Captcha[msg.guild.id].room = args2
+  msg.reply(`**The romanization name for activation has been changed to \`${args2}\`**`).then(m => m.delete(5000));
+            fs.writeFile("./Captcha.json", JSON.stringify(Captcha), function(a) {
+        if (a) throw a;
+    })
+    }
+      if(msg.content.startsWith(prefix + "setCaptchacmd")){
+if(!msg.guild.member(msg.author).hasPermission('MANAGE_GUILD')) return message.channel.send(`**Sorry But You Don\'t Have Permission \`MANAGE_GUILD\`**`).then(m => m.delete(5000));
+         let args3 = msg.content.split(' ').slice(1).join(' ');
+        if(!args3) return msg.reply(`**You have to write your activation command.**`).then(m => m.delete(5000));
+ 
+        Captcha[msg.guild.id].cmd = args3
+  msg.reply(`**The activation order for has been changed \`${args3}\` **`).then(m => m.delete(5000));
+            fs.writeFile("./Captcha.json", JSON.stringify(Captcha), function(a) {
+        if (a) throw a;
+    })
+      }
+});
+ 
+        client.on("message",async message => {
+        if(!message.channel.guild) return;
+        if(!Captcha[message.guild.id]) Captcha[message.guild.id] = {
+        role: "Nothing",
+        room: "Nothing",
+        cmd: "Captcha"
+        }
+        if(message.content.startsWith(prefix + Captcha[message.guild.id].cmd || "Captcha")){
+        if(Captcha[message.guild.id].role === 'Nothing') return message.reply(`**The activation level is not selected \`${prefix}setCaptcharole\`**`).then(m => m.delete(5000));
+        if(Captcha[message.guild.id].room === 'Nothing') return message.reply(`**You have not set your room activate \`${prefix}setCaptcharoom\`**`).then(m => m.delete(5000));
+        if (message.guild.member(message.author).roles.find(x => x.name === `${Captcha[message.guild.id].role}`)) return message.channel.send(`**${message.author}, You already have the rank**`).then(m => m.delete(5000));
+        if(!message.channel.guild) return message.channel.send(`**This is only for servers**`).then(m => m.delete(5000));
+        if(!message.guild.member(client.user).hasPermission('MANAGE_ROLES')) return message.channel.send(`**Sorry But I Don\'t Have Permission \`MANAGE_GUILD\`**`).then(m => m.delete(5000));
+        if(message.channel.name !== `${Captcha[message.guild.id].room}`) return message.reply(`**You are not in the right room please go to room \`${Captcha[message.guild.id].room}\`**`).then(m => m.delete(5000));
+        const canvas = Canvas.createCanvas(108 , 40);
+        const ctx = canvas.getContext('2d');
+        const background = await Canvas.loadImage("https://cdn.discordapp.com/attachments/608278049091223552/617791172810899456/hmmm.png");
+        ctx.drawImage(background, 0, 0, canvas.width, canvas.height);  
+        var one = Math.floor(Math.random() * 9) + 1;
+        var two = Math.floor(Math.random() * 9) + 1;
+        var three = Math.floor(Math.random() * 9) + 1;
+        var four = Math.floor(Math.random() * 9) + 1;
+        var number = `${one}${two}${three}${four}`;
+        ctx.font = '20px Arial Bold';
+        ctx.fontSize = '20px';
+        ctx.fillStyle = "#ffffff";
+        ctx.fillText(number, canvas.width / 2.4, canvas.height / 1.7);
+        const attachment = new Discord.Attachment(canvas.toBuffer());
+        message.channel.send(attachment).then(m => {
+        message.channel.awaitMessages(m => m.author.id === message.author.id, {max: 1, time: 60000}).then(c => {
+        if(c.first().content !== number) {
+        m.delete();
+        }else if(c.first().content === number) {
+        m.delete();
+        message.member.addRole(message.guild.roles.find("name", Captcha[message.guild.id].role));    
+        message.channel.send(`**${message.author.username}, You have been activated successfully.*`).then(m => m.delete(1000));
+        }
+        })
+        });
+        }
+        });
+
 client.login(process.env.BOT_TOKEN);// لا تغير فيها شي
