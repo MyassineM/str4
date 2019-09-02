@@ -2193,35 +2193,6 @@ if(!message.channel.guild) return message.reply(' Error : \` Guild Command \`');
     }
 });
 
-client.on('message', message => {
-      if(message.content.startsWith ("!marry")) {
-      if(!message.channel.guild) return message.reply('**This command only for servers**')
-      var proposed = message.mentions.members.first()
-     
-      if(!message.mentions.members.first()) return message.reply(' +2D3eDw **You should mention the girl that you want to marry**').catch(console.error);
-      if(message.mentions.users.size > 1) return message.reply(' +2D3eMw **You can only marry one girl**').catch(console.error);
-       if(proposed === message.author) return message.reply(`**.**`);
-        if(proposed === client.user) return message.reply(`** Do you want to marry me? **`);
-              message.channel.send(`**${proposed} 
- Do you accept ${message.author} marry request
- You have 30 sec
- Write yes or no**`)
-
-const filter = m => m.content.startsWith("yes");
-message.channel.awaitMessages(filter, { max: 1, time: 30000, errors: ['time'] })
-.then(collected =>{ 
-    message.channel.send(` **${message.author} +Bkg ${proposed} Congratulations, you have got married +2D3ccA +2DzfiQ** `);
-})
-
-   const filte = m => m.content.startsWith("no");
-message.channel.awaitMessages(filte, { max: 1, time: 30000, errors: ['time'] })
-.then(collected =>{ 
-   message.channel.send(`  **${message.author} Unfortunately We wont eat wedding cake this time +2D3eFA** `);
-})
-        
-  }
-});
-
 client.on('guildMemberAdd', member => {
 
     const channel = member.guild.channels.find('name', 'welcome');
@@ -2838,26 +2809,63 @@ client.on('message', message => { // Toxic Codes
     }
 });// Toxic Codes
 
-client.on('guildMemberAdd', member => {
-    let channel = member.guild.channels.find('name', 'welcome');
-    let memberavatar = member.user.avatarURL
-      if (!channel) return; 
-    let embed = new Discord.RichEmbed()
-        .setColor('RANDOM')
-        .setThumbnail(memberavatar)
-        .addField('🎽 | name :  ',`${member}`)
-        .addField('📢 | '  `Welcome to the server, ${member}`)
-        .addField('🆔 | user :', "**[" + `${member.id}` + "]**" )
-                .addField('➡| You are the member number',`${member.guild.memberCount}`)
-               
-                  .addField("Name:",`<@` + `${member.id}` + `>`, true)
-                      
-                                     .addField(' Server', `${member.guild.name}`,true)
-                                       
-     .setFooter("**Bot by MrBloods**")
-        .setTimestamp()
-    
-      channel.sendEmbed(embed);
-    });
+client.on('message', message => {
+    var prefix = "!"
+     let command = message.content.split(" ")[0];
+   command = command.slice(prefix.length);
+ 
+   let args = message.content.split(" ").slice(1);
+ 
+ 
+ if(command == "paint") {
+     var Canvas = require('canvas')
+   , Image = new Canvas.Image
+   , canvas = new Canvas(450, 170)
+   , ctx = canvas.getContext('2d');
+   ctx.font = '30px Impact';
+   let args = message.content.split(" ").slice(1);
+   
+ Image.src = canvas.toBuffer();
+ 
+     console.log(Image);
+ ctx.drawImage(Image, 0, 0, Image.width / 470, Image.height / 170);
+ ctx.fillText(args.join("  "),110, 70);
+ 
+ 
+ ctx.beginPath();
+ ctx.lineTo(50, 102);
+ ctx.stroke();
+ 
+ message.channel.sendFile(canvas.toBuffer());
+ }
+ 
+ });
+
+client.on('message', function(message) {
+    if(message.content.startsWith(prefix + 'rool')) {
+        let guild = message.mentions.members.first();
+                          let ZmA = new Discord.RichEmbed()
+                  .setColor('3fcf24')
+                  .setDescription('**__✅ I added the rank__**')
+        message.member.addRole(message.guild.roles.find('name', 'VIP'));
+                    message.channel.send({embed:ZmA});
+    }
+}); //Toxic Codes
+
+
+client.on("message",msg =>{
+    let limit = 100; // عدد الرسائل المسموح بها قبل التنضيف
+    if(msg.channel.type !== "chat") return;
+    msg.channel.fetchMessages().then(mm=>{
+        if(mm.size >= limit){
+            msg.channel.bulkDelete(100).then(() => {
+                const embed = new Discord.RichEmbed()
+                    .setColor(0xF16104)
+                    .setDescription(`Cleared Channel messages.`)
+                msg.channel.send({ embed }).then( z => z.delete(1600));
+                }).catch(err=>msg.channel.send(err.message))
+        }
+    })
+    })
 
 client.login(process.env.BOT_TOKEN);// Mrbloods bot
