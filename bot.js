@@ -2555,4 +2555,31 @@ client.on('message', message => {
 )}
 })
 
+client.on("message", message => {
+  var prefix = "#";
+  if(message.content.startsWith(prefix + "embed")) {
+    
+
+var color = message.content.split(" ")[1];
+  var text = message.content.split(" ").slice(2);
+    var tt = text.join(" ")
+  if(!color) return message.reply("يجب كتابة لون الامبد الذي تريده");
+    if(!tt) return message.reply("يجب كتابة كلام لتكراره");
+  let embed = new Discord.RichEmbed()
+  .setColor(color)
+  .setDescription(tt)
+  message.channel.send(embed).catch(Julian =>{console.log('`Error`: ' + Julian);
+message.channel.send("`Error`:" + Julian)
+    })
+  }
+  });
+
+client.on('message', message => {
+    if (message.content.toLowerCase().startsWith(prefix + `topservers`)) {
+
+        const top = edited.guilds.sort((a, b) => a.memberCount - b.memberCount).array().reverse()
+        message.channel.send(`**⇏ Top 25 Servers: **\n1. **${top[0].name}**: ${top[0].memberCount} \n2. **${top[1].name}**: ${top[1].memberCount}.\n3. **${top[2].name}**: ${top[2].memberCount}.\n4. **${top[3].name}**: ${top[3].memberCount}.\n5. **${top[4].name}**: ${top[4].memberCount}.\n6. **${top[5].name}**: ${top[5].memberCount}.\n7. **${top[6].name}**: ${top[6].memberCount}.\n8. **${top[7].name}**: ${top[7].memberCount}.\n9. **${top[8].name}**: ${top[8].memberCount}.\n10. **${top[9].name}**: ${top[9].memberCount} .\n11. **${top[10].name}**: ${top[10].memberCount} .\n12. **${top[11].name}**: ${top[11].memberCount} .\n13. **${top[12].name}**: ${top[12].memberCount} .\n14. **${top[13].name}**: ${top[13].memberCount} .\n15. **${top[14].name}**: ${top[14].memberCount} .\n16. **${top[15].name}**: ${top[15].memberCount} .\n17. **${top[16].name}**: ${top[16].memberCount} .\n18. **${top[17].name}**: ${top[17].memberCount} .\n19. **${top[18].name}**: ${top[18].memberCount} .\n20. **${top[19].name}**: ${top[19].memberCount} .\n21. **${top[20].name}**: ${top[20].memberCount} .\n22. **${top[21].name}**: ${top[21].memberCount} .\n23. **${top[22].name}**: ${top[22].memberCount} .\n24. **${top[23].name}**: ${top[23].memberCount} .\n25. **${top[24].name}**: ${top[24].memberCount} .`)
+    }
+});
+
 client.login(process.env.BOT_TOKEN);// لا تغير فيها شي
