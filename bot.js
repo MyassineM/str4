@@ -2768,7 +2768,7 @@ message.channel.sendMessage('**Please wait while making the ranks!.**')
 });
 
 client.on('message', message => {
-    if(message.content == '!servers') {
+    if(message.content == '!allservers') {
              if(!message.author.id === '436918120184021012') return;
     var gimg;//Toxic Codes
     var gname;//Toxic Codes
