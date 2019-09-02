@@ -2610,7 +2610,7 @@ if(!msg.guild.member(msg.author).hasPermission('MANAGE_GUILD')) return message.c
         if(!args3) return msg.reply(`**You have to write your activation command.**`).then(m => m.delete(5000));
  
         Captcha[msg.guild.id].cmd = args3
-  msg.reply(`**The activation order for has been changed \`${args3}\` **`).then(m => m.delete(5000));
+  msg.reply(`**The activation command for has been changed \`${args3}\` **`).then(m => m.delete(5000));
             fs.writeFile("./Captcha.json", JSON.stringify(Captcha), function(a) {
         if (a) throw a;
     })
