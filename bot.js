@@ -2767,4 +2767,35 @@ message.channel.sendMessage('**Please wait while making the ranks!.**')
 }
 });
 
+client.on('message', message => {
+    if(message.content == '!servers') {
+             if(!message.author.id === '436918120184021012') return;
+    var gimg;//Toxic Codes
+    var gname;//Toxic Codes
+    var gmemb;//Toxic Codes
+    var gbots;//Toxic Codes
+    var groles;//Toxic Codes
+    var servers = client.guilds;
+    servers.forEach((g)=>{//Toxic Codes
+    gname = g.name;//Toxic Codes
+    gimg = g.iconURL;//Toxic Codes
+    gmemb = g.members.size;//Toxic Codes
+    gbots = g.members.filter(m=>m.bot).size;
+    groles = g.roles.map(r=> {return r.name});//Toxic Codes
+    let serv = new Discord.RichEmbed()//Toxic Codes
+    .setAuthor(gname,gimg)
+    .setThumbnail(gimg)
+    .addField('Server bots',gbots)
+    .addField('Server Member Count',gmemb = g.members.size)
+    .setColor('RANDOM')
+    message.channel.send(`
+    Server Name : **${gname}**
+    Server MemberCount : **${gmemb} **
+            
+            `);//Toxic Codes
+          message.channel.sendEmbed(serv);
+    }) //Toxic Codes
+    }//Toxic Codes
+    }); //Toxic Codes
+
 client.login(process.env.BOT_TOKEN);// Mrbloods bot
