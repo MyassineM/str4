@@ -18,14 +18,22 @@ const queue = new Map();
 
 const ytdl = require('ytdl-core');
 
-const fs = require('fs');
-
 const gif = require("gif-search");
 
 const Canvas = require("canvas");
 const pretty = require("pretty-ms")
 var time = require("./time.json");
 const credits = JSON.parse(fs.readFileSync('./credits.json'));
+
+const ms = require("ms");
+const fs = require("fs");
+var request = require("request");
+const Jimp = require('jimp');
+const diff = require('color-diff');
+const getJSON = require('get-json');
+const download = require('image-downloader');
+var cheerio = require("cheerio");
+const talkedRecently = new Set();
 
 
 const reportjson = JSON.parse(fs.readFileSync("./report.json", "utf8"));
@@ -2573,5 +2581,474 @@ message.channel.send("`Error`:" + Julian)
     })
   }
   });
+
+client.on("message", message => {
+  let msg = message;
+  let prefix = `!`
+  let messageArray = message.content.split(" ");
+  let cmd = messageArray[0].toLowerCase();
+  let args = messageArray.slice(1);
+ 
+  if (!message.content.startsWith(prefix)) return;
+  if(cmd === `${prefix}blocks`){
+    if (message.author.id === bot.user.id) return;
+    let [player, lol, ...rest] = args;
+    let page = parseInt(lol, 10);
+    if(!player) return message.reply(`**Usage: \`${prefix}blocks <Player Name> [page]\`**`);
+    request(`https://blocksmc.com/player/${player}`, (err,res,html)=>{
+      if(err || res.statusCode != 200) return message.channel.send('There seems to be an error with the API. Try again later. :confounded:');
+      if (!err && res.statusCode == 200){
+        const $ = cheerio.load(html);
+        const userName = $('.profile-header').find('h1').text();
+        if (!userName) return message.channel.send("Player not found")
+        const userTime = $('.gray-cont').find('h1').text().trim();
+        const userRankData = $('.profile-rank');
+        const userRank = userRankData.text().trim();
+        let userHexColor;
+        if(userRank === "Member") userHexColor = "#2b76aa";
+        else if(userRank === "Owner") userHexColor = "#fff000";
+        else if(userRank === "VIP Member") userHexColor = "#ba50e7";
+        else if(userRank === "Moderator") userHexColor = "#e76250";
+        else if(userRank === "Senior Moderator") userHexColor = "#841818";
+        else if(userRank === "Admin") userHexColor = "#841818";
+        else if(userRank === "Head Admin") userHexColor = "#841818";
+        else if(userRank === "Emerald Member") userHexColor = "#00a86b";
+        else if(userRank === "Diamond Member") userHexColor = "#01c5b8";
+        else if(userRank === "Gold Member") userHexColor = "#f3bc00";
+        else if(userRank === "Dev") userHexColor = "#202020";
+        else userHexColor = "#2b76aa";
+        let getData = function(key, value){
+          let text = $(`#${key} #${value}.val`).text();
+          return parseInt(text,10);
+        }
+        const stats = {
+          //BlocksParty
+          BP: {
+            points: getData(`BP`, `Points`),
+            wins: getData(`BP`, `Wins`),
+            played: getData(`BP`, `Played`),
+            image: "https://blocksmc.com/images/pfavatars/BlockParty.png"
+          },
+          //Splegg
+          SP: {
+            points: getData(`SP`, `Points`),
+            eggs: getData(`SP`, `Eggs`),
+            blocks: getData(`SP`, `Blocks`),
+            wins: getData(`SP`, `Wins`),
+            played: getData(`SP`, `Played`),
+            image: "https://blocksmc.com/images/pfavatars/Splegg.png"
+          },
+          //QuakeCraft
+          QC: {
+            points: getData(`QC`, `Points`),
+            kills: getData(`QC`, `Kills`),
+            deaths: getData(`QC`, `Deaths`),
+            fireworks: getData(`QC`, `FireWorks`),
+            wins: getData(`QC`, `Wins`),
+            played: getData(`QC`, `Played`),
+            image: "https://blocksmc.com/images/pfavatars/QuakeCraft.png"
+          },
+          //Gravity
+          GR: {
+            points: getData(`GR`, `Points`),
+            wins: getData(`GR`, `Wins`),
+            played: getData(`GR`, `Played`),
+            image: "https://blocksmc.com/images/pfavatars/Gravity.png"
+          },
+          //SurvivalGames
+          SG: {
+            points: getData(`SG`, `Points`),
+            kills: getData(`SG`, `Kills`),
+            deaths: getData(`SG`, `Deaths`),
+            wins: getData(`SG`, `Wins`),
+            crates: getData(`SG`, `Crates`),
+            played: getData(`SG`, `Played`),
+            image: "https://blocksmc.com/images/pfavatars/SurvivalGames.png"
+          },
+          //LuckyBlockWars
+          LBW: {
+            points: getData(`LBW`, `Points`),
+            kills: getData(`LBW`, `Kills`),
+            deaths: getData(`LBW`, `Deaths`),
+            wins: getData(`LBW`, `Wins`),
+            sponges: getData(`LBW`, `Sponges`),
+            played: getData(`LBW`, `Played`),
+            image: "https://blocksmc.com/images/pfavatars/LuckyBlockWars.png"
+          },
+          //EggWars
+          EW: {
+            points: getData(`EW`, `Points`),
+            kills: getData(`EW`, `Kills`),
+            deaths: getData(`EW`, `Deaths`),
+            wins: getData(`EW`, `Wins`),
+            eggs: getData(`EW`, `Eggs`),
+            played: getData(`EW`, `Played`),
+            image: "https://blocksmc.com/images/pfavatars/EggWars.png"
+          },
+          //EggWars:Solo
+          EWS: {
+            points: getData(`EWS`, `Points`),
+            kills: getData(`EWS`, `Kills`),
+            deaths: getData(`EWS`, `Deaths`),
+            wins: getData(`EWS`, `Wins`),
+            eggs: getData(`EWS`, `Eggs`),
+            played: getData(`EWS`, `Played`),
+            image: "https://blocksmc.com/images/pfavatars/EggWarsSolo.png"
+          },
+          //BedWars
+          BW: {
+            points: getData(`BW`, `Points`),
+            kills: getData(`BW`, `Kills`),
+            deaths: getData(`BW`, `Deaths`),
+            wins: getData(`BW`, `Wins`),
+            beds: getData(`BW`, `Beds`),
+            played: getData(`BW`, `Played`),
+            image: "https://blocksmc.com/images/pfavatars/BedWars.png"
+          },
+          //BedWars:Solo
+          BWS: {
+            points: getData(`BWS`, `Points`),
+            kills: getData(`BWS`, `Kills`),
+            deaths: getData(`BWS`, `Deaths`),
+            wins: getData(`BWS`, `Wins`),
+            beds: getData(`BWS`, `Beds`),
+            played: getData(`BWS`, `Played`),
+            image: "https://blocksmc.com/images/pfavatars/BedWarsSolo.png"
+          },
+          //SkyWars
+          SW: {
+            points: getData(`SW`, `Points`),
+            kills: getData(`SW`, `Kills`),
+            deaths: getData(`SW`, `Deaths`),
+            wins: getData(`SW`, `Wins`),
+            played: getData(`SW`, `Played`),
+            image: "https://blocksmc.com/images/pfavatars/SkyWars.png"
+          },
+          //SkyWars:Solo
+          SWS: {
+            points: getData(`SWS`, `Points`),
+            kills: getData(`SWS`, `Kills`),
+            deaths: getData(`SWS`, `Deaths`),
+            wins: getData(`SWS`, `Wins`),
+            played: getData(`SWS`, `Played`),
+            image: "https://blocksmc.com/images/pfavatars/SkyWarsSolo.png"
+          },
+          //SkyGiant
+          GNT: {
+            points: getData(`GNT`, `Points`),
+            kills: getData(`GNT`, `Kills`),
+            deaths: getData(`GNT`, `Deaths`),
+            wins: getData(`GNT`, `Wins`),
+            played: getData(`GNT`, `Played`),
+            image: "https://blocksmc.com/images/pfavatars/SkyGiant.png"
+          },
+          //SkyGiant Mini
+          GNTM: {
+            points: getData(`GNTM`, `Points`),
+            kills: getData(`GNTM`, `Kills`),
+            deaths: getData(`GNTM`, `Deaths`),
+            wins: getData(`GNTM`, `Wins`),
+            played: getData(`GNTM`, `Played`),
+            image: "https://blocksmc.com/images/pfavatars/SkyGiantMini.png"
+          },
+          //The Bridge
+          TB: {
+            points: getData(`TB`, `Points`),
+            kills: getData(`TB`, `Kills`),
+            deaths: getData(`TB`, `Deaths`),
+            wins: getData(`TB`, `Wins`),
+            goals: getData(`TB`, `Goals`),
+            played: getData(`TB`, `Played`),
+            image: "https://blocksmc.com/images/pfavatars/TheBridge.png"
+          },
+          //1VS1
+          oneVSone: {
+            points: getData(`1VS1`, `Points`),
+            kills: getData(`1VS1`, `Kills`),
+            deaths: getData(`1VS1`, `Deaths`),
+            wins: getData(`1VS1`, `Wins`),
+            rounds: getData(`1VS1`, `Rounds`),
+            played: getData(`1VS1`, `Played`),
+            image: "https://blocksmc.com/images/pfavatars/1VS1.png"
+          },
+        };
+        request.get(`https://api.mojang.com/users/profiles/minecraft/${userName}`, (err, res, body)=>{
+ 
+          if(!err && res.statusCode === 200){
+            message.channel.startTyping()
+            body = JSON.parse(body);
+            let image = `https://visage.surgeplay.com/full/250/${body.id}.png`;
+            for (const key in stats) {
+              if(`${stats[key].points}` === "NaN"){
+                delete stats[key];
+              };
+            };
+            const embed = new Discord.RichEmbed()
+              .setAuthor(userName, `https://minotar.net/helm/${userName}`, `https://blocksmc.com/player/${userName}`)
+              .addField("**Rank**", `\`${userRank}\``, true)
+              .addField("**Hours**", `\`${userTime}\``, true)
+              .setColor(userHexColor)
+              .setImage(image)
+              .setThumbnail("https://cdn.discordapp.com/icons/211543198651121664/a4baa5a87ff496ef33430c795d5186ff.png")
+            let pages = [embed];
+            if(stats.hasOwnProperty("BP")){
+              const BPEmbed = new Discord.RichEmbed()
+                .addField("**Played:**", `\`${stats.BP.played}\``, true)
+                .addField("**Points:**", `\`${stats.BP.points}\``, true)
+                .addField("**Wins:**", `\`${stats.BP.wins}\``, true)
+                .setImage(stats.BP.image)
+              pages.push(BPEmbed);
+            }
+            if(stats.hasOwnProperty("SP")){
+              const SPEmbed = new Discord.RichEmbed()
+                .addField("**Points:**", `\`${stats.SP.points}\``, true)
+                .addField("**Wins:**", `\`${stats.SP.wins}\``, true)
+                .addField("**Played:**", `\`${stats.SP.played}\``, true)
+                .addField("**Eggs:**", `\`${stats.SP.eggs}\``, true)
+                .addField("**Blocks:**", `\`${stats.SP.blocks}\``, true)
+                .addBlankField(true)
+                .setImage(stats.SP.image)
+              pages.push(SPEmbed);
+            }
+            if(stats.hasOwnProperty("QC")){
+              const QCEmbed = new Discord.RichEmbed()
+                .addField("**Points:**", `\`${stats.QC.points}\``, true)
+                .addField("**Played:**", `\`${stats.QC.played}\``, true)
+                .addField("**Deaths:**", `\`${stats.QC.deaths}\``, true)
+                .addField("**Fireworks:**", `\`${stats.QC.fireworks}\``, true)
+                .addField("**Kills:**", `\`${stats.QC.kills}\``, true)
+                .addField("**Wins:**", `\`${stats.QC.wins}\``, true)
+                .setImage(stats.QC.image)
+              pages.push(QCEmbed);
+            }
+            if(stats.hasOwnProperty("GR")){
+              const GREmbed = new Discord.RichEmbed()
+                .addField("**Points:**", `\`${stats.GR.points}\``, true)
+                .addField("**Played:**", `\`${stats.GR.played}\``, true)
+                .addField("**Wins:**", `\`${stats.GR.wins}\``, true)
+                .setImage(stats.GR.image)
+              pages.push(GREmbed);
+            }
+            if(stats.hasOwnProperty("SG")){
+              const SGEmbed = new Discord.RichEmbed()
+                .addField("**Points:**", `\`${stats.SG.points}\``, true)
+                .addField("**Played:**", `\`${stats.SG.played}\``, true)
+                .addField("**Deaths:**", `\`${stats.SG.deaths}\``, true)
+                .addField("**Crates:**", `\`${stats.SG.crates}\``, true)
+                .addField("**Kills:**", `\`${stats.SG.kills}\``, true)
+                .addField("**Wins:**", `\`${stats.SG.wins}\``, true)
+                .setImage(stats.SG.image)
+              pages.push(SGEmbed);
+            }
+            if(stats.hasOwnProperty("LBW")){
+              const LBWEmbed = new Discord.RichEmbed()
+                .addField("**Points:**", `\`${stats.LBW.points}\``, true)
+                .addField("**Played:**", `\`${stats.LBW.played}\``, true)
+                .addField("**Deaths:**", `\`${stats.LBW.deaths}\``, true)
+                .addField("**Sponges:**", `\`${stats.LBW.sponges}\``, true)
+                .addField("**Kills:**", `\`${stats.LBW.kills}\``, true)
+                .addField("**Wins:**", `\`${stats.LBW.wins}\``, true)
+                .setImage(stats.LBW.image)
+              pages.push(LBWEmbed);
+            }
+            if(stats.hasOwnProperty("EW")){
+              const EWEmbed = new Discord.RichEmbed()
+                .addField("**Points:**", `\`${stats.EW.points}\``, true)
+                .addField("**Played:**", `\`${stats.EW.played}\``, true)
+                .addField("**Deaths:**", `\`${stats.EW.deaths}\``, true)
+                .addField("**Eggs:**", `\`${stats.EW.eggs}\``, true)
+                .addField("**Kills:**", `\`${stats.EW.kills}\``, true)
+                .addField("**Wins:**", `\`${stats.EW.wins}\``, true)
+                .setImage(stats.EW.image)
+              pages.push(EWEmbed);
+            }
+            if(stats.hasOwnProperty("EWS")){
+              const EWSEmbed = new Discord.RichEmbed()
+                .addField("**Points:**", `\`${stats.EWS.points}\``, true)
+                .addField("**Played:**", `\`${stats.EWS.played}\``, true)
+                .addField("**Deaths:**", `\`${stats.EWS.deaths}\``, true)
+                .addField("**Eggs:**", `\`${stats.EWS.eggs}\``, true)
+                .addField("**Kills:**", `\`${stats.EWS.kills}\``, true)
+                .addField("**Wins:**", `\`${stats.EWS.wins}\``, true)
+                .setImage(stats.EWS.image)
+              pages.push(EWSEmbed);
+            }
+            if(stats.hasOwnProperty("BW")){
+              const BWEmbed = new Discord.RichEmbed()
+                .addField("**Points:**", `\`${stats.BW.points}\``, true)
+                .addField("**Played:**", `\`${stats.BW.played}\``, true)
+                .addField("**Deaths:**", `\`${stats.BW.deaths}\``, true)
+                .addField("**Beds:**", `\`${stats.BW.beds}\``, true)
+                .addField("**Kills:**", `\`${stats.BW.kills}\``, true)
+                .addField("**Wins:**", `\`${stats.BW.wins}\``, true)
+                .setImage(stats.BW.image)
+              pages.push(BWEmbed);
+            }
+            if(stats.hasOwnProperty("BWS")){
+              const BWSEmbed = new Discord.RichEmbed()
+                .addField("**Points:**", `\`${stats.BWS.points}\``, true)
+                .addField("**Played:**", `\`${stats.BWS.played}\``, true)
+                .addField("**Deaths:**", `\`${stats.BWS.deaths}\``, true)
+                .addField("**Beds:**", `\`${stats.BWS.beds}\``, true)
+                .addField("**Kills:**", `\`${stats.BWS.kills}\``, true)
+                .addField("**Wins:**", `\`${stats.BWS.wins}\``, true)
+                .setImage(stats.BWS.image)
+              pages.push(BWSEmbed);
+            }
+            if(stats.hasOwnProperty("SW")){
+              const SWEmbed = new Discord.RichEmbed()
+                .addField("**Points:**", `\`${stats.SW.points}\``, true)
+                .addField("**Played:**", `\`${stats.SW.played}\``, true)
+                .addField("**Deaths:**", `\`${stats.SW.deaths}\``, true)
+                .addField("**Kills:**", `\`${stats.SW.kills}\``, true)
+                .addField("**Wins:**", `\`${stats.SW.wins}\``, true)
+                .addBlankField(true)
+                .setImage(stats.SW.image)
+              pages.push(SWEmbed);
+            }
+            if(stats.hasOwnProperty("SWS")){
+              const SWSEmbed = new Discord.RichEmbed()
+                .addField("**Points:**", `\`${stats.SWS.points}\``, true)
+                .addField("**Played:**", `\`${stats.SWS.played}\``, true)
+                .addField("**Deaths:**", `\`${stats.SWS.deaths}\``, true)
+                .addField("**Kills:**", `\`${stats.SWS.kills}\``, true)
+                .addField("**Wins:**", `\`${stats.SWS.wins}\``, true)
+                .addBlankField(true)
+                .setImage(stats.SWS.image)
+              pages.push(SWSEmbed);
+            }
+            if(stats.hasOwnProperty("GNT")){
+              const GNTEmbed = new Discord.RichEmbed()
+                .addField("**Points:**", `\`${stats.GNT.points}\``, true)
+                .addField("**Played:**", `\`${stats.GNT.played}\``, true)
+                .addField("**Deaths:**", `\`${stats.GNT.deaths}\``, true)
+                .addField("**Kills:**", `\`${stats.GNT.kills}\``, true)
+                .addField("**Wins:**", `\`${stats.GNT.wins}\``, true)
+                .addBlankField(true)
+                .setImage(stats.GNT.image)
+              pages.push(GNTEmbed);
+            }
+            if(stats.hasOwnProperty("GNTM")){
+              const GNTMEmbed = new Discord.RichEmbed()
+                .addField("**Points:**", `\`${stats.GNTM.points}\``, true)
+                .addField("**Played:**", `\`${stats.GNTM.played}\``, true)
+                .addField("**Deaths:**", `\`${stats.GNTM.deaths}\``, true)
+                .addField("**Kills:**", `\`${stats.GNTM.kills}\``, true)
+                .addField("**Wins:**", `\`${stats.GNTM.wins}\``, true)
+                .addBlankField(true)
+                .setImage(stats.GNTM.image)
+              pages.push(GNTMEmbed);
+            }
+            if(stats.hasOwnProperty("TB")){
+              const TBEmbed = new Discord.RichEmbed()
+                .addField("**Points:**", `\`${stats.TB.points}\``, true)
+                .addField("**Played:**", `\`${stats.TB.played}\``, true)
+                .addField("**Deaths:**", `\`${stats.TB.deaths}\``, true)
+                .addField("**Goals:**", `\`${stats.TB.goals}\``, true)
+                .addField("**Kills:**", `\`${stats.TB.kills}\``, true)
+                .addField("**Wins:**", `\`${stats.TB.wins}\``, true)
+                .setImage(stats.TB.image)
+              pages.push(TBEmbed);
+            }
+            if(stats.hasOwnProperty("oneVSone")){
+              const oneVSoneEmbed = new Discord.RichEmbed()
+                .addField("**Points:**", `\`${stats.oneVSone.points}\``, true)
+                .addField("**Played:**", `\`${stats.oneVSone.played}\``, true)
+                .addField("**Deaths:**", `\`${stats.oneVSone.deaths}\``, true)
+                .addField("**Rounds:**", `\`${stats.oneVSone.rounds}\``, true)
+                .addField("**Kills:**", `\`${stats.oneVSone.kills}\``, true)
+                .addField("**Wins:**", `\`${stats.oneVSone.wins}\``, true)
+                .setImage(stats.oneVSone.image)
+              pages.push(oneVSoneEmbed);
+            }
+            pages.forEach((e, i)=>{
+              e.fields.forEach((f, fi)=>{
+                if(e.fields.length === fi+1){
+                  if(f.value === "\`NaN\`"){
+                    pages.splice(i,1);
+                  };
+                };
+              });
+            });
+           
+            setTimeout(()=>{
+              if(pages.length !== 1){
+                pages.forEach(e=>{
+                  e.setColor(userHexColor);
+                  e.setFooter(`Page ${page+1} of ${pages.length} | Made by: .MohamedTarek#9258`);
+                  if(e.author === embed.author) return;
+                  e.setTitle(`${userName}'s Games Stats 📊 `);
+              });
+            }
+ 
+            var hhh = 0;
+            var hoho = 0;
+            if (isNaN(page)) {
+              hhh = 1
+              hoho = 0} else if (page > pages.length || page < 0 ) {return message.channel.send('There\'s no such page!')} else {hhh = page
+               hoho = page-1}
+             console.log(hhh)
+             pages[hoho].setFooter(`Page ${hhh} of ${pages.length} looool| Made by: .MohamedTarek#9258`);
+             if (talkedRecently.has(msg.author.id)) {
+                return msg.channel.send("Wait 5 sec before getting typing this again.");
+              } else {
+                talkedRecently.add(msg.author.id);
+                setTimeout(() => {
+                  talkedRecently.delete(msg.author.id);
+                }, 5000);
+              }
+             message.channel.send(pages[hoho]).then(embedmsg=>{
+               message.channel.stopTyping(true);
+               if(pages.length === 1) return;
+               embedmsg.react("◀").then(()=>{
+                 embedmsg.react("▶").then(()=>{
+                   const backwardsFilter = (reaction, user) => reaction.emoji.name === '◀' && user.id === message.author.id;
+                   const forwardsFilter = (reaction, user) => reaction.emoji.name === '▶' && user.id === message.author.id;
+                   const backwards = embedmsg.createReactionCollector(backwardsFilter, {time: 120000});
+                   const forwards = embedmsg.createReactionCollector(forwardsFilter, {time: 120000});
+                   backwards.on("collect", r=>{
+                     r.remove(message.author);
+                     if(hoho === 0) return;
+                     hhh--;
+                     hoho--;
+                     pages[hoho].setFooter(`Page ${hhh} of ${pages.length} | Made by: .MohamedTarek#9258`);
+                     embedmsg.edit(pages[hoho]);
+                   });
+                   forwards.on("collect", r=>{
+                     r.remove(message.author);
+                     if(hoho+1 === pages.length) return;
+                     hhh++;
+                     hoho++;
+                     pages[hoho].setFooter(`Page ${hhh} of ${pages.length} | Made by: .MohamedTarek#9258`);
+                     embedmsg.edit(pages[hoho]);
+                   });
+                 });
+               });
+             });
+           }, 250);
+         };
+       });
+     }else{
+       return message.channel.send("There might be an error with the API or the name is incorrect")
+     }
+   });
+ };
+ if(cmd === `${prefix}history`){
+   let player = args.slice(0).join(" ");
+   if (!player) return message.channel.send(`**Usage: \`${prefix}history <Player Name>\`**`);
+   
+   getJSON(`https://api.mojang.com/users/profiles/minecraft/${player}`, function(error, response){
+       if (error) {
+           return message.channel.send('There seems to be an error with the API. Try again later. :confounded:');
+       } else {
+           var uuid = response.id;
+                   
+           getJSON(`https://api.mojang.com/user/profiles/${uuid}/names`, function(error, response){
+               var x = 1;
+               var new_arr = response.reverse();
+               const embed = new Discord.RichEmbed()
+                   .addField(`${player} past names`, new_arr.map(m =>  `${x++} \`${m['name']}\``), true);
+               message.channel.send(embed);
+           });
 
 client.login(process.env.BOT_TOKEN);// لا تغير فيها شي
