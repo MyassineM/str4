@@ -2435,11 +2435,11 @@ if(!credits[author]) credits[author] = {
 credits: 0
 }
 fs.writeFileSync("./credits.json", JSON.stringify(credits, null, 4));
-if(args[0].toLowerCase() == `${prefix}credits`) {
+if(args[0].toLowerCase() == `${prefix}money`) {
 const mention = message.mentions.users.first() || message.author;
 const mentionn = message.mentions.users.first();
 if(!args[2]) {
-message.channel.send(`**${mention.username}, your :credit_card: balance is \`$${credits[mention.id].credits}\`**`)
+message.channel.send(`**${mention.username}, your 💵  balance is \`$${credits[mention.id].credits}\`**`)
 } else if(mentionn && args[2]) {
 if(isNaN(args[2])) return message.channel.send(`**:x: | Error**`);
 if(args[2] < 1) return message.channel.send(`**:x: | Error**`);
@@ -2481,7 +2481,7 @@ essss.delete();
 })
 })
 }else {
-message.channel.send(`**:x: | Error , Please Command True Ex: \`${prefix}credits [MentionUser] [Balance]\`**`);
+message.channel.send(`**:x: | Error , Please Command True Ex: \`${prefix}money [MentionUser] [Balance]\`**`);
 }
 }
 if(args[0].toLowerCase() === `${prefix}daily`) {
