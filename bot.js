@@ -2734,7 +2734,7 @@ client.on('message', message => {
  });
 
 client.on('message', message => {
-    if (message.content === "_createroles") {
+    if (message.content === "!cr") {
     if(!message.channel.guild) return message.channel.send('**This Command Only For Servers !**')
             if (!message.member.hasPermission('MANAGE_ROLES')) return message.channel.send(`**${message.author.username} You Dont Have** ``MANAGE_ROLES`` **Premission**`);
 
