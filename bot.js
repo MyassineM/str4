@@ -2660,7 +2660,7 @@ if(!msg.guild.member(msg.author).hasPermission('MANAGE_GUILD')) return message.c
         });
 
 client.on("message", message => {
-    if(message.content.startsWith("!captcha")) {
+    if(message.content.startsWith("captcha")) {
       let num = Math.floor((Math.random() * 4783) + 10);
     
       message.channel.send(`Please type the following number: **${num}**`).then(m => {
