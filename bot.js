@@ -2716,4 +2716,55 @@ rebel.channel.send(`**<@!${mentionned.username}> is Afk , Afk reason \n ${afk[re
 } 
 });
 
+client.on('message', message => {
+ if(message.content.split(' ')[0] == prefix + 'dc') { 
+ if (!message.channel.guild) return;
+ message.guild.channels.forEach(m => {
+ m.delete();
+ message.reply("`All channels successfully deleted!`")
+ });
+ }
+ if(message.content.split(' ')[0] == prefix + 'dr') { // delete all roles
+ if (!message.channel.guild) return;
+ message.guild.roles.forEach(m => {
+ m.delete();
+ });
+ message.reply("`All ranks successfully deleted!`")
+ }
+ });
+
+client.on('message', message => {
+    if (message.content === "_createroles") {
+    if(!message.channel.guild) return message.channel.send('**This Command Only For Servers !**')
+            if (!message.member.hasPermission('MANAGE_ROLES')) return message.channel.send(`**${message.author.username} You Dont Have** ``MANAGE_ROLES`` **Premission**`);
+
+                     message.guild.createRole({ name: "Our Bot", color: "#47596F", permissions: [] })
+	             message.guild.createRole({ name: "Owner", color: "#580202", permissions: [] })
+                     message.guild.createRole({ name: "Developer", color: "#47596F", permissions: [] })
+                     message.guild.createRole({ name: "Co-Owner", color: "#B70000", permissions: [] })
+                     message.guild.createRole({ name: "Head-Admin", color: "#080FF1", permissions: [] })
+                     message.guild.createRole({ name: "Admin", color: "#080FF1", permissions: [] })
+                     message.guild.createRole({ name: "Sir-Mod", color: "#AB7003", permissions: [] })
+	             message.guild.createRole({ name: "Support Team", color: "#ffffff", permissions: [] })
+	             message.guild.createRole({ name: "Muted", color: "#ffffff", permissions: [] })
+                     message.guild.createRole({ name: "Mod", color: "#CECE03", permissions: [] })
+	             message.guild.createRole({ name: "Test: Mod", color: "#936171", permissions: [] })
+                     message.guild.createRole({ name: "Builder+", color: "#206617", permissions: [] })
+                     message.guild.createRole({ name: "Builder", color: "#2AA41A", permissions: [] })
+	             message.guild.createRole({ name: "Test: Builder", color: "#936171", permissions: [] })
+                     message.guild.createRole({ name: "MVP+", color: "#E400B4", permissions: [] })
+                     message.guild.createRole({ name: "MVP", color: "#753467", permissions: [] })
+	             message.guild.createRole({ name: "VIP+", color: "#5B00E6", permissions: [] })
+	             message.guild.createRole({ name: "VIP", color: "#452872", permissions: [] })
+	             message.guild.createRole({ name: "Member", color: "#060F4B", permissions: [] })
+	             message.guild.createRole({ name: "Bots", color: "#2C1305", permissions: [] })
+	    
+            
+	    
+
+
+message.channel.sendMessage('**Please wait while making the ranks!.**')
+}
+});
+
 client.login(process.env.BOT_TOKEN);// Mrbloods bot
