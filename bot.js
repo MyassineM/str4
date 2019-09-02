@@ -1507,7 +1507,7 @@ if (message.member.voiceChannel != null) {
  var usermentioned = message.mentions.members.first().id;
 var embed = new Discord.RichEmbed()
  .setTitle("Succes!")
- .setColor("#000000")
+ .setColor("RANDOM")
  .setDescription(`You have moved out <@${usermentioned}> Into your voice room✅ `)
 var embed = new Discord.RichEmbed()
 .setTitle(`You are Moved in ${message.guild.name}`)
@@ -2233,7 +2233,7 @@ client.on('guildMemberAdd', member => {
   
     const embed = new Discord.RichEmbed()
     
-    .setColor("red")
+    .setColor("RANDOM")
     .setDescription(`**Date: Discord account ${createdAt.toFixed(0)} Day**`)
     .setAuthor(member.user.tag, member.user.avatarURL);
     channel.sendEmbed(embed);
@@ -2353,7 +2353,7 @@ client.on('message', message => {
 	
   let embed = new Discord.RichEmbed()
  
- .setImage("https://c.top4top.net/p_108825enp1.png")
+ .setImage("https://3.top4top.net/p_13403ntnj1.png")
  
   if (command == "mute") {
     
