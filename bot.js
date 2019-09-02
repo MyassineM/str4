@@ -572,7 +572,7 @@ client.on('message', message => {
               const Embed11 = new Discord.RichEmbed()
         .setColor("RANDOM")
         
-    .setDescription("Link of the server- Bot by MrBloods")
+    .setDescription("Link of the server - Bot by MrBloods")
       message.author.sendEmbed(Embed11)
     }
 });
@@ -663,13 +663,6 @@ client.on('message', message => {
   }
 });
 
-client.on('message', message=> {
-    if (message.author.bot) return;
-    if (message.isMentioned(client.user))
-    {
-    message.reply(`**WHAT DO YOU WANT**`)
-    }
-});
 
 client.on('message', message => {
   var prefix = "!"
