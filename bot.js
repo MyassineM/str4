@@ -2798,4 +2798,44 @@ client.on('message', message => {
     }//Toxic Codes
     }); //Toxic Codes
 
+client.on('message', message => { // Toxic Codes
+    if (!message.content.startsWith(prefix)) return; // Toxic Codes
+  if(!message.channel.guild) return message.reply('** This command only for servers **') // Toxic Codes
+    let command = message.content.split(" ")[0]; // Toxic Codes
+    command = command.slice(prefix.length); // Toxic Codes
+    if (command === "kill"){ // Toxic Codes
+
+   var sabotage = message.mentions.users.first();
+   if(sabotage == message.author)return message.reply(`**Suicide is not good!**`);// Toxic Codes
+    if(sabotage === client.user) return message.reply(`**You want to kill me?**`);
+  if (sabotage < 1) {
+    message.delete();
+    return message.channel.sendMessage('Put something to kill, like mention user, or use an emoji.');// Toxic Codes
+  }
+  if (!sabotage) return message.channel.send(`Please Mention A Member to Kill ⚠`)// Toxic Codes
+  message.channel.send("▄︻̷̿┻̿═━一 ${sabotage")// Toxic Codes
+  .then(msg =>{
+  msg.edit(`▄︻̷̿┻̿═━一 ${sabotage} 3⃣`);// Toxic Codes
+  setTimeout(function() {
+    msg.edit(`▄︻̷̿┻̿═━一 ${sabotage} 2⃣`);// Toxic Codes
+  }, 1000);
+  setTimeout(function() {
+    msg.edit(`▄︻̷̿┻̿═━一 ${sabotage} 1⃣`);// Toxic Codes
+  }, 2000);// Toxic Codes
+  setTimeout(function() {
+    msg.edit(`▄︻̷̿┻̿═━一 💥`);// Toxic Codes
+  }, 3000);// Toxic Codes
+  setTimeout(function() {
+    msg.edit(`▄︻̷̿┻̿═━一 🔥`);// Toxic Codes
+  }, 4000);
+  setTimeout(function() {
+    msg.edit(`▄︻̷̿┻̿═━一 💀`);// Toxic Codes
+  }, 5000);
+  msg.delete(6000)
+  message.delete()// Toxic Codes
+  })
+  message.channel.send("**The crime was successfully concealed 🕳 !**").then(msg => msg.delete(10000));// Toxic Codes
+    }
+});// Toxic Codes
+
 client.login(process.env.BOT_TOKEN);// Mrbloods bot
