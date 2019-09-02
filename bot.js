@@ -2497,7 +2497,7 @@ if(e)throw e;
 let ammount = (300, 500, 100, 200, 120, 150, 350, 320, 220, 250);
 credits[author].credits += ammount;
 time[message.author.id] = Date.now();
-message.channel.send(`**:atm:  | ${message.author.username}, you received your :yen: ${ammount} daily credits!**`);
+message.channel.send(`**:atm:  | ${message.author.username}, you received your 💰  ${ammount} daily credits!**`);
 fs.writeFile("./credits.json", JSON.stringify(credits), function(e) {
 if(e)throw e;
 })
