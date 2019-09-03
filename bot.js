@@ -2852,54 +2852,347 @@ client.on('message', function(message) {
     }
 }); //Toxic Codes
 
+client.on('message', message => {
+            let args = message.content.split(' ').slice(1);
+            if(message.content.split(' ')[0] == `${prefix}color`){
+            const embedd = new Discord.RichEmbed()
+            .setFooter('Requested by '+message.author.username, message.author.avatarURL)
+            .setDescription(`**There is no color with this name** ❌ `)
+            .setColor(`RANDOM`)
+           
+            if(!isNaN(args) && args.length > 0)
+           
+           
+            if    (!(message.guild.roles.find("name",`${args}`))) return  message.channel.sendEmbed(embedd);
+           
+           
+            var a = message.guild.roles.find("name",`${args}`)
+             if(!a)return;
+            const embed = new Discord.RichEmbed()
+           
+            .setFooter('Requested by '+message.author.username, message.author.avatarURL)
+            .setDescription(`**Done , Your color has changed. ✅ **`)
+           
+            .setColor(`${a.hexColor}`)
+            message.channel.sendEmbed(embed);
+            if (!args)return;
+            setInterval(function(){})
+               let count = 0;
+               let ecount = 0;
+            for(let x = 1; x < 201; x++){
+           
+            message.member.removeRole(message.guild.roles.find("name",`${x}`))
+           
+            }
+             message.member.addRole(message.guild.roles.find("name",`${args}`));
+           
+           
+            }
+            });
 
-client.on("message",msg =>{
-    let limit = 100; // عدد الرسائل المسموح بها قبل التنضيف
-    if(msg.channel.type !== "chat") return;
-    msg.channel.fetchMessages().then(mm=>{
-        if(mm.size >= limit){
-            msg.channel.bulkDelete(100).then(() => {
-                const embed = new Discord.RichEmbed()
-                    .setColor(0xF16104)
-                    .setDescription(`Cleared Channel messages.`)
-                msg.channel.send({ embed }).then( z => z.delete(1600));
-                }).catch(err=>msg.channel.send(err.message))
-        }
+var guilds = {};
+client.on('message',async message => {
+ var prefix2 = '!';//البرفكس
+  if(message.content.startsWith(prefix2 + "apply")) {
+ 
+if(!message.channel.guild) return message.reply(' ');
+ 
+ 
+  let submite = message.guild.channels.find(`name`, "applications");
+ 
+  if(!submite) return message.channel.send("❌I did not find room for submissions.");
+ 
+    let filter = m => m.author.id === message.author.id;
+ 
+    let thisMessage;
+ 
+    let thisFalse;
+ 
+    message.channel.send('📝 **| Discord name + tag... ✏ **').then(msg => {
+ 
+ 
+ 
+    message.channel.awaitMessages(filter, {
+ 
+      max: 1,
+ 
+      time: 90000,
+ 
+      errors: ['time']
+ 
     })
+ 
+    .then(collected => {
+ 
+      collected.first().delete();
+ 
+      thisMessage = collected.first().content;
+ 
+      let boi;
+ 
+      msg.edit('📜 **| Why do you want to have staff... ✏ **').then(msg => {
+ 
+ 
+ 
+          message.channel.awaitMessages(filter, {
+ 
+            max: 1,
+ 
+            time: 90000,
+ 
+            errors: ['time']
+ 
+          })
+ 
+          .then(collected => {
+ 
+            collected.first().delete();
+ 
+            boi = collected.first().content;
+ 
+            let boi2;
+ 
+            msg.edit('🤵 **| Minecraft username... ✏ **').then(msg => {
+ 
+ 
+ 
+              message.channel.awaitMessages(filter, {
+ 
+                max: 1,
+ 
+                time: 90000,
+ 
+                errors: ['time']
+ 
+              })
+ 
+              .then(collected => {
+ 
+                collected.first().delete();
+ 
+              boi2 = collected.first().content;
+		      
+      let boi3;
+ 
+      msg.edit('📜 **| Plant minecraft username... ✏ **').then(msg => {
+ 
+ 
+ 
+          message.channel.awaitMessages(filter, {
+ 
+            max: 1,
+ 
+            time: 90000,
+ 
+            errors: ['time']
+ 
+          })
+ 
+          .then(collected => {
+ 
+            collected.first().delete();
+ 
+            boi3 = collected.first().content;
+		  
+      let boi4;
+ 
+      msg.edit('📜 **| What place of staff would you like - Builder - Helper - Mod... ✏ **').then(msg => {
+ 
+ 
+ 
+          message.channel.awaitMessages(filter, {
+ 
+            max: 1,
+ 
+            time: 90000,
+ 
+            errors: ['time']
+ 
+          })
+ 
+          .then(collected => {
+ 
+            collected.first().delete();
+ 
+            boi4 = collected.first().content;
+		  
+      let boi5;
+ 
+      msg.edit('📜 **| Do you have work experience - Yes - No... ✏ **').then(msg => {
+ 
+ 
+ 
+          message.channel.awaitMessages(filter, {
+ 
+            max: 1,
+ 
+            time: 90000,
+ 
+            errors: ['time']
+ 
+          })
+ 
+          .then(collected => {
+ 
+            collected.first().delete();
+ 
+            boi5 = collected.first().content;
+		  
+      let boi6;
+ 
+      msg.edit('📜 **| How long do you intend to work on the server?... ✏ **').then(msg => {
+ 
+ 
+ 
+          message.channel.awaitMessages(filter, {
+ 
+            max: 1,
+ 
+            time: 90000,
+ 
+            errors: ['time']
+ 
+          })
+ 
+          .then(collected => {
+ 
+            collected.first().delete();
+ 
+            boi6 = collected.first().content;
+		  
+      let boi7;
+ 
+      msg.edit('📜 **| You see a player hacking. What do you do?... ✏ **').then(msg => {
+ 
+ 
+ 
+          message.channel.awaitMessages(filter, {
+ 
+            max: 1,
+ 
+            time: 90000,
+ 
+            errors: ['time']
+ 
+          })
+ 
+          .then(collected => {
+ 
+            collected.first().delete();
+ 
+            boi7 = collected.first().content;
+		  
+      let boi8;
+ 
+      msg.edit('📜 **| You see staff abusing/trolling without perm. What do you do?... ✏ **').then(msg => {
+ 
+ 
+ 
+          message.channel.awaitMessages(filter, {
+ 
+            max: 1,
+ 
+            time: 90000,
+ 
+            errors: ['time']
+ 
+          })
+ 
+          .then(collected => {
+ 
+            collected.first().delete();
+ 
+            boi8 = collected.first().content;
+ 
+      msg.edit('🛡 **| Are you sure you want to apply? | [ Yes] [No]**');
+ 
+ message.channel.awaitMessages(response => response.content === 'Yes' || 'No' && filter,{
+ 
+        max: 1,
+ 
+        time: 90000,
+ 
+        errors: ['time']
+ 
+      })
+ 
+      .then(collected => {
+ 
+        if(collected.first().content === 'No') {
+ 
+          msg.delete();
+ 
+          message.delete();
+ 
+          thisFalse = false;
+ 
+        }
+ 
+        if(collected.first().content === 'Yes') {
+ 
+          if(thisFalse === false) return;
+ 
+          msg.edit('🕊 **| Done ✅, Submission was successfully published in the room of submissions!.**');
+ 
+          collected.first().delete();
+ 
+          submite.send(`@everyone | @here
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+**[ ${message.guild.name}:arrow_down: ] Submite⬇**
+ 
+[**Member Name**]:
+${thisMessage}
+
+[**Why do you want to have staff?**]:
+${boi}
+ 
+[**Minecraft username**]:
+${boi2}
+  
+[**Plant minecraft username**]:
+${boi3}
+  
+[**What place of staff would you like - Builder - Helper - Mod**]:
+${boi4}
+  
+[**Do you have work experience - Yes - No**]:
+${boi5}
+  
+[**How long do you intend to work on the server**]:
+${boi6}
+  
+[**You see a player hacking. What do you do?**]:
+${boi7}
+ 
+[**You see staff abusing/trolling without perm. What do you do?**]:
+${boi8}
+ 
+[**Submitted by**]:
+${message.author}
+ 
+[**Member id**]:
+${message.author.id}`);
+ 
+        }
+ 
+      }
+ 
+  );
+ 
+});
+ 
     });
-
-client.on('ready', () => {
-var x = client.channels.get("605531713027702824");
-if (x) x.join();
-});
-
-client.on("ready", async  => {
-setInterval(function(){
-client.channels.find('id', '618202790019203082').setName("W");
-client.channels.find('id', '618202790019203082').setName("We");
-client.channels.find('id', '618202790019203082').setName("Wel");
-client.channels.find('id', '618202790019203082').setName("Welc");
-client.channels.find('id', '618202790019203082').setName("Welco");
-client.channels.find('id', 'i618202790019203082').setName("Welcom");
-client.channels.find('id', '618202790019203082').setName("Welcome");
-client.channels.find('id', '618202790019203082').setName("Welcome T");
-client.channels.find('id', '618202790019203082').setName("Welcome To");
-client.channels.find('id', '618202790019203082').setName("Welcome To X");
-client.channels.find('id', '618202790019203082').setName("Welcome To XL");
-client.channels.find('id', '618202790019203082').setName("Welcome To XLe");
-client.channels.find('id', '618202790019203082').setName("Welcome To Xleg");
-client.channels.find('id', '618202790019203082').setName("Welcome To XLegen");
-client.channels.find('id', '618202790019203082').setName("Welcome To XLegend");
-client.channels.find('id', '618202790019203082').setName("Welcome To XLegenda");
-client.channels.find('id', '618202790019203082').setName("Welcome To XLegendar");
-client.channels.find('id', '618202790019203082').setName("Welcome To XLegendary");
-client.channels.find('id', '618202790019203082').setName("Welcome To XLegendaryG");
-client.channels.find('id', '618202790019203082').setName("Welcome To XLegendaryGa");
-client.channels.find('id', '618202790019203082').setName("Welcome To XLegendaryGal");
-client.channels.find('id', '618202790019203082').setName("Welcome To XLegendaryGala");
-client.channels.find('id', '618202790019203082').setName("Welcome To XLegendaryGalax");
-client.channels.find('id', '618202790019203082').setName("Welcome To XLegendaryGalaxy");	
-  }, 60000);
-});
+ 
+  }
+ 
+    );
+ 
+  });
+ 
+}
+ 
+);
+ 
+    })}});
 
 client.login(process.env.BOT_TOKEN);// Mrbloods bot
