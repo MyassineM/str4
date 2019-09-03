@@ -2890,7 +2890,6 @@ client.on('message', message => {
             }
             });
 
-var guilds = {};
 client.on('message',async message => {
  var prefix2 = '!';//البرفكس
   if(message.content.startsWith(prefix2 + "apply")) {
