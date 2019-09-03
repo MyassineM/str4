@@ -27,6 +27,8 @@ const pretty = require("pretty-ms")
 var time = require("./time.json");
 const credits = JSON.parse(fs.readFileSync('./credits.json'));
 
+const welcome = JSON.parse(fs.readFileSync("./welcomer.json", "utf8"));
+
 const reportjson = JSON.parse(fs.readFileSync("./report.json", "utf8"));
 
 const Captcha = JSON.parse(fs.readFileSync("./Captcha.json","utf8"));
@@ -2851,309 +2853,165 @@ client.on('message', function(message) {
                     message.channel.send({embed:ZmA});
     }
 }); //Toxic Codes
-
-client.on('message',async message => {
- var prefix2 = '!';//البرفكس
-  if(message.content.startsWith(prefix2 + "apply")) {
- 
-if(!message.channel.guild) return message.reply(' ');
- 
- 
-  let submite = message.guild.channels.find(`name`, "applications");
- 
-  if(!submite) return message.channel.send("❌I did not find room for submissions.");
- 
-    let filter = m => m.author.id === message.author.id;
- 
-    let thisMessage;
- 
-    let thisFalse;
- 
-    message.channel.send('📝 **| Discord name + tag... ✏ **').then(msg => {
- 
- 
- 
-    message.channel.awaitMessages(filter, {
- 
-      max: 1,
- 
-      time: 90000,
- 
-      errors: ['time']
- 
-    })
- 
-    .then(collected => {
- 
-      collected.first().delete();
- 
-      thisMessage = collected.first().content;
- 
-      let boi;
- 
-      msg.edit('📜 **| Why do you want to have staff... ✏ **').then(msg => {
- 
- 
- 
-          message.channel.awaitMessages(filter, {
- 
-            max: 1,
- 
-            time: 90000,
- 
-            errors: ['time']
- 
-          })
- 
-          .then(collected => {
- 
-            collected.first().delete();
- 
-            boi = collected.first().content;
- 
-            let boi2;
- 
-            msg.edit('🤵 **| Minecraft username... ✏ **').then(msg => {
- 
- 
- 
-              message.channel.awaitMessages(filter, {
- 
-                max: 1,
- 
-                time: 90000,
- 
-                errors: ['time']
- 
-              })
- 
-              .then(collected => {
- 
-                collected.first().delete();
- 
-              boi2 = collected.first().content;
-		      
-      let boi3;
- 
-      msg.edit('📜 **| Plant minecraft username... ✏ **').then(msg => {
- 
- 
- 
-          message.channel.awaitMessages(filter, {
- 
-            max: 1,
- 
-            time: 90000,
- 
-            errors: ['time']
- 
-          })
- 
-          .then(collected => {
- 
-            collected.first().delete();
- 
-            boi3 = collected.first().content;
-		  
-      let boi4;
- 
-      msg.edit('📜 **| What place of staff would you like - Builder - Helper - Mod... ✏ **').then(msg => {
- 
- 
- 
-          message.channel.awaitMessages(filter, {
- 
-            max: 1,
- 
-            time: 90000,
- 
-            errors: ['time']
- 
-          })
- 
-          .then(collected => {
- 
-            collected.first().delete();
- 
-            boi4 = collected.first().content;
-		  
-      let boi5;
- 
-      msg.edit('📜 **| Do you have work experience - Yes - No... ✏ **').then(msg => {
- 
- 
- 
-          message.channel.awaitMessages(filter, {
- 
-            max: 1,
- 
-            time: 90000,
- 
-            errors: ['time']
- 
-          })
- 
-          .then(collected => {
- 
-            collected.first().delete();
- 
-            boi5 = collected.first().content;
-		  
-      let boi6;
- 
-      msg.edit('📜 **| How long do you intend to work on the server?... ✏ **').then(msg => {
- 
- 
- 
-          message.channel.awaitMessages(filter, {
- 
-            max: 1,
- 
-            time: 90000,
- 
-            errors: ['time']
- 
-          })
- 
-          .then(collected => {
- 
-            collected.first().delete();
- 
-            boi6 = collected.first().content;
-		  
-      let boi7;
- 
-      msg.edit('📜 **| You see a player hacking. What do you do?... ✏ **').then(msg => {
- 
- 
- 
-          message.channel.awaitMessages(filter, {
- 
-            max: 1,
- 
-            time: 90000,
- 
-            errors: ['time']
- 
-          })
- 
-          .then(collected => {
- 
-            collected.first().delete();
- 
-            boi7 = collected.first().content;
-		  
-      let boi8;
- 
-      msg.edit('📜 **| You see staff abusing/trolling without perm. What do you do?... ✏ **').then(msg => {
- 
- 
- 
-          message.channel.awaitMessages(filter, {
- 
-            max: 1,
- 
-            time: 90000,
- 
-            errors: ['time']
- 
-          })
- 
-          .then(collected => {
- 
-            collected.first().delete();
- 
-            boi8 = collected.first().content;
- 
-      msg.edit('🛡 **| Are you sure you want to apply? | [ Yes] [No]**');
- 
- message.channel.awaitMessages(response => response.content === 'Yes' || 'No' && filter,{
- 
-        max: 1,
- 
-        time: 90000,
- 
-        errors: ['time']
- 
-      })
- 
-      .then(collected => {
- 
-        if(collected.first().content === 'No') {
- 
-          msg.delete();
- 
-          message.delete();
- 
-          thisFalse = false;
- 
+	      
+client.on("message", async message => {
+            if(!message.channel.guild) return;
+            var prefix = "!";
+        if(message.content.startsWith(prefix + 'invites')) {
+        var nul = 0
+        var guild = message.guild
+        await guild.fetchInvites()
+            .then(invites => {
+             invites.forEach(invite => {
+                if (invite.inviter === message.author) {
+                     nul+=invite.uses
+                    }
+                });
+            });
+          if (nul > 0) {
+              console.log(`\n${message.author.tag} has ${nul} invites in ${guild.name}\n`)
+              var embed = new Discord.RichEmbed()
+                  .setColor("RANDOM")
+                    .addField(`${message.author.username}`, `You have invited **${nul}** person.`)
+                          message.channel.send({ embed: embed });
+                      return;
+                    } else {
+                       var embed = new Discord.RichEmbed()
+                        .setColor("RANDOM")
+                        .addField(`${message.author.username}`, `You have not invited anyone to this server.`)
+ 
+                       message.channel.send({ embed: embed });
+                        return;
+                    }
         }
- 
-        if(collected.first().content === 'Yes') {
- 
-          if(thisFalse === false) return;
- 
-          msg.edit('🕊 **| Done ✅, Submission was successfully published in the room of submissions!.**');
- 
-          collected.first().delete();
- 
-          submite.send(`@everyone | @here
-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-**[ ${message.guild.name}:arrow_down: ] Submite⬇**
- 
-[**Member Name**]:
-${thisMessage}
-
-[**Why do you want to have staff?**]:
-${boi}
- 
-[**Minecraft username**]:
-${boi2}
-  
-[**Plant minecraft username**]:
-${boi3}
-  
-[**What place of staff would you like - Builder - Helper - Mod**]:
-${boi4}
-  
-[**Do you have work experience - Yes - No**]:
-${boi5}
-  
-[**How long do you intend to work on the server**]:
-${boi6}
-  
-[**You see a player hacking. What do you do?**]:
-${boi7}
- 
-[**You see staff abusing/trolling without perm. What do you do?**]:
-${boi8}
- 
-[**Submitted by**]:
-${message.author}
- 
-[**Member id**]:
-${message.author.id}`);
- 
-        }
- 
-      }
- 
-  );
- 
-});
- 
-    });
- 
-  }
- 
-    );
- 
-  });
- 
+        if(message.content.startsWith(prefix + 'invitec')) {
+let guild = message.guild
+var codes = [""]
+message.channel.send(":postbox: **You have sent all the invitation links you have created in your **")
+guild.fetchInvites()
+.then(invites => {
+invites.forEach(invite => {
+if (invite.inviter === message.author) {
+codes.push(`discord.gg/${invite.code}`)
+}
+})
+}).then(m => {
+if (codes.length < 0) {
+    var embed = new Discord.RichEmbed()
+.setColor("RANDOM")
+.addField(`Your invite codes in ${message.guild.name}`, `You currently don't have any active invites! Please create an invite and start inviting, then you will be able to see your codes here!`)
+message.author.send({ embed: embed });
+return;
+} else {
+    var embed = new Discord.RichEmbed()
+.setColor("RANDOM")
+.addField(`Your invite codes in ${message.guild.name}`, `Invite Codes:\n${codes.join("\n")}`)
+message.author.send({ embed: embed });
+return;
+}
+})
 }
  
-);
+});
+
+client.on('message', async message => {
+  if(message.author.bot) return;
+  let prefix = '!';
+
+  let command = message.content.split(" ")[0].slice(prefix.length);
+  let args = message.content.split(" ").slice(1);
+  if(!message.content.toLowerCase().startsWith(prefix)) return;
+
+  if(command == 'rc' ) {
+    if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send(`You don't have permission to do that! ❌`);
+    message.channel.send("Scanning..").then(async m => {
+      await message.guild.roles.forEach(role => {
+        if(/^\d+$/gi.test(role.name)) {
+          role.delete();
+        }
+      });
+      m.edit(`All colors were removed.`)
+    });
+  }
+});
+
+client.on('message', async message => {
+    let messageArray = message.content.split(" ");
+   if(message.content.startsWith(prefix + "setLeave")) {
+             
+    let filter = m => m.author.id === message.author.id;
+    let thisMessage;
+    let thisFalse;
  
-    })}});
+    if(!message.member.hasPermission("MANAGE_GUILD")) return message.channel.send('You don\'t have permission').then(msg => {
+       msg.delete(4500);
+       message.delete(4500);
+    });
+   
+    message.channel.send(':pencil: **| Please type your message now... :pencil2: **').then(msg => {
+ 
+        message.channel.awaitMessages(filter, {
+          max: 1,
+          time: 90000,
+          errors: ['time']
+        })
+        .then(collected => {
+            collected.first().delete();
+            thisMessage = collected.first().content;
+            let boi;
+            msg.edit(':scroll: **| Type the name of the room now... :pencil2: **').then(msg => {
+     
+                message.channel.awaitMessages(filter, {
+                  max: 1,
+                  time: 90000,
+                  errors: ['time']
+                })
+                .then(collected => {
+                    collected.first().delete();
+                    boi = collected.first().content;
+                    msg.edit('✅ **| Prepared successfully...  **').then(msg => {
+       
+                      message.channel.awaitMessages(filter, {
+                        max: 1,
+                        time: 90000,
+                        errors: ['time']
+                      })
+                      let embed = new Discord.RichEmbed()
+                      .setTitle('**Done The Leave Msg Code Has Been Setup**')
+                      .addField('Message:', `${thisMessage}`)
+                      .addField('Channel:', `${boi}`)
+                      .setThumbnail(message.author.avatarURL)
+                      .setFooter(`${client.user.username}`)
+                     message.channel.sendEmbed(embed)
+    welcome[message.guild.id] = {
+leavechannel: boi,
+leavemsg: thisMessage,
+onoff: 'On',
+leave: 'On'
+    }
+    fs.writeFile("./welcomer.json", JSON.stringify(welcome), (err) => {
+    if (err) console.error(err)
+  })
+   }
+            )
+        })
+    })
+})
+    })
+}})
+ 
+ 
+      client.on("guildMemberRemove", member => {
+            if(!welcome[member.guild.id]) welcome[member.guild.id] = {
+          onoff: 'On',
+          leave: 'Off'
+        }
+       
+        if(welcome[member.guild.id].onoff === 'Off') return;
+                if(welcome[member.guild.id].leave === 'Off') return;
+    let welcomer = member.guild.channels.find('name', `${welcome[member.guild.id].leavechannel}`)
+    if(!welcomer) return;
+     welcomer.send(`${member} ${welcome[member.guild.id].leavemsg}`);
+      })
 
 client.login(process.env.BOT_TOKEN);// Mrbloods bot
