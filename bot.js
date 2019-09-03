@@ -2852,7 +2852,6 @@ client.on('message', function(message) {
     }
 }); //Toxic Codes
 
-var guilds = {};
 client.on('message',async message => {
  var prefix2 = '!';//البرفكس
   if(message.content.startsWith(prefix2 + "apply")) {
