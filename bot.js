@@ -2725,6 +2725,9 @@ client.on('message', message => {
                      message.guild.createRole({ name: "Builder+", color: "#206617", permissions: [] })
                      message.guild.createRole({ name: "Builder", color: "#2AA41A", permissions: [] })
 	             message.guild.createRole({ name: "Test: Builder", color: "#936171", permissions: [] })
+	             message.guild.createRole({ name: "Galaxy", color: "#1a56d6", permissions: [] })
+	             message.guild.createRole({ name: "Divine", color: "#afcaa5", permissions: [] })
+	             message.guild.createRole({ name: "Ultra", color: "#907cb9", permissions: [] })
                      message.guild.createRole({ name: "MVP+", color: "#E400B4", permissions: [] })
                      message.guild.createRole({ name: "MVP", color: "#753467", permissions: [] })
 	             message.guild.createRole({ name: "VIP+", color: "#5B00E6", permissions: [] })
@@ -3013,5 +3016,170 @@ leave: 'On'
     if(!welcomer) return;
      welcomer.send(`${member} ${welcome[member.guild.id].leavemsg}`);
       })
+
+client.on('message', message => {//new msg event
+if(!message.channel.guild) return;
+  if(message.content.startsWith(prefix + 'set')) {//to create the rainbow role
+      let role = message.guild.roles.find('name', 'Rainbow.')
+    if(role) return message.channel.send(`This Step Already Completed !`)//if the role already created return with this msg
+  //start of create role
+  if(!role){
+    rainbow =  message.guild.createRole({
+   name: "Rainbow.",//the role will create name
+   color: "#000000",//the default color
+   permissions:[]//the permissions
+ //end of create role
+})
+ 
+}
+message.channel.send('Done The Rainbow Role Setup Has Been Completed')//if the step completed
+}})
+ 
+client.on('ready', () => {//new ready event
+  setInterval(function(){
+      client.guilds.forEach(g => {
+                  var role = g.roles.find('name', 'Rainbow.');//rainbow role name
+                  if (role) {
+                      role.edit({color : "RANDOM"});
+                  };
+      });
+  }, 5000);//the rainbow time
+})
+
+client.on("guildMemberAdd", member => {
+    member.createDM().then(function (channel) {
+    return channel.send(`:rose: Welcome to the server! :rose: 
+  :crown: Member name: ${member}:crown:  
+  You are the member number: ${member.guild.memberCount} `) 
+  }).catch(console.error)
+  })
+
+client.on('guildCreate', guild => {
+    var embed = new Discord.RichEmbed()
+    .setColor(0x5500ff)
+    .setDescription(`**Thank you for adding the bot to your server.**`)
+        guild.owner.send(embed)
+  });
+
+client.on('message', message => {
+         if(message.content === prefix + "closeroom") {
+                             if(!message.channel.guild) return message.reply('** This command only for servers**');
+  
+     if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply(' **__You dont have permsission!__**');
+                message.channel.overwritePermissions(message.guild.id, {
+              SEND_MESSAGES: false
+  
+                }).then(() => {
+                    message.reply("**__Chat has been closed!__ ✅ **")
+                });
+                  }
+      if(message.content === prefix + "openroom") {
+                          if(!message.channel.guild) return message.reply('** This command only for servers**');
+  
+     if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('**__You dont have permsission!__**');
+                message.channel.overwritePermissions(message.guild.id, {
+              SEND_MESSAGES: true
+  
+                }).then(() => {
+                    message.reply("**__Chat has been opened!__✅**")
+                });
+      }
+         
+});
+
+client.on("message", msg => {
+    var prefix = '!'//البركفس
+    if(msg.content.startsWith(prefix + 'myacc')){
+      let embed = new Discord.RichEmbed()
+      .setThumbnail(msg.guild.iconURL)
+      .setColor("RANDOM")
+      .addField("Year📆",msg.guild.createdAt.getFullYear())
+      .addField("Hour📆", msg.guild.createdAt.getHours())
+      .addField("Day📆", msg.guild.createdAt.getDay())
+      .addField("Month📆", msg.guild.createdAt.getMonth())
+      .addField("Minutes📆", msg.guild.createdAt.getMinutes())
+      .addField("Seconds📆", msg.guild.createdAt.getSeconds())
+      .addField("Full📆", msg.guild.createdAt.toLocaleString())
+      .setTimestamp()
+      msg.channel.send(embed);
+    }
+  });
+
+client.on('guildMemberAdd', member => {
+     const welcomer =  member.guild.channels.find('name', 'welcome');
+    if(!welcomer) return;
+      if(welcomer) {
+         moment.locale('ar-ly');
+         var m = member.user;
+        let yumz = new Discord.RichEmbed()
+        .setColor('RANDOM')
+        .setThumbnail(m.avatarURL)
+        .setAuthor(m.username,m.avatarURL)
+        .addField(': Date of entry:',`${moment(member.user.createdAt).format('D/M/YYYY h:mm a')} **\n** \`${moment(member.user.createdAt).fromNow()}\``,true)            
+     
+         .setFooter(`${m.tag}`,"https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif")
+     welcomer.send({embed:yumz});          
+         
+   
+ 
+ 
+ 
+const w = ['./img/w1.png'];
+ 
+         let Image = Canvas.Image,
+            canvas = new Canvas(400, 200),
+            ctx = canvas.getContext('2d');
+        fs.readFile(`${w[Math.floor(Math.random() * w.length)]}`, function (err, Background) {
+            if (err) return console.log(err);
+            let BG = Canvas.Image;
+            let ground = new Image;
+            ground.src = Background;
+            ctx.drawImage(ground, 0, 0, 400, 200);
+             
+         
+ 
+                let url = member.user.displayAvatarURL.endsWith(".webp") ? member.user.displayAvatarURL.slice(100) + ".png" : member.user.displayAvatarURL;
+                jimp.read(url, (err, ava) => {
+                    if (err) return console.log(err);
+                    ava.getBuffer(jimp.MIME_PNG, (err, buf) => {
+                        if (err) return console.log(err);
+                       
+                        ctx.font = "bold 12px Arial";
+                        ctx.fontSize = '20px';
+                        ctx.fillStyle = "#f1f1f1";
+                        ctx.textAlign = "center";
+                        ctx.fillText(`welcome to ${member.guild.name}`, 300, 130);
+                       
+                        ctx.font = "bold 12px Arial";
+                        ctx.fontSize = '20px';
+                        ctx.fillStyle = "#f1f1f1";
+                        ctx.textAlign = "center";
+                        ctx.fillText(member.user.username, 200, 150);
+ 
+                let Avatar = Canvas.Image;
+                              let ava = new Avatar;
+                              ava.src = buf;
+                              ctx.beginPath();
+                              ctx.arc(77, 101, 62, 0, Math.PI*2);
+                              ctx.stroke();
+                                 ctx.clip();
+                                 ctx.drawImage(ava, 13, 38, 128, 126);  
+                         
+               
+                             
+welcomer.sendFile(canvas.toBuffer())
+ 
+ 
+ 
+     
+     
+                    }  )  
+     
+                   
+ 
+})
+      });                    
+ }
+});
 
 client.login(process.env.BOT_TOKEN);// Mrbloods bot
