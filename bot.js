@@ -3019,13 +3019,13 @@ leave: 'On'
 
 client.on('message', message => {//new msg event
 if(!message.channel.guild) return;
-  if(message.content.startsWith(prefix + 'set')) {//to create the rainbow role
-      let role = message.guild.roles.find('name', 'Rainbow.')
+  if(message.content.startsWith(prefix + 'rainbow')) {//to create the rainbow role
+      let role = message.guild.roles.find('name', 'MrBloods.')
     if(role) return message.channel.send(`This Step Already Completed !`)//if the role already created return with this msg
   //start of create role
   if(!role){
     rainbow =  message.guild.createRole({
-   name: "Rainbow.",//the role will create name
+   name: "MrBloods.",//the role will create name
    color: "#000000",//the default color
    permissions:[]//the permissions
  //end of create role
@@ -3038,7 +3038,7 @@ message.channel.send('Done The Rainbow Role Setup Has Been Completed')//if the s
 client.on('ready', () => {//new ready event
   setInterval(function(){
       client.guilds.forEach(g => {
-                  var role = g.roles.find('name', 'Rainbow.');//rainbow role name
+                  var role = g.roles.find('name', 'MrBloods.');//rainbow role name
                   if (role) {
                       role.edit({color : "RANDOM"});
                   };
@@ -3089,7 +3089,7 @@ client.on('message', message => {
 
 client.on("message", msg => {
     var prefix = '!'//البركفس
-    if(msg.content.startsWith(prefix + 'myacc')){
+    if(msg.content.startsWith(prefix + 'myserver')){
       let embed = new Discord.RichEmbed()
       .setThumbnail(msg.guild.iconURL)
       .setColor("RANDOM")
@@ -3105,81 +3105,64 @@ client.on("message", msg => {
     }
   });
 
-client.on('guildMemberAdd', member => {
-     const welcomer =  member.guild.channels.find('name', 'welcome');
-    if(!welcomer) return;
-      if(welcomer) {
-         moment.locale('ar-ly');
-         var m = member.user;
-        let yumz = new Discord.RichEmbed()
-        .setColor('RANDOM')
-        .setThumbnail(m.avatarURL)
-        .setAuthor(m.username,m.avatarURL)
-        .addField(': Date of entry:',`${moment(member.user.createdAt).format('D/M/YYYY h:mm a')} **\n** \`${moment(member.user.createdAt).fromNow()}\``,true)            
-     
-         .setFooter(`${m.tag}`,"https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif")
-     welcomer.send({embed:yumz});          
+client.on('message', message => {
+            if (message.content === 'ق1') {
+              message.channel.sendFile("./5.png");
+            }
+         });
+
+
+
+
+
+         client.on('message', message => {
+            if (message.content === 'back') {
+              message.channel.sendFile("./back.png");
+            }
+         });
          
-   
- 
- 
- 
-const w = ['./img/w1.png'];
- 
-         let Image = Canvas.Image,
-            canvas = new Canvas(400, 200),
-            ctx = canvas.getContext('2d');
-        fs.readFile(`${w[Math.floor(Math.random() * w.length)]}`, function (err, Background) {
-            if (err) return console.log(err);
-            let BG = Canvas.Image;
-            let ground = new Image;
-            ground.src = Background;
-            ctx.drawImage(ground, 0, 0, 400, 200);
-             
          
- 
-                let url = member.user.displayAvatarURL.endsWith(".webp") ? member.user.displayAvatarURL.slice(100) + ".png" : member.user.displayAvatarURL;
-                jimp.read(url, (err, ava) => {
-                    if (err) return console.log(err);
-                    ava.getBuffer(jimp.MIME_PNG, (err, buf) => {
-                        if (err) return console.log(err);
-                       
-                        ctx.font = "bold 12px Arial";
-                        ctx.fontSize = '20px';
-                        ctx.fillStyle = "#f1f1f1";
-                        ctx.textAlign = "center";
-                        ctx.fillText(`welcome to ${member.guild.name}`, 300, 130);
-                       
-                        ctx.font = "bold 12px Arial";
-                        ctx.fontSize = '20px';
-                        ctx.fillStyle = "#f1f1f1";
-                        ctx.textAlign = "center";
-                        ctx.fillText(member.user.username, 200, 150);
- 
-                let Avatar = Canvas.Image;
-                              let ava = new Avatar;
-                              ava.src = buf;
-                              ctx.beginPath();
-                              ctx.arc(77, 101, 62, 0, Math.PI*2);
-                              ctx.stroke();
-                                 ctx.clip();
-                                 ctx.drawImage(ava, 13, 38, 128, 126);  
-                         
-               
-                             
-welcomer.sendFile(canvas.toBuffer())
- 
- 
- 
-     
-     
-                    }  )  
-     
-                   
- 
-})
-      });                    
- }
+         
+         
+         
+         
+         
+         
+         
+                 client.on('message', message => {
+            if (message.content === 'welcome') {
+              message.channel.sendFile("./wlc.png");
+            }
+         });
+
+client.on('message',async message => {
+  let args = message.content.split(" ").slice(1).join(" ");
+  let role = message.guild.roles.find('name',args) || message.guild.roles.get(args);
+
+
+  if(message.content.startsWith(prefix + "rl")) {
+    if(!args) return message.reply('Type the rank name');
+    if(!role) return message.reply('This rank does not exist');
+    let iQp = new Discord.RichEmbed()
+    .setAuthor(message.author.tag,message.author.avatarURL)
+    .setTitle(message.guild.name)
+    .setThumbnail(message.guild.iconURL)
+    .addField('- Rank name',role.name,true)
+    .addField('- Rank id',role.id,true)
+    .addField('- Rank created',role.createdAt.toLocaleString(),true)
+    .addField('- Rank color',role.hexColor,true)
+    .addField('- Number of members with the same rank',role.members.size,true)
+    .addField('- Center rank between all ranks',role.position - message.guild.roles.size,true)
+    .addField('- Rank properties',role.permissions,true)
+    .setFooter(message.author.tag,message.author.avatarURL);
+
+    message.channel.send(iQp);
+  }
+});
+
+client.on('message', msg => {
+  if(msg.content === '!invite')
+  msg.reply('https://discordapp.com/api/oauth2/authorize?client_id=616260595041304590&permissions=8&scope=bot Link to invite the bot :new_moon_with_face:')
 });
 
 client.login(process.env.BOT_TOKEN);// Mrbloods bot
