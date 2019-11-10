@@ -20,6 +20,8 @@ const ytdl = require('ytdl-core');
 
 const fs = require('fs');
 
+const FFMPEG = require('ffmpeg');
+
 const gif = require("gif-search");
 
 const Canvas = require("canvas");
