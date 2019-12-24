@@ -181,7 +181,7 @@ client.on('message', msg => {
 
 client.on('message', msg => {
   if(msg.content === 'Ip')
-  msg.reply('mc.xlegendarygal.me ')
+  msg.reply('DivineWoods.net ')
 });
 
 client.on('message', msg => {
@@ -429,7 +429,7 @@ message.channel.send(E2Mdax);
 });
 
 client.on('message', message=>{
-    if (message.content ===  "اخرج"){
+    if (message.content ===  "99383197"){
     message.guild.leave();
             }
 }); //Toxic Codes
@@ -1539,11 +1539,11 @@ message.react("❌")
 });//toxic codes
 
 client.on("message", message => {
-    if (message.content === "!help") {
+    if (message.content === "!cmds") {
      const embed = new Discord.RichEmbed() 
          .setColor("#00FF00")
          .setThumbnail(message.author.avatarURL)
-         .setDescription(`**Help | XLegendaryGalaxy**
+         .setDescription(`**Help | DivineWoods**
 
         **__General orders__**
 **
@@ -1726,23 +1726,23 @@ client.on('message', async msg => {
 	if (command === `play`) {
 		const voiceChannel = msg.member.voiceChannel;
         
-        if (!voiceChannel) return msg.channel.send("انت لم تدخل روم صوتي");
+        if (!voiceChannel) return msg.channel.send("You didn't enter the audio room.");
         
         const permissions = voiceChannel.permissionsFor(msg.client.user);
         
         if (!permissions.has('CONNECT')) {
 
-			return msg.channel.send("ليست لدي صلاحيات للدخول الى الروم");
+			return msg.channel.send("I don't have permissions to enter the room");
         }
         
 		if (!permissions.has('SPEAK')) {
 
-			return msg.channel.send("انا لا يمكنني التكلم في هاذه الروم");
+			return msg.channel.send("I can't speak on this room");
 		}
 
 		if (!permissions.has('EMBED_LINKS')) {
 
-			return msg.channel.sendMessage("انا لا املك صلاحيات ارسال روابط")
+			return msg.channel.sendMessage("I don't have permissions to send links")
 		}
 
 		if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
@@ -1786,7 +1786,7 @@ client.on('message', async msg => {
 						});
 					} catch (err) {
 						console.error(err);
-						return msg.channel.send('لم يتم اختيار الاغنية');
+						return msg.channel.send('The song was not chosen');
                     }
                     
 					const videoIndex = parseInt(response.first().content);
@@ -1805,31 +1805,31 @@ client.on('message', async msg => {
         
 	} else if (command === `skip`) {
 
-		if (!msg.member.voiceChannel) return msg.channel.send("يجب ان تكون في روم صوتي");
-        if (!serverQueue) return msg.channel.send("ليست هناك اغاني ليتم التخطي");
+		if (!msg.member.voiceChannel) return msg.channel.send("You should be in an audio room");
+        if (!serverQueue) return msg.channel.send("There are no songs to skip");
 
-		serverQueue.connection.dispatcher.end('تم تخطي الاغنية');
+		serverQueue.connection.dispatcher.end('The song was skipped');
         return undefined;
         
 	} else if (command === `stop`) {
 
-		if (!msg.member.voiceChannel) return msg.channel.send("يجب ان تكون في روم صوتي");
+		if (!msg.member.voiceChannel) return msg.channel.send("You should be in an audio room");
         if (!serverQueue) return msg.channel.send("There is no Queue to stop!!");
         
 		serverQueue.songs = [];
-		serverQueue.connection.dispatcher.end('تم ايقاف الاغنية لقد خرجت من الروم الصوتي');
+		serverQueue.connection.dispatcher.end('The song has been paused. It has exited the audio track');
         return undefined;
         
 	} else if (command === `vol`) {
 
-		if (!msg.member.voiceChannel) return msg.channel.send("يجب ان تكون في روم صوتي");
-		if (!serverQueue) return msg.channel.send('يعمل الامر فقط عند تشغيل مقطع صوتي');
-        if (!args[1]) return msg.channel.send(`لقد تم تغير درجة الصوت الى**${serverQueue.volume}**`);
+		if (!msg.member.voiceChannel) return msg.channel.send("You should be in an audio room");
+		if (!serverQueue) return msg.channel.send('It only works when playing an audio clip');
+        if (!args[1]) return msg.channel.send(`The pitch of the voice has been changed to**${serverQueue.volume}**`);
         
 		serverQueue.volume = args[1];
         serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 50);
         
-        return msg.channel.send(`درجة الصوت الان**${args[1]}**`);
+        return msg.channel.send(`The volume now**${args[1]}**`);
 
 	} else if (command === `np`) {
 
@@ -1854,15 +1854,15 @@ client.on('message', async msg => {
 		if (serverQueue && serverQueue.playing) {
 			serverQueue.playing = false;
 			serverQueue.connection.dispatcher.pause();
-			return msg.channel.send('تم الايقاف');
+			return msg.channel.send('Stopped');
 		}
-		return msg.channel.send('في انتظار تشغيل المقطع');
+		return msg.channel.send('Waiting for the clip to play');
 	} else if (command === "resume") {
 
 		if (serverQueue && !serverQueue.playing) {
 			serverQueue.playing = true;
 			serverQueue.connection.dispatcher.resume();
-            return msg.channel.send('تم التشغيل');
+            return msg.channel.send('Done');
             
 		}
 		return msg.channel.send('Queue is empty!');
@@ -1907,7 +1907,7 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
 		serverQueue.songs.push(song);
 		console.log(serverQueue.songs);
 		if (playlist) return undefined;
-		else return msg.channel.send(`**${song.title}**, تمت اضافة المقطع الى قائمة الانتظار `);
+		else return msg.channel.send(`**${song.title}**, The clip was added to the queue `);
 	} 
 	return undefined;
 }
@@ -3181,8 +3181,8 @@ client.on('message', msg => {
           .setColor('RANDOM')
           .setThumbnail(h.avatarURL)
           .setAuthor(h.username,h.avatarURL)
-          .addField(': تاريخ دخولك الدسكورد',`${moment(member.user.createdAt).format('D/M/YYYY h:mm a')} **\n** \`${moment(member.user.createdAt).fromNow()}\``,true)            
-           .addField(': تاريخ دخولك السيرفر',`${moment(member.joinedAt).format('D/M/YYYY h:mm a ')} \n\`\`${moment(member.joinedAt).startOf(' ').fromNow()}\`\``, true) 
+          .addField(': Date you entered the discord',`${moment(member.user.createdAt).format('D/M/YYYY h:mm a')} **\n** \`${moment(member.user.createdAt).fromNow()}\``,true)            
+           .addField(': Date you entered the server',`${moment(member.joinedAt).format('D/M/YYYY h:mm a ')} \n\`\`${moment(member.joinedAt).startOf(' ').fromNow()}\`\``, true) 
            .setFooter(`${h.tag}`,"https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif")
        welcomer.send({embed:norelden});          
                  
@@ -3436,7 +3436,7 @@ client.on('message', message =>{
 
  client.on('ready', function(){
     var ms = 10000 ;
-    var setGame = [' !help','XLegendaryGalaxy Bot','Bot by MrBloods',' !invite to invite me ',' I am in 12 Server'];
+    var setGame = [' !help','DivineWoods Bot','Bot by MrBloods',' !invite to invite me ',' DivineWoods.ney'];
     var i = -1;
     var j = 0;
     setInterval(function (){
