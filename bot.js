@@ -3568,52 +3568,6 @@ if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return m
  
 });
 
-client.on('ready',async () => {
-  clent.channels.find(ch => ch.id === "629956274917867521" && ch.type === 'voice').join();
-});
-
-  client.on("message", message=> {
-  if (message.content.startsWith("./sayTo")) {
-    let filter = m => m.author.id === message.author.id
-    let channelBOT = ""
-    let messageBOT = ""
-    message.channel.send(("", {embed: {
-      title: "` ➡ `** Messege System **",
-      color: 0x06DF00,
-      timestamp: new Date(),
-      description:"قم بكتابة ايدي الغرفة",
-      footer: {
-        icon_url: client.user.avatarURL,
-        text: "© Codes BOT"
-      }} 
-    })).then((messageArray1)=>{
-        message.delete(/*Codes*/)
-        message.channel.awaitMessages(filter ,{max:1,time:30000,error:['time'],} ).then(pop1=>{
-          channelBOT = pop1.first(/*Codes*/).toString()
-          pop1.first().delete(/*Codes*/)
-          messageArray1.delete(/*Codes*/)
-          message.channel.send(("", {embed: {
-            title: "` ➡ `** Messege System **",
-            color: 0x06DF00,
-            timestamp: new Date(),
-            description:"قم بكتابة الرسالة",
-            footer: {
-              icon_url: client.user.avatarURL,
-              text: "© Codes BOT"
-            }} 
-          })).then((messageArray2)=>{
-            message.channel.awaitMessages(filter ,{max:1,time:30000,error:['time'],} ).then(pop2=>{
-              messageBOT = pop2.first(/*Codes*/)
-              pop2.first().delete(/*Codes*/)
-              messageArray2.delete(/*Codes*/)
-            message.guild.channels.find("id",channelBOT).sendMessage(messageBOT.toString())
-                })
-            })
-        })
-     })
-    }
-})
-
 Client.on('message', message => {
 
     if (message.content === "!count") {
