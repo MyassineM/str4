@@ -10,8 +10,6 @@ const YouTube = require('simple-youtube-api');
 
 const SQLite = require('sqlite'); // SQLpackage
 
-const invites = {};
-
 const path = require('path'); // PATHpackage
 
 const moment = require('moment');
