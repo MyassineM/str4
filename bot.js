@@ -2159,8 +2159,8 @@ client.on('message', message => {
 });
 
 client.on('ready',async () => {
-  let GUILDID = '605524619268718592'; // اي دي السيرفر  
-  let CHANNELID = '605524619268718596'; // اي دي الروم
+  let GUILDID = '621834641367629827'; // اي دي السيرفر  
+  let CHANNELID = '629956274917867521'; // اي دي الروم
   voiceStay(GUILDID, CHANNELID);
   function voiceStay(guildid, channelid) {
     if(!guildid) throw new Error('Syntax: voiceStay function requires guildid');
@@ -2218,7 +2218,7 @@ client.on('guildMemberAdd', member => {
     const embed = new Discord.RichEmbed()
     
     .setColor("RANDOM")
-    .setDescription(`**Date: Discord account ${createdAt.toFixed(0)} Day**`)
+    .setDescription(`**كم عندك بالديسكورد ${createdAt.toFixed(0)} Day**`)
     .setAuthor(member.user.tag, member.user.avatarURL);
     channel.sendEmbed(embed);
 
@@ -3019,12 +3019,12 @@ leave: 'On'
 client.on('message', message => {//new msg event
 if(!message.channel.guild) return;
   if(message.content.startsWith(prefix + 'rainbow')) {//to create the rainbow role
-      let role = message.guild.roles.find('name', 'MrBloods.')
+      let role = message.guild.roles.find('name', 'SOWRZ Clan.')
     if(role) return message.channel.send(`This Step Already Completed !`)//if the role already created return with this msg
   //start of create role
   if(!role){
     rainbow =  message.guild.createRole({
-   name: "MrBloods.",//the role will create name
+   name: "SOWRZ Clan.",//the role will create name
    color: "#000000",//the default color
    permissions:[]//the permissions
  //end of create role
@@ -3037,19 +3037,19 @@ message.channel.send('Done The Rainbow Role Setup Has Been Completed')//if the s
 client.on('ready', () => {//new ready event
   setInterval(function(){
       client.guilds.forEach(g => {
-                  var role = g.roles.find('name', 'MrBloods.');//rainbow role name
+                  var role = g.roles.find('name', 'SOWRZ Clan.');//rainbow role name
                   if (role) {
                       role.edit({color : "RANDOM"});
                   };
       });
-  }, 5000);//the rainbow time
+  }, 15000);//the rainbow time
 })
 
 client.on("guildMemberAdd", member => {
     member.createDM().then(function (channel) {
-    return channel.send(`:rose: Welcome to the server! :rose: 
-  :crown: Member name: ${member}:crown:  
-  You are the member number: ${member.guild.memberCount} `) 
+    return channel.send(`:rose: مرحبا بك لسيرفرنا SOWRZ Clan ! :rose: 
+  :crown: منور ياحب : ${member}:crown:  
+  انت العضو رقم: ${member.guild.memberCount} `) 
   }).catch(console.error)
   })
 
@@ -3161,11 +3161,11 @@ client.on('message',async message => {
 
 client.on('message', msg => {
   if(msg.content === '!invite')
-  msg.reply('https://discordapp.com/api/0oauth2/authorize?client_id=616260595041304590&permissions=8&scope=bot Link to invite the bot :new_moon_with_face:')
+  msg.reply('ممنوع حاليا Link to invite the bot :new_moon_with_face:')
 });
 
  client.on("guildMemberAdd", member => {
-  let welcomer = member.guild.channels.find("name","اسم الروم");
+  let welcomer = member.guild.channels.find("name","Welcome");
         if(!welcomer) return;
         if(welcomer) {
            moment.locale('ar-ly');
@@ -3174,8 +3174,8 @@ client.on('message', msg => {
           .setColor('RANDOM')
           .setThumbnail(h.avatarURL)
           .setAuthor(h.username,h.avatarURL)
-          .addField(': Date you entered the discord',`${moment(member.user.createdAt).format('D/M/YYYY h:mm a')} **\n** \`${moment(member.user.createdAt).fromNow()}\``,true)            
-           .addField(': Date you entered the server',`${moment(member.joinedAt).format('D/M/YYYY h:mm a ')} \n\`\`${moment(member.joinedAt).startOf(' ').fromNow()}\`\``, true) 
+          .addField(': متى دخلت الديسكورد',`${moment(member.user.createdAt).format('D/M/YYYY h:mm a')} **\n** \`${moment(member.user.createdAt).fromNow()}\``,true)            
+           .addField(': متى دخلت للسيرفر',`${moment(member.joinedAt).format('D/M/YYYY h:mm a ')} \n\`\`${moment(member.joinedAt).startOf(' ').fromNow()}\`\``, true) 
            .setFooter(`${h.tag}`,"https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif")
        welcomer.send({embed:norelden});          
                  
@@ -3568,53 +3568,6 @@ if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return m
  
 });
 
-client.on("guildMemberAdd", member => { //${! .₳Ⱨ₥ɆĐ ♡}#0561  ,  ! ,Haru#6204         ${! .₳Ⱨ₥ɆĐ ♡}#0561  ,  ! ,Haru#6204
-var embed = new Discord.RichEmbed() //${! .₳Ⱨ₥ɆĐ ♡}#0561  ,  ! ,Haru#6204
-    .setThumbnail(member.user.avatarURL) //${! .₳Ⱨ₥ɆĐ ♡}#0561  ,  ! ,Haru#6204
-    .addField("**Thank You For Joining**", `<@${member.id}>`) //${! .₳Ⱨ₥ɆĐ ♡}#0561  ,  ! ,Haru#6204
-    .setColor("#0984e3") //${! .₳Ⱨ₥ɆĐ ♡}#0561  ,  ! ,Haru#6204
-    .setImage("https://cdn.discordapp.com/attachments/607046676984758383/650554313818767361/p_1225y7yza1.gif"); //${! .₳Ⱨ₥ɆĐ ♡}#0561  ,  ! ,Haru#6204
-     //${! .₳Ⱨ₥ɆĐ ♡}#0561  ,  ! ,Haru#6204
-  var channel = member.guild.channels.find("name", "اسم الرومl");          /* <============================================ */
-  if (!channel) return; //${! .₳Ⱨ₥ɆĐ ♡}#0561  ,  ! ,Haru#6204
-  channel.send({ embed: embed }); //${! .₳Ⱨ₥ɆĐ ♡}#0561  ,  ! ,Haru#6204
-}); //${! .₳Ⱨ₥ɆĐ ♡}#0561  ,  ! ,Haru#6204
-//${! .₳Ⱨ₥ɆĐ ♡}#0561  ,  ! ,Haru#6204
-const invites = {}; //${! .₳Ⱨ₥ɆĐ ♡}#0561  ,  ! ,Haru#6204
-const wait = require("util").promisify(setTimeout); //${! .₳Ⱨ₥ɆĐ ♡}#0561  ,  ! ,Haru#6204
-client.on("ready", () => {
-  //${! .₳Ⱨ₥ɆĐ ♡}#0561  ,  ! ,Haru#6204
-  wait(1000); //${! .₳Ⱨ₥ɆĐ ♡}#0561  ,  ! ,Haru#6204
-  client.guilds.forEach(king => {
-   //${! .₳Ⱨ₥ɆĐ ♡}#0561  ,  ! ,Haru#6204
-    king.fetchInvites().then(guildInvites => {
-      //${! .₳Ⱨ₥ɆĐ ♡}#0561  ,  ! ,Haru#6204
-      invites[king.id] = guildInvites; //${! .₳Ⱨ₥ɆĐ ♡}#0561  ,  ! ,Haru#6204
-      //${! .₳Ⱨ₥ɆĐ ♡}#0561  ,  ! ,Haru#6204
-      //${! .₳Ⱨ₥ɆĐ ♡}#0561  ,  ! ,Haru#6204
-      //${! .₳Ⱨ₥ɆĐ ♡}#0561  ,  ! ,Haru#6204
-     //${! .₳Ⱨ₥ɆĐ ♡}#0561  ,  ! ,Haru#6204
-    }); //${! .₳Ⱨ₥ɆĐ ♡}#0561  ,  ! ,Haru#6204
-  }); //${! .₳Ⱨ₥ɆĐ ♡}#0561  ,  ! ,Haru#6204
-}); //${! .₳Ⱨ₥ɆĐ ♡}#0561  ,  ! ,Haru#6204
-//${! .₳Ⱨ₥ɆĐ ♡}#0561  ,  ! ,Haru#6204
-client.on("guildMemberAdd", member => {
- //! ,Haru#6204  , ${! .₳Ⱨ₥ɆĐ ♡}#0561
-  member.guild.fetchInvites().then(guildInvites => {
-  //! ,Haru#6204  , ${! .₳Ⱨ₥ɆĐ ♡}#0561
-    const gamer = invites[member.guild.id]; //! ,Haru#6204  , ${! .₳Ⱨ₥ɆĐ ♡}#0561
-    invites[member.guild.id] = guildInvites; //! ,Haru#6204  , ${! .₳Ⱨ₥ɆĐ ♡}#0561
-   const invite = guildInvites.find(i => gamer.get(i.code).uses < i.uses);//! ,Haru#6204  , ${! .₳Ⱨ₥ɆĐ ♡}#0561
-    const inviter = client.users.get(invite.inviter.id); //! ,Haru#6204  , ${! .₳Ⱨ₥ɆĐ ♡}#0561
-    const welcome = member.guild.channels.find(
-      //! ,Haru#6204  , ${! .₳Ⱨ₥ɆĐ ♡}#0561
-      channel => channel.name === "اسم الروم"       /*<=============================================================================*/
-    ); //! ,Haru#6204  , ${! .₳Ⱨ₥ɆĐ ♡}#0561
-    welcome.send(//! ,Haru#6204  , ${! .₳Ⱨ₥ɆĐ ♡}#0561
- /*Alpha Team copyRight 2020*/ `{<@${member.id}>} **invited by** {<@${inviter.id}>}`
-    ); //! ,Haru#6204  , ${! .₳Ⱨ₥ɆĐ ♡}#0561
-  }); //! ,Haru#6204  , ${! .₳Ⱨ₥ɆĐ ♡}#0561
-}); //! ,Haru#6204  , ${! .₳Ⱨ₥ɆĐ ♡}#0561
-//Alpha Team copyRight 2020
+
 
 client.login(process.env.BOT_TOKEN);// SOWRZ Clan bot
