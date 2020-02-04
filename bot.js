@@ -3568,18 +3568,4 @@ if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return m
  
 });
 
-Client.on('message', message => {
-
-    if (message.content === "!count") {
-
-    let embed = new Discord.RichEmbed()
-
-.addField('**Count**: ' , message.guild.memberCount)
-.setColor("#51cde6")
-.setDescription(`${message.guild.name}`)
-     message.channel.sendEmbed(embed);
-} 
-
-});
-
 client.login(process.env.BOT_TOKEN);// SOWRZ Clan bot
