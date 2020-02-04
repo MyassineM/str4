@@ -3568,6 +3568,23 @@ if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return m
  
 });
 
+client.on("guildMemberAdd", member => {
+  let welcome = member.guild.channels.find("name","welcome");
+  if(!welcome) return;
+  if(welcome) {
+      let embed = new Discord.RichEmbed()
+      .setColor("RANDOM")
+      .setThumbnail(member.user.avatarURL)  
+      .setAuthor(member.user.username , member.user.avatarURL)
+      .addField("** بك في سيرفرنا مرحبا**", `[${member.guild.name}]`, true)
+      .addField(`**عضو رقم**`, `[${member.guild.memberCount}]`, true)
+      .addField("**اسم العضو**", `[${member.user.username}#${member.user.discriminator}]`,true)
+      .addField("**الايدي**", `[${member.user.id}]`, true)
+      .addField('**تم صنع الحساب منذ**',`${moment(member.user.createdAt).format('D/M/YYYY h:mm a')}**n** `${moment(member.user.createdAt).fromNow()}``,true)            
+      .addField("**تم دخلول للسيرفر منذ**",`${moment(member.user.joinedAt).format('D/M/YYYY h:mm a')}**n** `${moment(member.user.joinedAt).fromNow()}``,true)    
+      welcome.send(embed)
 
+  }
+  })
 
 client.login(process.env.BOT_TOKEN);// SOWRZ Clan bot
