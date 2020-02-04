@@ -12,6 +12,10 @@ const SQLite = require('sqlite'); // SQLpackage
 
 const path = require('path'); // PATHpackage
 
+const moment = require('moment');
+
+const invites = {};
+
 const youtube = new YouTube("AIzaSyAdORXg7UZUo7sePv97JyoDqtQVi3Ll0b8");
 
 const queue = new Map();
@@ -3570,6 +3574,50 @@ if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return m
  
 });
 
-
+client.on("ready", () => {  
+    client.guilds.forEach(g => { 
+        g.fetchInvites().then(guildInvites => {  
+             invites[g.id] = guildInvites; 
+       });  
+    });  
+  });  
+SQLite.open(path.join(__dirname, 'links.sql')) 
+  .then(() => {  
+      console.log('Opened')  
+      SQLite.run(`CREATE TABLE IF NOT EXISTS linkSysteme (code TEXT, id VARCHAR(30))`) 
+}) 
+.catch(err => console.error(err))  
+client.on('guildMemberAdd', member => {
+  member.guild.fetchInvites().then(async guildInvites => {
+  const welcomer =  member.guild.channels.find('name', 'welcome');//تقدر تغير اسم الروم
+  const emoji = client.emojis.find("name","welcome");// وتقدر تغير الاموجي بس خلي اسمه
+  const emoji1 = client.emojis.find("name","Krupp");
+  const emoji2 = client.emojis.find("name","Date");
+  const emoji3 = client.emojis.find("name","Invite");
+  const inv = invites[member.guild.id];  
+    invites[member.guild.id] = guildInvites;  
+    let invite = guildInvites.find(i => inv.get(i.code).uses < i.uses); 
+    let res = await SQLite.get(`SELECT * FROM linkSysteme WHERE code = '${invite.code}'`)  
+    if(!res) {  
+    console.log(invite.code) 
+    } else { 
+      console.log(res.code)
+    }  
+    if(!welcomer) return;
+    if(welcomer) {
+    moment.locale('ar-ly');    
+    let VIRUS = new Discord.RichEmbed()
+    .setColor('RANDOM')
+    .setImage(`خلي رابط الصوره هنا`)
+    welcomer.send({embed:VIRUS}).then(msg => {
+    msg.channel.send(`>>> **${emoji} ➤ Welcome To : ${member}**
+**${emoji3} ➤ Invite By : ${invite.inviter}**
+**${emoji2} ➤ Date Created : __${moment(member.user.createdAt).format('D/M/YYYY h:mm a')}__**
+**${emoji1} ➤ You Are Nr : __${member.guild.memberCount}__**
+    `);
+    });     
+   }
+});  
+});
 
 client.login(process.env.BOT_TOKEN);// SOWRZ Clan bot
