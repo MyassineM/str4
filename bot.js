@@ -51,7 +51,7 @@ const developers = ["436918120184021012"]
 
 
 client.on('ready', () => { //code bot not leave room voice //Bot Is Online
-    client.channels.get("605531901725376516").join(); //by :n3k4a 
+    client.channels.get("629956236078612500").join(); //by :n3k4a 
     });
 
 client.on("message", (message) => {
@@ -155,7 +155,7 @@ client.on('message', message => {
             .setAuthor(client.user.username,client.user.avatarURL)
             .setThumbnail(client.user.avatarURL)
             .setColor('RANDOM')
-            .setTitle('``Bot by MrBloods`` ')
+            .setTitle('``Bot by SOWRZ Clan`` ')
             .addField('``My Ping``' , [`${Date.now() - message.createdTimestamp}` + 'MS'], true)
             .addField('``RAM Usage``', `[${(process.memoryUsage().rss / 1048576).toFixed()}MB]`, true)
             .addField('``servers``', [client.guilds.size], true)
@@ -170,33 +170,33 @@ client.on('message', message => {
 });
 
 client.on('message', msg => {
-  if(msg.content === 'Hello')
-  msg.reply('Hi ')
+  if(msg.content === 'هلا')
+  msg.reply('هلا والله')
 });
 
 client.on('message', msg => {
-  if(msg.content === 'Back')
-  msg.reply('Welcome Back')
+  if(msg.content === 'سلام عليكم')
+  msg.reply('وعلكم السلام')
 });
 
 client.on('message', msg => {
-  if(msg.content === 'Ip')
-  msg.reply('DivineWoods.net ')
+  if(msg.content === 'باك')
+  msg.reply('ولكم')
 });
 
 client.on('message', msg => {
-  if(msg.content === 'xD')
-  msg.reply('lol')
+  if(msg.content === 'سورز')
+  msg.reply('احسن كلان')
 });
 
 client.on('message', msg => {
-  if(msg.content === 'MrBloods')
-  msg.reply('What do u want')
+  if(msg.content === 'SOWRZ')
+  msg.reply('افضل كلان')
 });
 
 client.on('message', msg => {
-  if(msg.content === 'Bye')
-  msg.reply('Bye ❤')
+  if(msg.content === 'سلام')
+  msg.reply('سلام ❤')
 });
  
 client.on('message', message => {
@@ -535,7 +535,7 @@ client.on('message', message => {
             .addField('**Channels**📝 :' , `[ ${client.channels.size} ]` , true)
             .addField('**Users**🔮 :' ,`[ ${client.users.size} ]` , true)
             .addField('**Bot Name**🔰 :' , `[ ${client.user.tag} ]` , true)
-            .addField('**Bot Owner**👑 :' , `[<@507533148897411082>]` , true)
+            .addField('**Bot Owner**👑 :' , `[<@436918120184021012>]` , true)
             .setFooter(message.author.username, message.author.avatarURL)
     })
 }
@@ -583,7 +583,7 @@ client.on('message', message => {
               const Embed11 = new Discord.RichEmbed()
         .setColor("RANDOM")
         
-    .setDescription("Link of the server- Bot by MrBloods")
+    .setDescription("Link of the server- Bot by SOWRZ Clan")
       message.author.sendEmbed(Embed11)
     }
 });
@@ -1455,7 +1455,7 @@ var flip = ["**__HEADS__**",
 .setDescription(flip[Math.floor(Math.random() * flip.length)])
 .setThumbnail("https://cdn.onlinewebfonts.com/svg/img_441809.png")
 .setColor(0xd3d0c4)
-   .setFooter(`Bot by MrBloods`)
+   .setFooter(`Bot by SOWRZ Clan`)
 message.channel.sendEmbed(cat);
 
     }
@@ -1948,7 +1948,7 @@ client.user.setStatus("dnd")
 });
 
 client.on('message', message => {
-  if (message.channel.id === "616983620963532800") {
+  if (message.channel.id === "622135538983370762") {
     message.react('☑')
       .then(() => {
         message.react('🚫')
@@ -2007,7 +2007,7 @@ if(message.content.startsWith(prefix + `contact`)){
 if(message.author.bot || message.channel.type == 'dm') return;
 let args = message.content.split(" ").slice(1);
 let msg = args.join(' ');
-let dev = client.users.get("436918120184021012"); //Your id
+let dev = client.users.get("674180426532782081"); //Your id
 if(!args) return message.reply("You must type the message");
 dev.send(`• | User: **${message.author.tag}**\n\n• | Message: **${msg}**`).then(() =>{
 message.channel.send(`Your message has been successfully delivered to the bot developer`)
@@ -2720,26 +2720,17 @@ client.on('message', message => {
                      message.guild.createRole({ name: "Our Bot", color: "#47596F", permissions: [] })
 	             message.guild.createRole({ name: "Owner", color: "#580202", permissions: [] })
                      message.guild.createRole({ name: "Developer", color: "#47596F", permissions: [] })
-                     message.guild.createRole({ name: "Co-Owner", color: "#B70000", permissions: [] })
+                     message.guild.createRole({ name: "Crown", color: "#B70000", permissions: [] })
                      message.guild.createRole({ name: "Head-Admin", color: "#080FF1", permissions: [] })
                      message.guild.createRole({ name: "Admin", color: "#080FF1", permissions: [] })
-                     message.guild.createRole({ name: "Sir-Mod", color: "#AB7003", permissions: [] })
+                     message.guild.createRole({ name: "Mod", color: "#AB7003", permissions: [] })
 	             message.guild.createRole({ name: "Support Team", color: "#ffffff", permissions: [] })
 	             message.guild.createRole({ name: "Muted", color: "#ffffff", permissions: [] })
-                     message.guild.createRole({ name: "Mod", color: "#CECE03", permissions: [] })
-	             message.guild.createRole({ name: "Test: Mod", color: "#936171", permissions: [] })
-                     message.guild.createRole({ name: "Builder+", color: "#206617", permissions: [] })
-                     message.guild.createRole({ name: "Builder", color: "#2AA41A", permissions: [] })
-	             message.guild.createRole({ name: "Test: Builder", color: "#936171", permissions: [] })
-	             message.guild.createRole({ name: "Galaxy", color: "#1a56d6", permissions: [] })
-	             message.guild.createRole({ name: "Divine", color: "#afcaa5", permissions: [] })
-	             message.guild.createRole({ name: "Ultra", color: "#907cb9", permissions: [] })
-                     message.guild.createRole({ name: "MVP+", color: "#E400B4", permissions: [] })
-                     message.guild.createRole({ name: "MVP", color: "#753467", permissions: [] })
-	             message.guild.createRole({ name: "VIP+", color: "#5B00E6", permissions: [] })
-	             message.guild.createRole({ name: "VIP", color: "#452872", permissions: [] })
+                     message.guild.createRole({ name: "Small Crown", color: "#CECE03", permissions: [] })
 	             message.guild.createRole({ name: "Member", color: "#060F4B", permissions: [] })
 	             message.guild.createRole({ name: "Bots", color: "#2C1305", permissions: [] })
+	    	     message.guild.createRole({ name: "Music", color: "#160F4B", permissions: [] })
+	             message.guild.createRole({ name: "Known", color: "#2F1305", permissions: [] })
 	    
             
 	    
@@ -3436,7 +3427,7 @@ client.on('message', message =>{
 
  client.on('ready', function(){
     var ms = 10000 ;
-    var setGame = [' !help','DivineWoods Bot','Bot by MrBloods',' !invite to invite me ',' DivineWoods.ney'];
+    var setGame = ['!help','SOWRZ Clan Bot','Bot by SOWRZ Clan',' !invite to invite me ','Welcome To SOWRZ Clan Server'];
     var i = -1;
     var j = 0;
     setInterval(function (){
@@ -3447,7 +3438,7 @@ client.on('message', message =>{
             j = -1;
         }
         i = i+j;
-        client.user.setGame(setGame[i],`http://www.twitch.tv/MrBloods`);
+        client.user.setGame(setGame[i],`http://www.twitch.tv/SOWRZ_Clan`);
     }, ms);
 console.log("==================================")
 console.log("1")
@@ -3491,7 +3482,7 @@ var prefix = "!";//البرفكس
 if(message.channel.type === "dm") return;
 if(message.author.bot) return;
    if(!rWlc[message.guild.id]) rWlc[message.guild.id] = {
-    role: "member"
+    role: "Member"
   }
 const channel = rWlc[message.guild.id].role
   if (message.content.startsWith(prefix + "autorole")) {
@@ -3517,4 +3508,68 @@ client.on("guildMemberAdd", member => {
       
       }); 
 
-client.login(process.env.BOT_TOKEN);// Mrbloods bot
+client.on('ready', () => {
+console.log('SOWRZ Clan bot is ready to be used.');
+ });
+
+client.on('message', async message =>{
+  if (message.author.boss) return;
+ 
+if (!message.content.startsWith(prefix)) return;
+    let command = message.content.split(" ")[0];
+     command = command.slice(prefix.length);
+    let args = message.content.split(" ").slice(1);
+    if (command == "ميوت ") {
+        if (!message.channel.guild) return;
+        if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.reply("انت لا تملك صلاحيات !! ").then(msg => msg.delete(5000));
+        if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.reply("البوت لايملك صلاحيات ").then(msg => msg.delete(5000));;
+        let user = message.mentions.users.first();
+        let muteRole = message.guild.roles.find("name", "Muted");
+        if (!muteRole) return message.reply("** لا يوجد رتبة الميوت 'Muted' **").then(msg => {msg.delete(5000)});
+        if (message.mentions.users.size < 1) return message.reply('** يجب عليك المنشن اولاً **').then(msg => {msg.delete(5000)});
+        let reason = message.content.split(" ").slice(2).join(" ");
+        message.guild.member(user).addRole(muteRole);
+        const muteembed = new Discord.RichEmbed()
+        .setColor("RANDOM")
+        .setAuthor(`Muted!`, user.displayAvatarURL)
+        .setThumbnail(user.displayAvatarURL)
+        .addField("**:busts_in_silhouette:  المستخدم**",  '**[ ' + `${user.tag}` + ' ]**',true)
+        .addField("**:hammer:  تم بواسطة **", '**[ ' + `${message.author.tag}` + ' ]**',true)
+        .addField("**:book:  السبب**", '**[ ' + `${reason}` + ' ]**',true)
+        .addField("User", user, true)
+        message.channel.send({embed : muteembed});
+        var muteembeddm = new Discord.RichEmbed()
+        .setAuthor(`Muted!`, user.displayAvatarURL)
+        .setDescription(`      
+${user} انت معاقب بميوت كتابي بسبب مخالفة القوانين
+${message.author.tag} تمت معاقبتك بواسطة
+[ ${reason} ] : السبب
+اذا كانت العقوبة عن طريق الخطأ تكلم مع المسؤلين
+`)
+        .setFooter(`في سيرفر : ${message.guild.name}`)
+        .setColor("RANDOM")
+    user.send( muteembeddm);
+  }
+if(command === `unmute`) {
+  if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.sendMessage("**ليس لديك صلاحية لفك عن الشخص ميوت**:x: ").then(m => m.delete(5000));
+if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.reply("**ما عندي برمشن**").then(msg => msg.delete(6000))
+ 
+  let toMute = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
+  if(!toMute) return message.channel.sendMessage("**عليك المنشن أولاّ**:x: ");
+ 
+  let role = message.guild.roles.find (r => r.name === "Muted");
+ 
+  if(!role || !toMute.roles.has(role.id)) return message.channel.sendMessage("**لم يتم اعطاء هذه شخص ميوت من الأساس**:x:")
+ 
+  await toMute.removeRole(role)
+  message.channel.sendMessage("**لقد تم فك الميوت عن شخص بنجاح**:white_check_mark:");
+ 
+  return;
+ 
+  }
+ 
+});
+
+
+
+client.login(process.env.BOT_TOKEN);// SOWRZ Clan bot
