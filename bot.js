@@ -3455,4 +3455,117 @@ console.log("1")
 console.log("====================================")
 });
 
+client.on('message', message => {
+  if (message.author.bot) return;
+
+  let args = message.content.split(" ");
+  
+  let command = args[0];
+  
+  let messagecount = args[1];
+  
+    if(command == prefix + "clear") {
+    if(!message.member.hasPermission("MANAGE_MESSAGES")) {
+		message.channel.send("You need this permission`MANAGE_MESSAGES` ")
+	} else if (!messagecount) {
+		message.channel.send("**List the number of messages to delete**")
+	}else {
+		message.channel.bulkDelete(messagecount);
+        message.channel.send("**Message `" + messagecount + "` Has been deleted **").then(mes => 
+		mes.delete(3000)
+		);    
+	 }
+   }
+  // By Alpha Codes - AboKhalil 26/7/2019
+}); 
+
+client.on('message', message => {
+var prefix = "!";//البرفكس 
+if(message.channel.type === "dm") return;
+if(message.author.bot) return;
+   if(!rWlc[message.guild.id]) rWlc[message.guild.id] = {
+    role: "〘 Verified 〙"
+  }
+const channel = rWlc[message.guild.id].role
+  if (message.content.startsWith(prefix + "autorole")) {
+    if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
+    let newrole = message.content.split(' ').slice(1).join(" ")
+    if(!newrole) return message.reply(`**${prefix}autorole <role name>**`)
+    rWlc[message.guild.id].role = newrole
+    message.channel.send(`**${message.guild.name}'s role has been changed to ${newrole}**`);
+  }
+fs.writeFile("./AutoRole.json", JSON.stringify(rWlc), function(e){
+    if (e) throw e;
+})
+});
+client.on("guildMemberAdd", member => {
+      if(!rWlc[member.guild.id]) rWlc[member.guild.id] = {
+    role: "Verified?"
+  }
+    const sRole = rWlc[member.guild.id].role
+    let Rrole = member.guild.roles.find('name', sRole);
+  member.addRole(Rrole);
+ 
+  
+      
+      }); 
+
+client.on('message', async message =>{
+  if (message.author.boss) return;
+ 
+if (!message.content.startsWith(prefix)) return;
+    let command = message.content.split(" ")[0];
+     command = command.slice(prefix.length);
+    let args = message.content.split(" ").slice(1);
+    if (command == "mute") {
+        if (!message.channel.guild) return;
+        if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.reply("You don't have permission !! ").then(msg => msg.delete(5000));
+        if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.reply("I don't have permission! ").then(msg => msg.delete(5000));;
+        let user = message.mentions.users.first();
+        let muteRole = message.guild.roles.find("name", "Muted");
+        if (!muteRole) return message.reply("** I didn't find a role called Muted 'Muted' **").then(msg => {msg.delete(5000)});
+        if (message.mentions.users.size < 1) return message.reply('**Mention first **').then(msg => {msg.delete(5000)});
+        let reason = message.content.split(" ").slice(2).join(" ");
+        message.guild.member(user).addRole(muteRole);
+        const muteembed = new Discord.RichEmbed()
+        .setColor("RANDOM")
+        .setAuthor(`Muted!`, user.displayAvatarURL)
+        .setThumbnail(user.displayAvatarURL)
+        .addField("**:busts_in_silhouette:  The user**",  '**[ ' + `${user.tag}` + ' ]**',true)
+        .addField("**:hammer:  Done by **", '**[ ' + `${message.author.tag}` + ' ]**',true)
+        .addField("**:book:  Reason**", '**[ ' + `${reason}` + ' ]**',true)
+        .addField("User", user, true)
+        message.channel.send({embed : muteembed});
+        var muteembeddm = new Discord.RichEmbed()
+        .setAuthor(`Muted!`, user.displayAvatarURL)
+        .setDescription(`      
+${user} You are muted for breaking rules
+You are muted by ${message.author.tag}
+Reason [ ${reason} ] 
+If you have any problems talk with staff
+`)
+        .setFooter(`Bot by MrBloods - ${message.guild.name}`)
+        .setColor("RANDOM")
+    user.send( muteembeddm);
+  }
+if(command === `unmute`) {
+  if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.sendMessage("**You don't have permission**:x: ").then(m => m.delete(5000));
+if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.reply("**I don't have permission**").then(msg => msg.delete(6000))
+ 
+  let toMute = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
+  if(!toMute) return message.channel.sendMessage("**Mention first**:x: ");
+ 
+  let role = message.guild.roles.find (r => r.name === "Muted");
+ 
+  if(!role || !toMute.roles.has(role.id)) return message.channel.sendMessage("**He is not muted **:x:")
+ 
+  await toMute.removeRole(role)
+  message.channel.sendMessage("**Done. I removed the mute **:white_check_mark:");
+ 
+  return;
+ 
+  }
+ 
+});
+
 client.login(process.env.BOT_TOKEN);//MrBloods bot
