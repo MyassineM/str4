@@ -157,7 +157,7 @@ client.on('message', message => {
             .setAuthor(client.user.username,client.user.avatarURL)
             .setThumbnail(client.user.avatarURL)
             .setColor('RANDOM')
-            .setTitle('``Bot by SOWRZ Clan`` ')
+            .setTitle('``Bot by MrBloods`` ')
             .addField('``My Ping``' , [`${Date.now() - message.createdTimestamp}` + 'MS'], true)
             .addField('``RAM Usage``', `[${(process.memoryUsage().rss / 1048576).toFixed()}MB]`, true)
             .addField('``servers``', [client.guilds.size], true)
@@ -172,33 +172,33 @@ client.on('message', message => {
 });
 
 client.on('message', msg => {
-  if(msg.content === 'هلا')
-  msg.reply('هلا والله')
+  if(msg.content === 'Hello')
+  msg.reply('Hello!')
 });
 
 client.on('message', msg => {
-  if(msg.content === 'سلام عليكم')
-  msg.reply('وعلكم السلام')
+  if(msg.content === 'Hi')
+  msg.reply('Hi!')
 });
 
 client.on('message', msg => {
-  if(msg.content === 'باك')
-  msg.reply('ولكم')
+  if(msg.content === 'Hey')
+  msg.reply('Hey ')
 });
 
 client.on('message', msg => {
-  if(msg.content === 'سورز')
-  msg.reply('احسن كلان')
+  if(msg.content === 'Back')
+  msg.reply('Welcome Back')
 });
 
 client.on('message', msg => {
-  if(msg.content === 'SOWRZ')
-  msg.reply('افضل كلان')
+  if(msg.content === 'IP')
+  msg.reply('IP: play.vortexprison.net')
 });
 
 client.on('message', msg => {
-  if(msg.content === 'سلام')
-  msg.reply('سلام ❤')
+  if(msg.content === 'Bye')
+  msg.reply('Good Bye ❤')
 });
  
 client.on('message', message => {
@@ -279,7 +279,7 @@ client.on('message', message => {
   if (message.content.startsWith(prefix + 'sug')) {
       if (message.author.bot) return
       if (!message.guild) return message.reply('**:x: This Commands Just In Server**')
-      let Room = message.guild.channels.find(`name`, "suggestions")
+      let Room = message.guild.channels.find(`name`, "「📊」suggestions")
       if (!Room) return message.channel.send(`**Error** :octagonal_sign:\n**I Can't find the __suggestions__ Channel**`)
       if(!Room.permissionsFor(client.user).has(['SEND_MESSAGES','READ_MESSAGES','EMBED_LINKS'])) return message.channel.send(`**Error** :octagonal_sign:
 I Don\'t have Permissions on tha suggestions channel`)
@@ -338,7 +338,7 @@ client.on('message', async message => {
             .setAuthor(message.author.username, message.author.avatarURL)
         .setFooter(`${message.guild.name} `)
      message.channel.send(embed500)
-     message.author.send('` You are muted because you sent links in the chat! `');
+     message.author.send('` You are muted from VortexPrison server because you sent links in the chat! `');
    
        
     }
@@ -377,7 +377,7 @@ client.on("message", message => {
 });
 
 client.on('guildMemberAdd', member => {
-var channel = member.guild.channels.find('name', 'welcome');
+var channel = member.guild.channels.find('name', '「👋」welcome);
     if(!channel) return;
 channel.send('**Welcome** ' + `${member}` + ' **To** ' + `__${member.guild.name}__` + ' **Server** 💕')          
  
@@ -425,7 +425,7 @@ var E2Mdax = new Discord.RichEmbed()
 .addField('📗|online',` ${message.guild.members.filter(m=>m.presence.status == 'online').size}`)
 .addField('📓| offline',`${message.guild.members.filter(m=>m.presence.status == 'offline').size}`) // Mdax77x | Toxic Codes CopyRight
 .setFooter(`Requested By | ${message.author.tag}`) // Mdax77x | Toxic Codes
-.addField('**==============**',true)
+.addField('**=======VortexPrison Server=======**',true)
 .setColor('RANDOM')
 message.channel.send(E2Mdax);
 });
@@ -585,7 +585,7 @@ client.on('message', message => {
               const Embed11 = new Discord.RichEmbed()
         .setColor("RANDOM")
         
-    .setDescription("Link of the server- Bot by SOWRZ Clan")
+    .setDescription("Link of the server- Bot by VortexPrison")
       message.author.sendEmbed(Embed11)
     }
 });
@@ -708,7 +708,7 @@ client.on('messageDelete', message => {
     if(!message.guild.member(client.user).hasPermission('EMBED_LINKS')) return;
     if(!message.guild.member(client.user).hasPermission('MANAGE_MESSAGES')) return;
  
-    var logChannel = message.guild.channels.find(c => c.name === 'log');
+    var logChannel = message.guild.channels.find(c => c.name === '「📋」changelog');
     if(!logChannel) return;
  
     let messageDelete = new Discord.RichEmbed()
@@ -1950,7 +1950,7 @@ client.user.setStatus("dnd")
 });
 
 client.on('message', message => {
-  if (message.channel.id === "622135538983370762") {
+  if (message.channel.id === "693849611080826911") {
     message.react('☑')
       .then(() => {
         message.react('🚫')
@@ -1987,7 +1987,7 @@ client.on('message', async msg =>{
     };
 });
 
-let inv_room = "616329647587590180" // room id
+let inv_room = "688718826971595008" // room id
 client.on('guildMemberAdd', async member => { // membed add event
     member.guild.fetchInvites().then(async guildInvites => { // fetch invites ?
             const inv = invites[member.guild.id]; // get invite :)
@@ -2009,7 +2009,7 @@ if(message.content.startsWith(prefix + `contact`)){
 if(message.author.bot || message.channel.type == 'dm') return;
 let args = message.content.split(" ").slice(1);
 let msg = args.join(' ');
-let dev = client.users.get("674180426532782081"); //Your id
+let dev = client.users.get("436918120184021012"); //Your id
 if(!args) return message.reply("You must type the message");
 dev.send(`• | User: **${message.author.tag}**\n\n• | Message: **${msg}**`).then(() =>{
 message.channel.send(`Your message has been successfully delivered to the bot developer`)
@@ -2159,8 +2159,8 @@ client.on('message', message => {
 });
 
 client.on('ready',async () => {
-  let GUILDID = '621834641367629827'; // اي دي السيرفر  
-  let CHANNELID = '629956274917867521'; // اي دي الروم
+  let GUILDID = '688715593649487946'; // اي دي السيرفر  
+  let CHANNELID = '692480228538187846'; // اي دي الروم
   voiceStay(GUILDID, CHANNELID);
   function voiceStay(guildid, channelid) {
     if(!guildid) throw new Error('Syntax: voiceStay function requires guildid');
@@ -2218,7 +2218,7 @@ client.on('guildMemberAdd', member => {
     const embed = new Discord.RichEmbed()
     
     .setColor("RANDOM")
-    .setDescription(`**كم عندك بالديسكورد ${createdAt.toFixed(0)} Day**`)
+    .setDescription(`**How much time do you have in the discord: ${createdAt.toFixed(0)} Day**`)
     .setAuthor(member.user.tag, member.user.avatarURL);
     channel.sendEmbed(embed);
 
@@ -2846,7 +2846,7 @@ client.on('message', message => {
  });
 
 client.on('message', function(message) {
-    if(message.content.startsWith(prefix + 'rool')) {
+    if(message.content.startsWith(prefix + 'vip')) {
         let guild = message.mentions.members.first();
                           let ZmA = new Discord.RichEmbed()
                   .setColor('3fcf24')
@@ -3019,7 +3019,7 @@ leave: 'On'
 client.on('message', message => {//new msg event
 if(!message.channel.guild) return;
   if(message.content.startsWith(prefix + 'rainbow')) {//to create the rainbow role
-      let role = message.guild.roles.find('name', 'SOWRZ Clan.')
+      let role = message.guild.roles.find('name', 'VortexPrison.')
     if(role) return message.channel.send(`This Step Already Completed !`)//if the role already created return with this msg
   //start of create role
   if(!role){
@@ -3105,7 +3105,7 @@ client.on("message", msg => {
   });
 
 client.on('message', message => {
-            if (message.content === 'ق1') {
+            if (message.content === '!1') {
               message.channel.sendFile("./5.png");
             }
          });
@@ -3115,7 +3115,7 @@ client.on('message', message => {
 
 
          client.on('message', message => {
-            if (message.content === 'back') {
+            if (message.content === '!2') {
               message.channel.sendFile("./back.png");
             }
          });
@@ -3129,7 +3129,7 @@ client.on('message', message => {
          
          
                  client.on('message', message => {
-            if (message.content === 'welcome') {
+            if (message.content === '!3') {
               message.channel.sendFile("./wlc.png");
             }
          });
@@ -3161,11 +3161,11 @@ client.on('message',async message => {
 
 client.on('message', msg => {
   if(msg.content === '!invite')
-  msg.reply('ممنوع حاليا Link to invite the bot :new_moon_with_face:')
+  msg.reply('(Soon) :new_moon_with_face:')
 });
 
  client.on("guildMemberAdd", member => {
-  let welcomer = member.guild.channels.find("name","Welcome");
+  let welcomer = member.guild.channels.find("name","「👋」welcome");
         if(!welcomer) return;
         if(welcomer) {
            moment.locale('ar-ly');
@@ -3174,9 +3174,9 @@ client.on('message', msg => {
           .setColor('RANDOM')
           .setThumbnail(h.avatarURL)
           .setAuthor(h.username,h.avatarURL)
-          .addField(': متى دخلت الديسكورد',`${moment(member.user.createdAt).format('D/M/YYYY h:mm a')} **\n** \`${moment(member.user.createdAt).fromNow()}\``,true)            
-           .addField(': متى دخلت للسيرفر',`${moment(member.joinedAt).format('D/M/YYYY h:mm a ')} \n\`\`${moment(member.joinedAt).startOf(' ').fromNow()}\`\``, true) 
-           .setFooter(`${h.tag}`,"https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif")
+          .addField(': Wehn you joinned the discord: ',`${moment(member.user.createdAt).format('D/M/YYYY h:mm a')} **\n** \`${moment(member.user.createdAt).fromNow()}\``,true)            
+           .addField(': When you joinned the server: ',`${moment(member.joinedAt).format('D/M/YYYY h:mm a ')} \n\`\`${moment(member.joinedAt).startOf(' ').fromNow()}\`\``, true) 
+           .setFooter(`${h.tag}`,"https://media.discordapp.net/attachments/693389788023095306/693843294085447780/Vortex.png?width=902&height=508")
        welcomer.send({embed:norelden});          
                  
    
@@ -3201,7 +3201,7 @@ client.on('guildMemberAdd', member => {
     invites[member.guild.id] = guildInvites;
     const invite = guildInvites.find(i => gamer.get(i.code).uses < i.uses);
     const inviter = client.users.get(invite.inviter.id);
-    const welcome = member.guild.channels.find(channel => channel.name === "welcome");
+    const welcome = member.guild.channels.find(channel => channel.name === "「👋」welcome");
     welcome.send(` ||${member.user.tag}|| invited by ||${inviter.tag}|| invites =  ||${invite.uses}|| `)
   });
 }); 
@@ -3429,7 +3429,7 @@ client.on('message', message =>{
 
  client.on('ready', function(){
     var ms = 10000 ;
-    var setGame = ['!help','SOWRZ Clan Bot','Bot by SOWRZ Clan',' !invite to invite me ','Welcome To SOWRZ Clan Server'];
+    var setGame = ['!help','VortexPrison ChatBot','Bot by MrBloods','Ip: play.vortexprison.net','Welcome To VortexPrison Server!'];
     var i = -1;
     var j = 0;
     setInterval(function (){
@@ -3440,7 +3440,7 @@ client.on('message', message =>{
             j = -1;
         }
         i = i+j;
-        client.user.setGame(setGame[i],`http://www.twitch.tv/SOWRZ_Clan`);
+        client.user.setGame(setGame[i],`http://www.twitch.tv/MrBloods`);
     }, ms);
 console.log("==================================")
 console.log("1")
@@ -3484,7 +3484,7 @@ var prefix = "!";//البرفكس
 if(message.channel.type === "dm") return;
 if(message.author.bot) return;
    if(!rWlc[message.guild.id]) rWlc[message.guild.id] = {
-    role: "Member"
+    role: "〘 Verified 〙"
   }
 const channel = rWlc[message.guild.id].role
   if (message.content.startsWith(prefix + "autorole")) {
@@ -3519,48 +3519,48 @@ if (!message.content.startsWith(prefix)) return;
     let args = message.content.split(" ").slice(1);
     if (command == "mute") {
         if (!message.channel.guild) return;
-        if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.reply("انت لا تملك صلاحيات !! ").then(msg => msg.delete(5000));
-        if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.reply("البوت لايملك صلاحيات ").then(msg => msg.delete(5000));;
+        if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.reply("You don't have permission !! ").then(msg => msg.delete(5000));
+        if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.reply("I don't have permission! ").then(msg => msg.delete(5000));;
         let user = message.mentions.users.first();
         let muteRole = message.guild.roles.find("name", "Muted");
-        if (!muteRole) return message.reply("** لا يوجد رتبة الميوت 'Muted' **").then(msg => {msg.delete(5000)});
-        if (message.mentions.users.size < 1) return message.reply('** يجب عليك المنشن اولاً **').then(msg => {msg.delete(5000)});
+        if (!muteRole) return message.reply("** I didn't find a role called Muted 'Muted' **").then(msg => {msg.delete(5000)});
+        if (message.mentions.users.size < 1) return message.reply('**Mention first **').then(msg => {msg.delete(5000)});
         let reason = message.content.split(" ").slice(2).join(" ");
         message.guild.member(user).addRole(muteRole);
         const muteembed = new Discord.RichEmbed()
         .setColor("RANDOM")
         .setAuthor(`Muted!`, user.displayAvatarURL)
         .setThumbnail(user.displayAvatarURL)
-        .addField("**:busts_in_silhouette:  المستخدم**",  '**[ ' + `${user.tag}` + ' ]**',true)
-        .addField("**:hammer:  تم بواسطة **", '**[ ' + `${message.author.tag}` + ' ]**',true)
-        .addField("**:book:  السبب**", '**[ ' + `${reason}` + ' ]**',true)
+        .addField("**:busts_in_silhouette:  The user**",  '**[ ' + `${user.tag}` + ' ]**',true)
+        .addField("**:hammer:  Done by **", '**[ ' + `${message.author.tag}` + ' ]**',true)
+        .addField("**:book:  Reason**", '**[ ' + `${reason}` + ' ]**',true)
         .addField("User", user, true)
         message.channel.send({embed : muteembed});
         var muteembeddm = new Discord.RichEmbed()
         .setAuthor(`Muted!`, user.displayAvatarURL)
         .setDescription(`      
-${user} انت معاقب بميوت كتابي بسبب مخالفة القوانين
-${message.author.tag} تمت معاقبتك بواسطة
-[ ${reason} ] : السبب
-اذا كانت العقوبة عن طريق الخطأ تكلم مع المسؤلين
+${user} You are muted for breaking rules
+You are muted by ${message.author.tag}
+Reason [ ${reason} ] 
+If you have any problems talk with staff
 `)
-        .setFooter(`في سيرفر : ${message.guild.name}`)
+        .setFooter(`Bot by MrBloods - ${message.guild.name}`)
         .setColor("RANDOM")
     user.send( muteembeddm);
   }
 if(command === `unmute`) {
-  if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.sendMessage("**ليس لديك صلاحية لفك عن الشخص ميوت**:x: ").then(m => m.delete(5000));
-if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.reply("**ما عندي برمشن**").then(msg => msg.delete(6000))
+  if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.sendMessage("**You don't have permission**:x: ").then(m => m.delete(5000));
+if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.reply("**I don't have permission**").then(msg => msg.delete(6000))
  
   let toMute = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
-  if(!toMute) return message.channel.sendMessage("**عليك المنشن أولاّ**:x: ");
+  if(!toMute) return message.channel.sendMessage("**Mention first**:x: ");
  
   let role = message.guild.roles.find (r => r.name === "Muted");
  
-  if(!role || !toMute.roles.has(role.id)) return message.channel.sendMessage("**لم يتم اعطاء هذه شخص ميوت من الأساس**:x:")
+  if(!role || !toMute.roles.has(role.id)) return message.channel.sendMessage("**He is not muted **:x:")
  
   await toMute.removeRole(role)
-  message.channel.sendMessage("**لقد تم فك الميوت عن شخص بنجاح**:white_check_mark:");
+  message.channel.sendMessage("**Done. I removed the mute **:white_check_mark:");
  
   return;
  
@@ -3568,4 +3568,4 @@ if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return m
  
 });
 
-client.login(process.env.BOT_TOKEN);// SOWRZ Clan bot
+client.login(process.env.BOT_TOKEN);//MrBloods bot
